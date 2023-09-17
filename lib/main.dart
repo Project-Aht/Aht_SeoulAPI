@@ -1,4 +1,6 @@
+import 'package:aht_dimigo/screens/register_exam_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,10 +11,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: Column(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    () => const ResgisterExamScreen();
+                  },
+                  child: const Text('정보 추가하기')),
+            ],
+          ),
         ),
       ),
     );
