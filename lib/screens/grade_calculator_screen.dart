@@ -10,6 +10,6 @@ class GradeCalclulatorScreen extends StatefulWidget {
 class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold();
   }
 }
