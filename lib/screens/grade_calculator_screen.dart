@@ -21,9 +21,30 @@ class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
           children: [
             Container(
               width: screenWidth,
-              height: screenHeight / 844 * 132,
+              height: screenHeight / 844 * 122,
               decoration: const BoxDecoration(
                 color: AhtColors.Main_Color,
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: screenHeight / 844 * 74),
+                  SizedBox(
+                    height: screenHeight / 844 * 28,
+                    child: Row(
+                      children: [
+                        SizedBox(width: screenWidth / 390 * 16),
+                        InkWell(
+                          onTap: () {},
+                          child: const Icon(
+                            Icons.arrow_back,
+                            size: 28,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
