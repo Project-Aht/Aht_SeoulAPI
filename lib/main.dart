@@ -1,8 +1,16 @@
-import 'package:aht_dimigo/screens/register_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+import 'firebase_options.dart';
+import 'firebase/instance.dart';
+import 'screens/register_exam_screen.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Get.put(Instance());
+  await Get.find<Instance>().getUserInfo();
   runApp(const MainApp());
 }
 
