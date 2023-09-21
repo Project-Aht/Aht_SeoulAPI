@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
+import 'package:get/get.dart';
+import 'package:aht_dimigo/themes/text_theme.dart';
 
 class GradeCalclulatorScreen extends StatefulWidget {
   const GradeCalclulatorScreen({super.key});
@@ -27,24 +29,60 @@ class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: screenHeight / 844 * 74),
+                  SizedBox(height: screenHeight / 844 * 70),
                   SizedBox(
                     height: screenHeight / 844 * 28,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(width: screenWidth / 390 * 16),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Get.back();
+                          },
                           child: const Icon(
                             Icons.arrow_back,
                             size: 28,
                             color: Colors.white,
                           ),
                         ),
+                        SizedBox(width: screenWidth / 390 * 108),
+                        const Text(
+                          '등급계산기',
+                          style: AhtTextTheme.TopMenuBar,
+                        ),
                       ],
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(height: screenHeight / 844 * 48),
+            Row(
+              children: [
+                SizedBox(width: screenWidth / 390 * 16),
+                const Text(
+                  '과목',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w700,
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight / 844 * 48,
+                bottom: screenHeight / 844 * 24,
+                left: screenWidth / 390 * 16,
+                right: screenWidth / 390 * 16,
+              ),
+              child: const Column(
+                children: [],
               ),
             ),
           ],
