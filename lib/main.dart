@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       home: Scaffold(
         body: Center(
           child: Column(
