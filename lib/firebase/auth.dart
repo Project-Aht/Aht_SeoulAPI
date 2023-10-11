@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -45,11 +46,20 @@ class Auth {
   static Future<bool> signin({
     required String email,
     required String pw,
+    required bool autoLogin,
   }) async {
+    final prefs = await SharedPreferences.getInstance();
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: pw);
       Get.find<Instance>().getUserInfo();
+      if (autoLogin) {
+        prefs.setString('email', email);
+        prefs.setString('pw', pw);
+      } else {
+        prefs.remove('email');
+        prefs.remove('pw');
+      }
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return false;
@@ -58,9 +68,12 @@ class Auth {
   }
 
   static Future<bool> signout() async {
+    final prefs = await SharedPreferences.getInstance();
     try {
       await _firebaseAuth.signOut();
       Get.find<Instance>().getUserInfo();
+      prefs.remove('email');
+      prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return false;
@@ -70,6 +83,7 @@ class Auth {
   }
 
   static Future<bool> quit() async {
+    final prefs = await SharedPreferences.getInstance();
     try {
       firestore
           .collection('profile')
@@ -78,6 +92,8 @@ class Auth {
       await _firebaseAuth.currentUser?.delete();
       await _firebaseAuth.signOut();
       Get.find<Instance>().getUserInfo();
+      prefs.remove('email');
+      prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return false;

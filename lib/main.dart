@@ -1,6 +1,8 @@
+import 'package:aht_dimigo/firebase/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'firebase/instance.dart';
 import 'themes/color_theme.dart';
@@ -11,11 +13,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(Instance());
-  await Get.find<Instance>().getUserInfo();
   runApp(const MainApp());
 }
-
-
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
@@ -26,12 +25,31 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   bool _showSplashScreen = true;
+
   Future<void> _loadData() async {
     await Future.delayed(
         const Duration(milliseconds: 2000)); // splash screen이 표시될 시간(초)
     setState(() {
       _showSplashScreen = false;
     });
+  }
+
+  Future<bool> autoLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? email = prefs.getString('email');
+    String? pw = prefs.getString('pw');
+    if (email == null || pw == null) {
+      return false;
+    }
+    bool loginCompleted = await Auth.signin(
+      email: email,
+      pw: pw,
+      autoLogin: true,
+    );
+    if (loginCompleted) {
+      Get.find<Instance>().getUserInfo();
+    }
+    return loginCompleted;
   }
 
   @override
@@ -44,7 +62,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    
+
     return GetMaterialApp(
       theme: ThemeData(
         fontFamily: 'Pretendard',
@@ -55,17 +73,23 @@ class _MainAppState extends State<MainApp> {
         primaryColor: AhtColors.Main_Color,
       ),
       home: _showSplashScreen
-          ? const Scaffold(body: SplashScreen())
+          ? const SplashScreen()
           : FutureBuilder(
-              future: getInfo(),
+              future: autoLogin(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SplashScreen();
+                  return const SplashScreen(); //값 받을 때까지 대기
                 } else {
-                  if (snapshot.data == null) {
-                    return const StartScreen();
+                  if (snapshot.data == true) {
+                    return const MainScreen(); //자동 로그인 정보가 유효하면 메인 화면으로
                   } else {
+                    () async {
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.remove('email');
+                      prefs.remove('pw');
+                    }();
                     return const MainScreen();
+                    // return const LoginScreen(); //자동 로그인 정보가 없거나 유효하지 않으면 로그인 화면으로
                   }
                 }
               },
@@ -73,20 +97,3 @@ class _MainAppState extends State<MainApp> {
     );
   }
 }
-
-/*      home: _showSplashScreen
-          ? const Scaffold(body: SplashScreen())
-          : FutureBuilder(
-              future: getInfo(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SplashScreen();
-                } else {
-                  if (snapshot.data == null) {
-                    return const StartScreen();
-                  } else {
-                    return const MainScreen();
-                  }
-                }
-              },
-            ),
