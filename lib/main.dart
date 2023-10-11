@@ -46,9 +46,7 @@ class _MainAppState extends State<MainApp> {
           ),
           primaryColor: AhtColors.Main_Color,
         ),
-        home: _showSplashScreen
-            ? const Scaffold(body: SplashScreen())
-            : const Scaffold(body: MainScreen()));
+        home: const MainScreen());
   }
 }
 

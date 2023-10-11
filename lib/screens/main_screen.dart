@@ -40,60 +40,58 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     // ignore: unused_local_variable
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            color: Color(0xFF6B19DC),
-          ),
-          child: ScrollConfiguration(
-            behavior: MyBehavior(),
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                Screen1(),
-                HomeScreen(),
-                MenuScreen(),
-              ],
-            ),
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color(0xFF6B19DC),
+        ),
+        child: ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: TabBarView(
+            controller: _tabController,
+            children: const [
+              Screen1(),
+              HomeScreen(),
+              MenuScreen(),
+            ],
           ),
         ),
-        extendBodyBehindAppBar: true,
-        bottomNavigationBar: SizedBox(
-          height: 0,
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: screenWidth / 390 * 0,
-                right: screenWidth / 390 * 0,
-                top: screenHeight / 844 * 2),
-            child: TabBar(
-              controller: _tabController,
-              tabs: const [
-                Tab(
-                  icon: Icon(
-                    Icons.search,
-                    size: 32,
-                  ),
+      ),
+      extendBodyBehindAppBar: true,
+      bottomNavigationBar: SizedBox(
+        height: 0,
+        child: Padding(
+          padding: EdgeInsets.only(
+              left: screenWidth / 390 * 0,
+              right: screenWidth / 390 * 0,
+              top: screenHeight / 844 * 2),
+          child: TabBar(
+            controller: _tabController,
+            tabs: const [
+              Tab(
+                icon: Icon(
+                  Icons.search,
+                  size: 32,
                 ),
-                Tab(
-                  icon: Icon(
-                    Icons.home_outlined,
-                    size: 32,
-                  ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.home_outlined,
+                  size: 32,
                 ),
-                Tab(
-                  icon: Icon(
-                    Icons.menu_sharp,
-                    size: 32,
-                  ),
+              ),
+              Tab(
+                icon: Icon(
+                  Icons.menu_sharp,
+                  size: 32,
                 ),
-              ],
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorColor: AhtColors.Main_Color,
-              indicatorWeight: 4,
-              labelColor: AhtColors.Main_Color,
-              unselectedLabelColor: const Color.fromARGB(255, 142, 142, 142),
-            ),
+              ),
+            ],
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorColor: AhtColors.Main_Color,
+            indicatorWeight: 4,
+            labelColor: AhtColors.Main_Color,
+            unselectedLabelColor: const Color.fromARGB(255, 142, 142, 142),
           ),
         ),
       ),
