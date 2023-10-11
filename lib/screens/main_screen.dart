@@ -20,17 +20,19 @@ class MainScreen extends StatefulWidget {
 }*/
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
-  String? PIN;
-  late TabController _tabController;
+  late final TabController _tabController = TabController(
+    length: 3,
+    vsync: this,
+    initialIndex: 0,
+
+    /// 탭 변경 애니메이션 시간
+    animationDuration: const Duration(milliseconds: 800),
+  );
 
   @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(
-      length: 3,
-      initialIndex: 1,
-      vsync: this,
-    );
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -43,7 +45,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF6B19DC),
+          color: Color(0xFFFAFAFA),
         ),
         child: TabBarView(
           controller: _tabController,
@@ -67,13 +69,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             tabs: const [
               Tab(
                 icon: Icon(
-                  Icons.search,
+                  Icons.calendar_month_outlined,
                   size: 32,
                 ),
               ),
               Tab(
                 icon: Icon(
-                  Icons.home_outlined,
+                  Icons.home,
                   size: 32,
                 ),
               ),
@@ -86,9 +88,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             ],
             indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: AhtColors.Main_Color,
-            indicatorWeight: 4,
+            indicatorWeight: 1,
             labelColor: AhtColors.Main_Color,
-            unselectedLabelColor: const Color.fromARGB(255, 142, 142, 142),
+            unselectedLabelColor: const Color(0xFFB0B0B0),
           ),
         ),
       ),

@@ -25,44 +25,53 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   bool _showSplashScreen = true;
+  bool? loginCompleted;
 
   Future<void> _loadData() async {
     await Future.delayed(
         const Duration(milliseconds: 2000)); // splash screen이 표시될 시간(초)
+    print(2);
     setState(() {
       _showSplashScreen = false;
     });
   }
 
-  Future<bool> autoLogin() async {
+  Future<void> autoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     String? email = prefs.getString('email');
     String? pw = prefs.getString('pw');
     if (email == null || pw == null) {
-      return false;
+      await prefs.remove('email');
+      await prefs.remove('pw');
+      print(1);
+      setState(() {
+        loginCompleted = false;
+      });
+      return;
     }
-    bool loginCompleted = await Auth.signin(
+    loginCompleted = await Auth.signin(
       email: email,
       pw: pw,
       autoLogin: true,
     );
-    if (loginCompleted) {
-      Get.find<Instance>().getUserInfo();
+    if (loginCompleted!) {
+      await Get.find<Instance>().getUserInfo();
+    } else {
+      await prefs.remove('email');
+      await prefs.remove('pw');
     }
-    return loginCompleted;
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
     _loadData();
+    autoLogin();
   }
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return GetMaterialApp(
       theme: ThemeData(
         fontFamily: 'Pretendard',
@@ -72,28 +81,12 @@ class _MainAppState extends State<MainApp> {
         ),
         primaryColor: AhtColors.Main_Color,
       ),
-      home: _showSplashScreen
-          ? const SplashScreen()
-          : FutureBuilder(
-              future: autoLogin(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SplashScreen(); //값 받을 때까지 대기
-                } else {
-                  if (snapshot.data == true) {
-                    return const MainScreen(); //자동 로그인 정보가 유효하면 메인 화면으로
-                  } else {
-                    () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.remove('email');
-                      prefs.remove('pw');
-                    }();
-                    return const MainScreen();
-                    // return const LoginScreen(); //자동 로그인 정보가 없거나 유효하지 않으면 로그인 화면으로
-                  }
-                }
-              },
-            ),
+      home: (_showSplashScreen || loginCompleted == null)
+          ? const Scaffold(body: SplashScreen()) //값 받을 때까지 대기
+          : (loginCompleted!)
+              ? const MainScreen() //자동 로그인 정보가 유효하면 메인 화면으로
+              // : const LoginScreen(),
+              : const MainScreen(),
     );
   }
 }
