@@ -15,6 +15,8 @@ Future<void> main() async {
   runApp(const MainApp());
 }
 
+
+
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
 
@@ -33,20 +35,42 @@ class _MainAppState extends State<MainApp> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _loadData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-
+    
     return GetMaterialApp(
-        theme: ThemeData(
-          fontFamily: 'Pretendard',
-          colorScheme: const ColorScheme.light(
-            background: Colors.white,
-            brightness: Brightness.light,
-          ),
-          primaryColor: AhtColors.Main_Color,
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+        colorScheme: const ColorScheme.light(
+          background: Colors.white,
+          brightness: Brightness.light,
         ),
-        home: const MainScreen());
+        primaryColor: AhtColors.Main_Color,
+      ),
+      home: _showSplashScreen
+          ? const Scaffold(body: SplashScreen())
+          : FutureBuilder(
+              future: getInfo(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const SplashScreen();
+                } else {
+                  if (snapshot.data == null) {
+                    return const StartScreen();
+                  } else {
+                    return const MainScreen();
+                  }
+                }
+              },
+            ),
+    );
   }
 }
 
@@ -65,4 +89,4 @@ class _MainAppState extends State<MainApp> {
                   }
                 }
               },
-            ),*/
+            ),
