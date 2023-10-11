@@ -26,7 +26,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     initialIndex: 0,
 
     /// 탭 변경 애니메이션 시간
-    animationDuration: const Duration(milliseconds: 800),
+    animationDuration: const Duration(milliseconds: 600), //에니메이션 시간
   );
 
   @override
@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       ),
       extendBodyBehindAppBar: true,
       bottomNavigationBar: SizedBox(
-        height: 0,
+        height: screenHeight / 844 * 70,
         child: Padding(
           padding: EdgeInsets.only(
               left: screenWidth / 390 * 0,
@@ -66,24 +66,27 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               top: screenHeight / 844 * 2),
           child: TabBar(
             controller: _tabController,
-            tabs: const [
+            tabs: [
               Tab(
                 icon: Icon(
                   Icons.calendar_month_outlined,
-                  size: 32,
+                  size: screenWidth / 390 * 26,
                 ),
+                text: '캘린더',
               ),
               Tab(
                 icon: Icon(
                   Icons.home,
-                  size: 32,
+                  size: screenWidth / 390 * 26,
                 ),
+                text: '홈',
               ),
               Tab(
                 icon: Icon(
                   Icons.menu_sharp,
-                  size: 32,
+                  size: screenWidth / 390 * 26,
                 ),
+                text: '메뉴',
               ),
             ],
             indicatorSize: TabBarIndicatorSize.label,
