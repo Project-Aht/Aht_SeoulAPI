@@ -45,7 +45,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFFFAFAFA),
+          color: Color(0xFFB0B0B0),
         ),
         child: TabBarView(
           controller: _tabController,
@@ -57,7 +57,15 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         ),
       ),
       extendBodyBehindAppBar: true,
-      bottomNavigationBar: SizedBox(
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: Color(0xFFB0B0B0),
+              width: 0.15,
+            ),
+          ),
+        ),
         height: screenHeight / 844 * 70,
         child: Padding(
           padding: EdgeInsets.only(
@@ -73,6 +81,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   size: screenWidth / 390 * 26,
                 ),
                 text: '캘린더',
+                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 6.5),
               ),
               Tab(
                 icon: Icon(
@@ -80,13 +89,15 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   size: screenWidth / 390 * 26,
                 ),
                 text: '홈',
+                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 6.5),
               ),
               Tab(
                 icon: Icon(
-                  Icons.menu_sharp,
+                  Icons.account_circle,
                   size: screenWidth / 390 * 26,
                 ),
-                text: '메뉴',
+                text: '마이페이지',
+                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 6.5),
               ),
             ],
             indicatorSize: TabBarIndicatorSize.label,
