@@ -1,5 +1,4 @@
 import 'package:aht_dimigo/firebase/auth.dart';
-import 'screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -74,19 +73,18 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Pretendard',
-        colorScheme: const ColorScheme.light(
-          background: Colors.white,
-          brightness: Brightness.light,
+        theme: ThemeData(
+          fontFamily: 'Pretendard',
+          colorScheme: const ColorScheme.light(
+            background: Colors.white,
+            brightness: Brightness.light,
+          ),
+          primaryColor: AhtColors.Main_Color,
         ),
-        primaryColor: AhtColors.Main_Color,
-      ),
-      home: (_showSplashScreen || loginCompleted == null)
-          ? const Scaffold(body: SplashScreen()) //값 받을 때까지 대기
-          : (loginCompleted!)
-              ? const MainScreen() //자동 로그인 정보가 유효하면 메인 화면으로
-              : const LoginSignupScreen(),
-    );
+        home: (_showSplashScreen || loginCompleted == null)
+            ? const Scaffold(body: SplashScreen()) //값 받을 때까지 대기
+            : const MainScreen() //자동 로그인 정보가 유효하면 메인 화면으로
+
+        );
   }
 }
