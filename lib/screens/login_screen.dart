@@ -1,7 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:aht_dimigo/config/palette.dart';
 import 'package:aht_dimigo/screens/main_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   const LoginSignupScreen({Key? key}) : super(key: key);
@@ -61,8 +63,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                               color: Colors.white),
                           children: [
                             TextSpan(
-                              text:
-                                  isSignupScreen ? ' to Yummy chat!' : ' back',
+                              text: isSignupScreen ? ' 강민준 멘트' : ' back',
                               style: const TextStyle(
                                 letterSpacing: 1.0,
                                 fontSize: 25,
@@ -478,7 +479,10 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                            colors: [Colors.orange, Colors.red],
+                            colors: [
+                              Color.fromARGB(255, 49, 40, 156),
+                              Color.fromARGB(255, 57, 41, 117)
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight),
                         borderRadius: BorderRadius.circular(30),
