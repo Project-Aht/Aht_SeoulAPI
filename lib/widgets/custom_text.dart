@@ -8,7 +8,7 @@ class CustomText extends StatefulWidget {
   const CustomText({
     super.key,
     required this.text,
-    required this.style,
+    this.style,
     this.textAlign = TextAlign.left,
   });
 
