@@ -1,4 +1,5 @@
 import 'package:aht_dimigo/firebase/auth.dart';
+import 'screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 import 'firebase/instance.dart';
 import 'themes/color_theme.dart';
-import 'package:aht_dimigo/screens/main_screen.dart';
+import 'screens/main_screen.dart';
 import 'screens/splash_screen.dart';
 
 Future<void> main() async {
@@ -85,8 +86,7 @@ class _MainAppState extends State<MainApp> {
           ? const Scaffold(body: SplashScreen()) //값 받을 때까지 대기
           : (loginCompleted!)
               ? const MainScreen() //자동 로그인 정보가 유효하면 메인 화면으로
-              // : const LoginScreen(),
-              : const MainScreen(),
+              : const LoginSignupScreen(),
     );
   }
 }
