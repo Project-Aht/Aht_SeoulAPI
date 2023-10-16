@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomText extends StatefulWidget {
+class CustomText extends StatelessWidget {
   final String text;
   final TextStyle? style;
   final TextAlign textAlign;
@@ -13,17 +13,64 @@ class CustomText extends StatefulWidget {
   });
 
   @override
-  State<CustomText> createState() => _CustomTextState();
-}
-
-class _CustomTextState extends State<CustomText> {
-  @override
   Widget build(BuildContext context) {
     return Text(
-      widget.text,
-      style: widget.style,
-      textAlign: widget.textAlign,
+      text,
+      style: style,
+      textAlign: textAlign,
       textScaleFactor: 0.85,
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final InputDecoration? decoration;
+  final TextInputType? keyboardType;
+  final TextStyle? style;
+  final bool? obscureText;
+  final String? obscuringCharacter;
+  final int? maxLength;
+  final ScrollController? scrollController;
+  final ScrollPhysics? scrollPhysics;
+  final void Function(String)? onChanged;
+  final int? maxLines;
+  final void Function(String)? onSubmitted;
+
+  const CustomTextField({
+    super.key,
+    this.decoration,
+    this.keyboardType,
+    this.style,
+    this.obscureText,
+    this.obscuringCharacter,
+    this.maxLength,
+    this.maxLines,
+    this.onChanged,
+    this.onSubmitted,
+    this.scrollPhysics,
+    this.scrollController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final mqData = MediaQuery.of(context);
+    final mqDataNew = mqData.copyWith(textScaleFactor: 0.85);
+    return MediaQuery(
+      data: mqDataNew,
+      child: TextField(
+        cursorColor: Colors.black,
+        decoration: decoration,
+        keyboardType: keyboardType,
+        style: style,
+        obscureText: obscureText ?? false,
+        obscuringCharacter: obscuringCharacter ?? '•',
+        maxLength: maxLength,
+        maxLines: maxLines,
+        onChanged: onChanged,
+        onSubmitted: onSubmitted,
+        scrollPhysics: scrollPhysics,
+        scrollController: scrollController,
+      ),
     );
   }
 }
