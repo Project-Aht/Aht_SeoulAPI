@@ -1,3 +1,4 @@
+import 'package:aht_dimigo/screens/grade_calculator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import 'package:get/get.dart';
@@ -176,28 +177,37 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SizedBox(
-                        width: screenWidth / 390 * 70,
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.black,
-                          size: screenWidth / 390 * 30,
+                      GestureDetector(
+                        onTap: _GetToGradeCalculatorScreen,
+                        child: SizedBox(
+                          width: screenWidth / 390 * 70,
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.black,
+                            size: screenWidth / 390 * 30,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: screenWidth / 390 * 70,
-                        child: Icon(
-                          Icons.check_box_outlined,
-                          color: Colors.black,
-                          size: screenWidth / 390 * 30,
+                      GestureDetector(
+                        onTap: _GetToDoneExamScreen,
+                        child: SizedBox(
+                          width: screenWidth / 390 * 70,
+                          child: Icon(
+                            Icons.check_box_outlined,
+                            color: Colors.black,
+                            size: screenWidth / 390 * 30,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: screenWidth / 390 * 70,
-                        child: Icon(
-                          Icons.calculate_outlined,
-                          color: Colors.black,
-                          size: screenWidth / 390 * 30,
+                      GestureDetector(
+                        onTap: _GetToGradeCalculatorScreen,
+                        child: SizedBox(
+                          width: screenWidth / 390 * 70,
+                          child: Icon(
+                            Icons.calculate_outlined,
+                            color: Colors.black,
+                            size: screenWidth / 390 * 30,
+                          ),
                         ),
                       ),
                     ],
@@ -205,48 +215,57 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      SizedBox(
-                        width: screenWidth / 390 * 70,
-                        child: const Center(
-                          child: Text(
-                            '정보수정',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w600,
-                              height: 1.25,
+                      GestureDetector(
+                        onTap: _GetToGradeCalculatorScreen,
+                        child: SizedBox(
+                          width: screenWidth / 390 * 70,
+                          child: const Center(
+                            child: Text(
+                              '정보수정',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.25,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: screenWidth / 390 * 70,
-                        child: const Center(
-                          child: Text(
-                            '완료된\n수행평가',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w600,
-                              height: 1.25,
+                      GestureDetector(
+                        onTap: _GetToDoneExamScreen,
+                        child: SizedBox(
+                          width: screenWidth / 390 * 70,
+                          child: const Center(
+                            child: Text(
+                              '완료된\n수행평가',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.25,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: screenWidth / 390 * 70,
-                        child: const Center(
-                          child: Text(
-                            '점수계산기',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w600,
-                              height: 1.25,
+                      GestureDetector(
+                        onTap: _GetToGradeCalculatorScreen,
+                        child: SizedBox(
+                          width: screenWidth / 390 * 70,
+                          child: const Center(
+                            child: Text(
+                              '점수계산기',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w600,
+                                height: 1.25,
+                              ),
                             ),
                           ),
                         ),
@@ -262,4 +281,16 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
       ),
     );
   }
+}
+
+void _GetToGradeCalculatorScreen() {
+  Get.to(() => const GradeCalclulatorScreen());
+}
+
+void _GetToDoneExamScreen() {
+  Get.to(() => const GradeCalclulatorScreen());
+}
+
+void _GetToEditInformationScreen() {
+  Get.to(() => const GradeCalclulatorScreen());
 }

@@ -34,13 +34,13 @@ class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
         children: [
           Container(
             width: screenWidth,
-            height: screenHeight / 844 * 122,
+            height: screenHeight / 844 * 110,
             decoration: const BoxDecoration(
               color: AhtColors.Main_Color,
             ),
             child: Column(
               children: [
-                SizedBox(height: screenHeight / 844 * 70),
+                SizedBox(height: screenHeight / 844 * 61),
                 SizedBox(
                   height: screenHeight / 844 * 28,
                   child: Row(
@@ -74,121 +74,125 @@ class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
               left: screenWidth / 390 * 16,
               right: screenWidth / 390 * 16,
             ),
-            child: Column(
-              children: [
-                const Row(
-                  children: [
-                    CustomText(
-                      text: '과목',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w700,
-                        height: 1,
+            child: SizedBox(
+              height: screenHeight / 844 * 686,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      const Row(
+                        children: [
+                          CustomText(
+                            text: '과목',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              height: 1,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: screenHeight / 844 * 8),
-                Column(
-                  children: [
-                    for (int i = 0; i < subjectList.length; i++)
-                      SubjectCard(
-                        index: i,
-                        subject: subjectList[i],
-                        update: () {
-                          setState(() {});
-                        },
-                      )
-                  ],
-                ),
-                if (adding)
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: screenHeight / 844 * 4,
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.only(left: 17 / 390 * screenWidth),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF4F4F4),
-                        borderRadius: BorderRadius.circular(5),
+                      SizedBox(height: screenHeight / 844 * 8),
+                      Column(
+                        children: [
+                          for (int i = 0; i < subjectList.length; i++)
+                            SubjectCard(
+                              index: i,
+                              subject: subjectList[i],
+                              update: () {
+                                setState(() {});
+                              },
+                            )
+                        ],
                       ),
-                      child: CustomTextField(
-                        maxLines: 1,
-                        onSubmitted: (name) {
+                      if (adding)
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: screenHeight / 844 * 4,
+                          ),
+                          child: Container(
+                            padding:
+                                EdgeInsets.only(left: 17 / 390 * screenWidth),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF4F4F4),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: CustomTextField(
+                              maxLines: 1,
+                              onSubmitted: (name) {
+                                setState(() {
+                                  openIndex = subjectList.length;
+                                  subjectList.add({'name': name});
+                                  adding = false;
+                                });
+                              },
+                              decoration: const InputDecoration(
+                                hintText: '과목명을 입력하세요',
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                        ),
+                      SizedBox(height: screenHeight / 844 * 12),
+                      GestureDetector(
+                        onTap: () {
                           setState(() {
-                            openIndex = subjectList.length;
-                            subjectList.add({'name': name});
-                            adding = false;
+                            adding = true;
+                            openIndex = null;
                           });
                         },
-                        decoration: const InputDecoration(
-                          hintText: '과목명을 입력하세요',
-                          border: InputBorder.none,
+                        child: Container(
+                          height: screenHeight / 844 * 48,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.black.withOpacity(0.15),
+                            ),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.black.withOpacity(0.15),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                SizedBox(height: screenHeight / 844 * 12),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      adding = true;
-                      openIndex = null;
-                    });
-                  },
-                  child: Container(
-                    height: screenHeight / 844 * 48,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                        color: Colors.black.withOpacity(0.15),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          //calculate
+                          Get.off(
+                            () => GradeResultScreen(
+                              subjectList: subjectList,
+                            ),
+                            duration: Duration.zero,
+                          );
+                        },
+                        child: Container(
+                          height: 59 / 844 * screenHeight,
+                          decoration: BoxDecoration(
+                            color: AhtColors.Main_Color,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: CustomText(
+                              text: '계산하기',
+                              style: AhtTextTheme.ButtonText,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.black.withOpacity(0.15),
-                      ),
-                    ),
+                      SizedBox(height: screenHeight / 844 * 24),
+                    ],
                   ),
-                ),
-              ],
-            ),
-          ),
-          const Expanded(
-            child: SizedBox(),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              bottom: screenHeight / 844 * 24,
-              left: screenWidth / 390 * 16,
-              right: screenWidth / 390 * 16,
-            ),
-            child: GestureDetector(
-              onTap: () {
-                //calculate
-                Get.off(
-                  () => GradeResultScreen(
-                    subjectList: subjectList,
-                  ),
-                  duration: Duration.zero,
-                );
-              },
-              child: Container(
-                height: 59 / 844 * screenHeight,
-                decoration: BoxDecoration(
-                  color: AhtColors.Main_Color,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(
-                  child: CustomText(
-                    text: '계산하기',
-                    style: AhtTextTheme.ButtonText,
-                  ),
-                ),
+                ],
               ),
             ),
           ),

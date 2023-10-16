@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../themes/text_theme.dart';
 import '../themes/color_theme.dart';
 import '../widgets/custom_text.dart';
+import 'dart:core';
 
 class GradeResultScreen extends StatefulWidget {
   const GradeResultScreen({
@@ -18,11 +19,30 @@ class GradeResultScreen extends StatefulWidget {
 
 class _GradeResultScreenState extends State<GradeResultScreen> {
   String username = '';
+  late Map<String, double> result;
   double meanGrade = 0;
 
   @override
   void initState() {
     super.initState();
+    _calculateGrade();
+  }
+
+  void _calculateGrade() {
+    for (int i = 0; i < widget.subjectList.length; i++) {
+      String name = widget.subjectList[i]['name'];
+      double gradeby100 = (widget.subjectList[i]['rank'] +
+              (widget.subjectList[i]['same_rank'] - 1)) /
+          2 /
+          widget.subjectList[i]['total'] *
+          100;
+      _addValueToResult(name, gradeby100);
+      print(result[name]);
+    }
+  }
+
+  void _addValueToResult(String key, double value) {
+    result[key] = value;
   }
 
   @override
