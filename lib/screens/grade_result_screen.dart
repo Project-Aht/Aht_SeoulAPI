@@ -1,3 +1,4 @@
+import 'package:aht_dimigo/screens/grade_calculator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../themes/text_theme.dart';
@@ -19,7 +20,7 @@ class GradeResultScreen extends StatefulWidget {
 
 class _GradeResultScreenState extends State<GradeResultScreen> {
   String username = '';
-  late Map<String, double> result;
+  Map<String, double> result = {};
   double meanGrade = 0;
 
   @override
@@ -29,20 +30,19 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
   }
 
   void _calculateGrade() {
+    num credits = 0;
     for (int i = 0; i < widget.subjectList.length; i++) {
-      String name = widget.subjectList[i]['name'];
-      double gradeby100 = (widget.subjectList[i]['rank'] +
-              (widget.subjectList[i]['same_rank'] - 1)) /
-          2 /
-          widget.subjectList[i]['total'] *
-          100;
-      _addValueToResult(name, gradeby100);
+      Map sub = widget.subjectList[i];
+      String name = sub['name'];
+      double gradeby100 =
+          (sub['rank'] + (sub['same_rank'] - 1) / 2) / sub['total'] * 100;
+      result[name] = gradeby100;
+      credits += sub['credit'];
+      meanGrade += gradeby100 * sub['credit'];
       print(result[name]);
     }
-  }
-
-  void _addValueToResult(String key, double value) {
-    result[key] = value;
+    meanGrade /= credits;
+    print(result);
   }
 
   @override
@@ -113,8 +113,21 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
             style: AhtTextTheme.GradeResultMean,
             textAlign: TextAlign.center,
           ),
-          const Expanded(
-            child: SizedBox(),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: screenWidth / 390 * 16,
+              ),
+              child: ListView.separated(
+                itemCount: subjectList.length,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
+                ),
+                itemBuilder: (context, index) => CustomText(
+                  text: '${subjectList[index]}',
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(
