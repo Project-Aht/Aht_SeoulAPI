@@ -76,14 +76,16 @@ class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
             ),
             child: SizedBox(
               height: screenHeight / 844 * 686,
+              width: screenWidth / 390 * 358,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     children: [
-                      const Row(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomText(
+                          const CustomText(
                             text: '과목',
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -92,6 +94,17 @@ class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
                               fontFamily: 'Pretendard',
                               fontWeight: FontWeight.w700,
                               height: 1,
+                            ),
+                          ),
+                          CustomText(
+                            text: '동석차수가 없을 경우 1을 입력해주세요',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.15),
+                              fontSize: 11,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w600,
+                              height: 1.8,
                             ),
                           ),
                         ],

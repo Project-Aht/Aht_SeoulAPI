@@ -22,6 +22,7 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
   String username = '';
   Map<String, double> result = {};
   double meanGrade = 0;
+  double meanGradeCut = 0; // 소수 첫재짜리 반올림
 
   @override
   void initState() {
@@ -35,13 +36,34 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
       Map sub = widget.subjectList[i];
       String name = sub['name'];
       double gradeby100 =
-          (sub['rank'] + (sub['same_rank'] - 1) / 2) / sub['total'] * 100;
-      result[name] = gradeby100;
+          (sub['rank'] + (sub['same_rank'] - 1)) / sub['total'] * 100;
+      late double justrank;
+      if (0 <= gradeby100 && gradeby100 <= 4) {
+        justrank = 1;
+      } else if (4 < gradeby100 && gradeby100 <= 11) {
+        justrank = 2;
+      } else if (11 < gradeby100 && gradeby100 <= 23) {
+        justrank = 3;
+      } else if (23 < gradeby100 && gradeby100 <= 40) {
+        justrank = 4;
+      } else if (40 < gradeby100 && gradeby100 <= 60) {
+        justrank = 5;
+      } else if (60 < gradeby100 && gradeby100 <= 77) {
+        justrank = 6;
+      } else if (77 < gradeby100 && gradeby100 <= 89) {
+        justrank = 7;
+      } else if (89 < gradeby100 && gradeby100 <= 96) {
+        justrank = 8;
+      } else {
+        justrank = 9;
+      }
+      result[name] = justrank;
       credits += sub['credit'];
-      meanGrade += gradeby100 * sub['credit'];
+      meanGrade += justrank * sub['credit'];
       print(result[name]);
     }
     meanGrade /= credits;
+    meanGradeCut = double.parse(meanGrade.toStringAsFixed(1));
     print(result);
   }
 
@@ -101,7 +123,7 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
             ),
             child: Center(
               child: CustomText(
-                text: '$meanGrade',
+                text: '$meanGradeCut',
               ),
             ),
           ),
@@ -109,7 +131,7 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
             height: 26 / 844 * screenHeight,
           ),
           CustomText(
-            text: '$username님의 평균 등급은\n$meanGrade등급입니다.',
+            text: '$username님의 평균 등급은\n$meanGradeCut등급입니다.',
             style: AhtTextTheme.GradeResultMean,
             textAlign: TextAlign.center,
           ),
