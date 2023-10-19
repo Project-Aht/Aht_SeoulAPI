@@ -36,6 +36,7 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w700,
     height: 1.25,
   );
+<<<<<<< HEAD
   static const MiddleMenuText = TextStyle(
     color: Colors.black,
     fontSize: 16,
@@ -49,5 +50,41 @@ abstract class AhtTextTheme {
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w600,
     height: 1.25,
+=======
+  static const LoginText = TextStyle(
+    color: Colors.black,
+    fontSize: 18,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+    height: 0,
+  );
+  static const LoginHintText = TextStyle(
+    color: Color(0xFFD9D9D9),
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w500,
+    height: 0,
+  );
+  static const CheckBoxText = TextStyle(
+    color: Color(0xFFD9D9D9),
+    fontSize: 12,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 0,
+  );
+  static const CheckBoxHighlight = TextStyle(
+    color: Colors.black,
+    fontSize: 12,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 0,
+  );
+  static const LogoText = TextStyle(
+    color: Color(0xFF38498E),
+    fontSize: 64,
+    fontFamily: 'Righteous',
+    fontWeight: FontWeight.w400,
+    height: 0,
+>>>>>>> d3aa49e17210e2b6a6246051d28b57d04bab2c4d
   );
 }
