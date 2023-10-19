@@ -17,6 +17,7 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
   final _authemtication = FirebaseAuth.instance;
 
   bool isSignupScreen = true;
+  bool showSpinner = false;
   final _formKey = GlobalKey<FormState>();
   String userName = '';
   String userEmail = '';
@@ -428,6 +429,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                       borderRadius: BorderRadius.circular(50)),
                   child: GestureDetector(
                     onTap: () async {
+                      setState(() {
+                        showSpinner = true;
+                      });
                       if (isSignupScreen) {
                         _tryValidation();
                         try {
@@ -441,8 +445,14 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                                 return const MainScreen();
                               }),
                             );
+                            setState(() {
+                              showSpinner = false;
+                            });
                           }
                         } catch (e) {
+                          setState(() {
+                            showSpinner = false;
+                          });
                           // ignore: avoid_print
                           print(e);
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -463,6 +473,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             password: userpassword,
                           );
                           if (newUser.user != null) {
+                            setState(() {
+                              showSpinner = false;
+                            });
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
@@ -471,6 +484,9 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                             );
                           }
                         } catch (e) {
+                          setState(() {
+                            showSpinner = false;
+                          });
                           // ignore: avoid_print
                           print(e);
                         }
