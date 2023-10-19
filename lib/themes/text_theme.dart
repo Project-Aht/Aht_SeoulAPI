@@ -36,7 +36,6 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w700,
     height: 1.25,
   );
-<<<<<<< HEAD
   static const MiddleMenuText = TextStyle(
     color: Colors.black,
     fontSize: 16,
@@ -50,7 +49,7 @@ abstract class AhtTextTheme {
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w600,
     height: 1.25,
-=======
+  );
   static const LoginText = TextStyle(
     color: Colors.black,
     fontSize: 18,
@@ -85,6 +84,5 @@ abstract class AhtTextTheme {
     fontFamily: 'Righteous',
     fontWeight: FontWeight.w400,
     height: 0,
->>>>>>> d3aa49e17210e2b6a6246051d28b57d04bab2c4d
   );
 }
