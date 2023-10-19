@@ -36,4 +36,18 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w700,
     height: 1.25,
   );
+  static const MiddleMenuText = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 1.25,
+  );
+  static final TextfieldHintText = TextStyle(
+    color: Colors.black.withOpacity(0.2),
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 1.25,
+  );
 }

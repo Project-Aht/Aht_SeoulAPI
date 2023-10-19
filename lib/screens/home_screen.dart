@@ -1,8 +1,10 @@
+import 'package:aht_dimigo/screens/register_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import '../widgets/custom_text.dart';
 import 'package:aht_dimigo/widgets/subject_selection_box.dart';
 import 'package:aht_dimigo/widgets/main_exam_box.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,7 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
         foregroundColor: Colors.white,
         backgroundColor: AhtColors.Main_Color,
         elevation: 7,
-        child: const Icon(Icons.add),
+        child: GestureDetector(
+          onTap: () {
+            Get.to(() => const RegisterExamScreen());
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: SizedBox(
