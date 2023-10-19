@@ -47,6 +47,7 @@ class Auth {
     required String email,
     required String pw,
     required bool autoLogin,
+    required bool savingId,
   }) async {
     final prefs = await SharedPreferences.getInstance();
     try {
@@ -56,6 +57,9 @@ class Auth {
       if (autoLogin) {
         prefs.setString('email', email);
         prefs.setString('pw', pw);
+      } else if (savingId) {
+        prefs.setString('email', email);
+        prefs.remove('pw');
       } else {
         prefs.remove('email');
         prefs.remove('pw');
@@ -73,7 +77,6 @@ class Auth {
       await _firebaseAuth.signOut();
       Get.find<Instance>().getUserInfo();
       prefs.remove('email');
-      prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return false;

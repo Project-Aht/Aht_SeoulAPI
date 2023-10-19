@@ -41,9 +41,7 @@ class _MainAppState extends State<MainApp> {
     final prefs = await SharedPreferences.getInstance();
     String? email = prefs.getString('email');
     String? pw = prefs.getString('pw');
-    if (email == null || pw == null) {
-      await prefs.remove('email');
-      await prefs.remove('pw');
+    if (pw == null) {
       print(1);
       setState(() {
         loginCompleted = false;
@@ -51,9 +49,10 @@ class _MainAppState extends State<MainApp> {
       return;
     }
     loginCompleted = await Auth.signin(
-      email: email,
+      email: email!,
       pw: pw,
       autoLogin: true,
+      savingId: true,
     );
     if (loginCompleted!) {
       await Get.find<Instance>().getUserInfo();
@@ -86,6 +85,6 @@ class _MainAppState extends State<MainApp> {
             ? const Scaffold(body: SplashScreen()) //값 받을 때까지 대기
             : (loginCompleted!)
                 ? const MainScreen() //자동 로그인 정보가 유효하면 메인 화면으로
-                : const LoginSignupScreen());
+                : const LoginScreen());
   }
 }

@@ -70,6 +70,7 @@ abstract class AhtTextTheme {
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w600,
     height: 0,
+    decorationThickness: 4,
   );
   static const CheckBoxHighlight = TextStyle(
     color: Colors.black,
