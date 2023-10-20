@@ -192,13 +192,46 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(height: screenHeight / 844 * 6),
                         subjectadding
                             ? ListView.separated(
+                                padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 itemCount: subjects.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return SubjectCard(subjects[index]);
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        title = subjects[index];
+                                      });
+                                    },
+                                    child: Container(
+                                      height: screenHeight / 844 * 44,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFF4F4F4),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width:
+                                                      screenWidth / 390 * 16),
+                                              CustomText(
+                                                text: subjects[index],
+                                                style:
+                                                    AhtTextTheme.MiddleMenuText,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
                                 },
                                 separatorBuilder: (BuildContext context,
                                         int index) =>
@@ -240,38 +273,6 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SubjectCard extends StatelessWidget {
-  final String subjectName;
-  const SubjectCard(this.subjectName, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      height: screenHeight / 844 * 44,
-      decoration: BoxDecoration(
-        color: const Color(0xFFF4F4F4),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              SizedBox(width: screenWidth / 390 * 16),
-              CustomText(
-                text: subjectName,
-                style: AhtTextTheme.MiddleMenuText,
-              ),
-            ],
           ),
         ],
       ),
