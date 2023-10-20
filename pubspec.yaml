@@ -16,6 +16,7 @@ dependencies:
   cloud_firestore:
   firebase_messaging:
   get:
+  scroll_date_picker:
   flutter:
     sdk: flutter
 

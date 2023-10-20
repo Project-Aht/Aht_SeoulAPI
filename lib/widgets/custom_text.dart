@@ -35,6 +35,7 @@ class CustomTextField extends StatelessWidget {
   final void Function(String)? onChanged;
   final int? maxLines;
   final void Function(String)? onSubmitted;
+  final TextEditingController? controller;
 
   const CustomTextField({
     super.key,
@@ -49,6 +50,7 @@ class CustomTextField extends StatelessWidget {
     this.onSubmitted,
     this.scrollPhysics,
     this.scrollController,
+    this.controller,
   });
 
   @override
@@ -70,6 +72,7 @@ class CustomTextField extends StatelessWidget {
         onSubmitted: onSubmitted,
         scrollPhysics: scrollPhysics,
         scrollController: scrollController,
+        controller: controller,
       ),
     );
   }
