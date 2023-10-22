@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "378705323250",
-    "firebase_url": "https://ahtdimigo-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "ahtdimigo",
-    "storage_bucket": "ahtdimigo.appspot.com"
+    "project_number": "490830252827",
+    "project_id": "aht-a9dbe",
+    "storage_bucket": "aht-a9dbe.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:378705323250:android:8a24fafb8ae7eb01ce9c6b",
+        "mobilesdk_app_id": "1:490830252827:android:685322672429058a6ee1be",
         "android_client_info": {
           "package_name": "com.example.aht_dimigo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "378705323250-2bathp7a5ujnv15rs7cljjaus2c77c88.apps.googleusercontent.com",
+          "client_id": "490830252827-kuqcqu17rfjm1bh1avv0so2odhkpui1u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB5P4C1q4K52SFHjdFz6CTSUliixM3jiSs"
+          "current_key": "AIzaSyAkeGmc5gEZyTP8NKv3i2c0YvHGWyUIsMk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "378705323250-2bathp7a5ujnv15rs7cljjaus2c77c88.apps.googleusercontent.com",
+              "client_id": "490830252827-kuqcqu17rfjm1bh1avv0so2odhkpui1u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

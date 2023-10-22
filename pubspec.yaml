@@ -17,6 +17,7 @@ dependencies:
   firebase_messaging:
   get:
   scroll_date_picker:
+  image_picker:
   flutter:
     sdk: flutter
 
@@ -32,28 +33,28 @@ flutter:
     - assets\images\splash_image.png
 
   fonts:
-      - family: Righteous
-        fonts:
-          - asset: fonts/Righteous/Righteous_400.ttf
-            weight: 400
+    - family: Righteous
+      fonts:
+        - asset: fonts/Righteous/Righteous_400.ttf
+          weight: 400
 
-      - family: Pretendard
-        fonts:
-          - asset: fonts/Pretendard/Pretendard-Black.ttf
-            weight: 900
-          - asset: fonts/Pretendard/Pretendard-Bold.ttf
-            weight: 700
-          - asset: fonts/Pretendard/Pretendard-ExtraBold.ttf
-            weight: 800
-          - asset: fonts/Pretendard/Pretendard-ExtraLight.ttf
-            weight: 200
-          - asset: fonts/Pretendard/Pretendard-Light.ttf
-            weight: 300
-          - asset: fonts/Pretendard/Pretendard-Medium.ttf
-            weight: 500
-          - asset: fonts/Pretendard/Pretendard-Regular.ttf
-            weight: 400
-          - asset: fonts/Pretendard/Pretendard-Thin.ttf
-            weight: 100
-          - asset: fonts/Pretendard/Pretendard-SemiBold.ttf
-            weight: 600
+    - family: Pretendard
+      fonts:
+        - asset: fonts/Pretendard/Pretendard-Black.ttf
+          weight: 900
+        - asset: fonts/Pretendard/Pretendard-Bold.ttf
+          weight: 700
+        - asset: fonts/Pretendard/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: fonts/Pretendard/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: fonts/Pretendard/Pretendard-Light.ttf
+          weight: 300
+        - asset: fonts/Pretendard/Pretendard-Medium.ttf
+          weight: 500
+        - asset: fonts/Pretendard/Pretendard-Regular.ttf
+          weight: 400
+        - asset: fonts/Pretendard/Pretendard-Thin.ttf
+          weight: 100
+        - asset: fonts/Pretendard/Pretendard-SemiBold.ttf
+          weight: 600

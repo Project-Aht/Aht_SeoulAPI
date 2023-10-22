@@ -44,44 +44,40 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCoaD7VDCnXJ3TVXTQGaDqDjtXSuPG7s28',
-    appId: '1:378705323250:web:856c3e5c9a966a71ce9c6b',
-    messagingSenderId: '378705323250',
-    projectId: 'ahtdimigo',
-    authDomain: 'ahtdimigo.firebaseapp.com',
-    databaseURL: 'https://ahtdimigo-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ahtdimigo.appspot.com',
-    measurementId: 'G-NH5CJE71TR',
+    apiKey: 'AIzaSyA35e_XE9bv_pLJXsc_M71vrTYsy0ncBEE',
+    appId: '1:490830252827:web:e04031f47dd1815e6ee1be',
+    messagingSenderId: '490830252827',
+    projectId: 'aht-a9dbe',
+    authDomain: 'aht-a9dbe.firebaseapp.com',
+    storageBucket: 'aht-a9dbe.appspot.com',
+    measurementId: 'G-VZ00R2B71V',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB5P4C1q4K52SFHjdFz6CTSUliixM3jiSs',
-    appId: '1:378705323250:android:8a24fafb8ae7eb01ce9c6b',
-    messagingSenderId: '378705323250',
-    projectId: 'ahtdimigo',
-    databaseURL: 'https://ahtdimigo-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ahtdimigo.appspot.com',
+    apiKey: 'AIzaSyAkeGmc5gEZyTP8NKv3i2c0YvHGWyUIsMk',
+    appId: '1:490830252827:android:685322672429058a6ee1be',
+    messagingSenderId: '490830252827',
+    projectId: 'aht-a9dbe',
+    storageBucket: 'aht-a9dbe.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBIcTOgjfAFWtK-68UtRwG90Phcw-ct2GA',
-    appId: '1:378705323250:ios:f0ecbd5273100cdfce9c6b',
-    messagingSenderId: '378705323250',
-    projectId: 'ahtdimigo',
-    databaseURL: 'https://ahtdimigo-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ahtdimigo.appspot.com',
-    iosClientId: '378705323250-gktl59kgo590a0nmbig49ruql3nk6imp.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAybV-P8S6Quq3knxvCx-2FVD-FoT9VgtA',
+    appId: '1:490830252827:ios:9a4b9d1f055e4d006ee1be',
+    messagingSenderId: '490830252827',
+    projectId: 'aht-a9dbe',
+    storageBucket: 'aht-a9dbe.appspot.com',
+    iosClientId: '490830252827-37g10qt3jav2crf06d2pqp4gquvgk9s0.apps.googleusercontent.com',
     iosBundleId: 'com.example.ahtDimigo',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBIcTOgjfAFWtK-68UtRwG90Phcw-ct2GA',
-    appId: '1:378705323250:ios:367501dd9315e33ace9c6b',
-    messagingSenderId: '378705323250',
-    projectId: 'ahtdimigo',
-    databaseURL: 'https://ahtdimigo-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'ahtdimigo.appspot.com',
-    iosClientId: '378705323250-cjt11l1oedike1t4ts3uhgn79adfhbc4.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAybV-P8S6Quq3knxvCx-2FVD-FoT9VgtA',
+    appId: '1:490830252827:ios:8f675b577f0cdab36ee1be',
+    messagingSenderId: '490830252827',
+    projectId: 'aht-a9dbe',
+    storageBucket: 'aht-a9dbe.appspot.com',
+    iosClientId: '490830252827-fbvdpq61j11ian7uq6psovmftokpsoto.apps.googleusercontent.com',
     iosBundleId: 'com.example.ahtDimigo.RunnerTests',
   );
 }
