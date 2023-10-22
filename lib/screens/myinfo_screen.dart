@@ -1,8 +1,9 @@
-import 'package:aht_dimigo/firebase/auth.dart';
-import 'package:aht_dimigo/screens/grade_calculator_screen.dart';
-import 'package:aht_dimigo/screens/login_screen.dart';
+import '../firebase/auth.dart';
+import '../firebase/instance.dart';
+import '../themes/color_theme.dart';
+import 'grade_calculator_screen.dart';
+import 'login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:aht_dimigo/themes/color_theme.dart';
 import 'package:get/get.dart';
 
 class MyinfoScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class MyinfoScreen extends StatefulWidget {
 }
 
 class _MyinfoScreenState extends State<MyinfoScreen> {
+  final Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo ?? {};
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -122,9 +124,9 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text(
-                    '1학년 2반 전지훈',
-                    style: TextStyle(
+                  Text(
+                    '${_userInfo['school']['grade']}학년 ${_userInfo['school']['class']}반 ${_userInfo['name']}',
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontFamily: 'Pretendard',
@@ -180,7 +182,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                        onTap: _GetToGradeCalculatorScreen,
+                        onTap: _GetToEditInformationScreen,
                         child: SizedBox(
                           width: screenWidth / 390 * 70,
                           child: Icon(
@@ -218,7 +220,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GestureDetector(
-                        onTap: _GetToGradeCalculatorScreen,
+                        onTap: _GetToEditInformationScreen,
                         child: SizedBox(
                           width: screenWidth / 390 * 70,
                           child: const Center(

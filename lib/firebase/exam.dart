@@ -9,27 +9,25 @@ List<Exam> exams = _instance.exams;
 CollectionReference<Map<String, dynamic>> collection = _firestore
     .collection('school')
     .doc(userInfo?['school']['name'])
-    .collection('exam');
+    .collection('exam')
+    .doc('${userInfo?['school']['grade']}')
+    .collection('${userInfo?['school']['class']}');
 
 class Exam {
   List<DateTime> dates;
-  List<String> admin;
   String title;
   String range;
   String memo;
   String subject;
-  int grade;
-  int? score;
+  int score;
 
   Exam({
     required this.title,
     required this.subject,
     required this.dates,
     required this.memo,
-    required this.admin,
-    required this.grade,
     required this.range,
-    this.score,
+    required this.score,
   });
 
   static Future<Exam> set({
@@ -38,19 +36,15 @@ class Exam {
     required List<DateTime> dates,
     required String memo,
     required String range,
-    required List<String> admin,
-    required int grade,
-    int? score,
+    required int score,
   }) async {
     await collection.doc(title).set(
       {
         'subject': subject,
         'range': range,
-        'admin': admin,
         'dates': dates,
-        'grade': grade,
         'memo': memo,
-        if (score != null) 'score': score,
+        'score': score,
       },
     );
     return Exam(
@@ -58,9 +52,8 @@ class Exam {
       subject: subject,
       dates: dates,
       memo: memo,
-      admin: admin,
-      grade: grade,
       range: range,
+      score: score,
     );
   }
 
@@ -71,9 +64,7 @@ class Exam {
       {
         'subject': kwargs['subject'] ?? subject,
         'range': kwargs['range'] ?? range,
-        'admin': kwargs['admin'] ?? admin,
         'dates': kwargs['dates'] ?? dates,
-        'grade': kwargs['grade'] ?? grade,
         'score': kwargs['score'] ?? score,
         'memo': kwargs['memo'] ?? memo,
       },
@@ -88,8 +79,6 @@ class Exam {
       range: data?['range'],
       dates: data?['dates'],
       memo: data?['memo'],
-      admin: data?['admin'],
-      grade: data?['grade'],
       score: data?['score'],
     );
   }
@@ -105,8 +94,6 @@ class Exam {
           range: data['range'],
           dates: data['dates'],
           memo: data['memo'],
-          admin: data['admin'],
-          grade: data['grade'],
           score: data['score'],
         ),
       );
