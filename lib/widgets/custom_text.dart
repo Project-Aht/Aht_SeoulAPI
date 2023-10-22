@@ -24,6 +24,8 @@ class CustomText extends StatelessWidget {
 }
 
 class CustomTextField extends StatelessWidget {
+  final TextAlign? textAlign;
+  final TextInputAction? textInputAction;
   final InputDecoration? decoration;
   final TextInputType? keyboardType;
   final TextStyle? style;
@@ -39,6 +41,8 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     super.key,
+    this.textAlign,
+    this.textInputAction,
     this.decoration,
     this.keyboardType,
     this.style,
@@ -60,6 +64,8 @@ class CustomTextField extends StatelessWidget {
     return MediaQuery(
       data: mqDataNew,
       child: TextField(
+        textAlign: textAlign ?? TextAlign.start,
+        textInputAction: textInputAction,
         cursorColor: Colors.black,
         decoration: decoration,
         keyboardType: keyboardType,

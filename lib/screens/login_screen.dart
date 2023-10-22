@@ -190,14 +190,17 @@ class _LoginScreenState extends State<LoginScreen> {
               height: screenHeight / 844 * 44,
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 if (email != null && pw != null) {
-                  Auth.signin(
+                  bool signinCompleted = await Auth.signin(
                     email: email!,
                     pw: pw!,
                     autoLogin: autoLogin,
                     savingId: savingId,
                   );
+                  if (signinCompleted) {
+                    Get.offAll(() => const MainScreen());
+                  }
                 }
               },
               child: Container(
@@ -237,15 +240,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: () {
                     Get.offAll(() => const SignUpScreen());
                   },
-                  child: CustomText(
-                    text: '“앗”이 처음이라면? 회원가입하기',
-                    style: AhtTextTheme.CheckBoxText.apply(
-                      color: const Color(0xFF38498E),
-                      decoration: TextDecoration.underline,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Color(0xFF38498E),
+                        ),
+                      ),
+                    ),
+                    child: CustomText(
+                      text: '“앗”이 처음이라면? 회원가입하기',
+                      style: AhtTextTheme.CheckBoxText.apply(
+                        color: const Color(0xFF38498E),
+                      ),
                     ),
                   ),
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 30,
             ),
             GestureDetector(
               onTap: () {
