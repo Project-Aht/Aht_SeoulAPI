@@ -1,4 +1,6 @@
+import 'package:aht_dimigo/firebase/auth.dart';
 import 'package:aht_dimigo/screens/grade_calculator_screen.dart';
+import 'package:aht_dimigo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import 'package:get/get.dart';
@@ -276,6 +278,13 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
               ),
             ),
             SizedBox(height: screenHeight / 844 * 70),
+            GestureDetector(
+              onTap: () async {
+                await Auth.signout();
+                Get.to(() => const LoginScreen());
+              },
+              child: const Text('로그아웃'),
+            ),
           ],
         ),
       ),

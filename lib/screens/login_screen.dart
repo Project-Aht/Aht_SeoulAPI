@@ -5,6 +5,7 @@ import 'package:aht_dimigo/themes/color_theme.dart';
 import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:aht_dimigo/widgets/custom_text.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'main_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +21,28 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  late final SharedPreferences prefs;
   bool savingId = false;
   bool autoLogin = false;
   String? email;
   String? pw;
+
+  @override
+  void initState() {
+    super.initState();
+    getSavedId();
+  }
+
+  Future<void> getSavedId() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      email = prefs.getString('email');
+      _controller.text = email ?? '';
+      print(email);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: screenWidth / 390 * 266,
                   child: CustomTextField(
+                    controller: _controller,
                     onChanged: (p0) {
                       setState(() {
                         email = p0;
@@ -257,27 +277,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            GestureDetector(
-              onTap: () {
-                Get.offAll(() => const MainScreen());
-              },
-              child: Container(
-                height: screenHeight / 844 * 52,
-                decoration: BoxDecoration(
-                  color: AhtColors.Main_Color,
-                  borderRadius: BorderRadius.circular(screenHeight / 844 * 10),
-                ),
-                child: const Center(
-                  child: CustomText(
-                    text: '일단 메인으로',
-                    style: AhtTextTheme.ButtonText,
-                  ),
-                ),
-              ),
             ),
           ],
         ),

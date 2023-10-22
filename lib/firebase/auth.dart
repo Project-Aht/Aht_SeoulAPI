@@ -76,7 +76,7 @@ class Auth {
     try {
       await _firebaseAuth.signOut();
       Get.find<Instance>().getUserInfo();
-      prefs.remove('email');
+      prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return false;

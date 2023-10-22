@@ -277,30 +277,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
               GestureDetector(
                 onTap: () async {
                   if (email == null) {
-                    Get.showSnackbar(
-                      const GetSnackBar(
-                        message: '이메일을 입력해주세요.',
-                      ),
+                    Get.snackbar(
+                      '',
+                      '이메일을 입력해주세요.',
                     );
                   } else if (pw == null) {
-                    Get.showSnackbar(
-                      const GetSnackBar(
-                        message: '비밀번호를 입력해주세요.',
-                      ),
+                    Get.snackbar(
+                      '',
+                      '비밀번호를 입력해주세요.',
                     );
                   } else if (pw != pwCheck) {
-                    Get.showSnackbar(
-                      const GetSnackBar(
-                        message: '비밀번호가 일치하지 않습니다.',
-                      ),
+                    Get.snackbar(
+                      '',
+                      '비밀번호가 일치하지 않습니다.',
                     );
                   } else if (schoolName == null ||
                       schoolGrade == null ||
                       schoolClass == null) {
-                    Get.showSnackbar(
-                      const GetSnackBar(
-                        message: '학교 정보를 입력해주세요.',
-                      ),
+                    Get.snackbar(
+                      '',
+                      '학교 정보를 입력해주세요.',
                     );
                   } else {
                     bool signupCompleted = await Auth.signup(
@@ -314,10 +310,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if (signupCompleted) {
                       Get.offAll(() => const MainScreen());
                     } else {
-                      Get.showSnackbar(
-                        const GetSnackBar(
-                          message: '회원가입에 실패했습니다.',
-                        ),
+                      Get.snackbar(
+                        '',
+                        '회원가입에 실패했습니다.',
                       );
                     }
                   }
@@ -363,28 +358,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Get.offAll(() => const MainScreen());
-                },
-                child: Container(
-                  height: screenHeight / 844 * 52,
-                  decoration: BoxDecoration(
-                    color: AhtColors.Main_Color,
-                    borderRadius:
-                        BorderRadius.circular(screenHeight / 844 * 10),
-                  ),
-                  child: const Center(
-                    child: CustomText(
-                      text: '일단 메인으로',
-                      style: AhtTextTheme.ButtonText,
-                    ),
-                  ),
-                ),
               ),
             ],
           ),
