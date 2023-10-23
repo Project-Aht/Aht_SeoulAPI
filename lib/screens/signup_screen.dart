@@ -302,7 +302,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     bool signupCompleted = await Auth.signup(
                       email: email!,
                       pw: pw!,
-                      imagePath: '',
                       schoolName: schoolName!,
                       schoolGrade: schoolGrade!,
                       schoolClass: schoolClass!,

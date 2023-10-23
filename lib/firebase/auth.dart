@@ -1,18 +1,20 @@
+import 'dart:io';
+
+import 'package:aht_dimigo/firebase/image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'instance.dart';
 
-class Auth {
-  static final _instance = Get.find<Instance>();
-  static final FirebaseAuth _firebaseAuth = _instance.firebaseAuth;
-  static final FirebaseFirestore firestore = _instance.firestore;
+final _instance = Get.find<Instance>();
+final FirebaseAuth _firebaseAuth = _instance.firebaseAuth;
+final FirebaseFirestore firestore = _instance.firestore;
 
+class Auth {
   static Future<bool> signup({
     required String email,
     required String pw,
-    required String imagePath,
     required String schoolName,
     required int schoolGrade,
     required int schoolClass,
@@ -20,8 +22,8 @@ class Auth {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: pw);
+
       await firestore.collection('profile').doc(email).set({
-        'image_path': imagePath,
         'point': 0,
         'school': {
           'name': schoolName,
@@ -88,6 +90,7 @@ class Auth {
   static Future<bool> quit() async {
     final prefs = await SharedPreferences.getInstance();
     try {
+      Storage.removeProfile();
       firestore
           .collection('profile')
           .doc(_instance.userInfo!['email'])
