@@ -22,9 +22,9 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
   List<DateTime> dates = [];
   String memo = '';
   String range = '';
-  late List<String> admin;
+  List<String> admin = ['aaaskdjf;l@gmail.com'];
   late int ratio;
-  late int grade;
+  int grade = 3;
   List<String> subjects = ['수학', '국어', '영어', '전지훈바보'];
   DateTime _selectedDate = DateTime.now();
 
@@ -137,6 +137,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                 onSubmitted: (changingtitle) {
                                   setState(() {
                                     title = changingtitle;
+                                    print(title);
                                     dateadding = false;
                                   });
                                 },
@@ -215,6 +216,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
                                   itemCount: subjects.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
@@ -484,7 +486,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                 ),
                                 onSubmitted: (changingrange) {
                                   setState(() {
-                                    title = changingrange;
+                                    range = changingrange;
                                   });
                                 },
                               ),
@@ -493,39 +495,49 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                         ],
                       ),
                     ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            //!로직 추가
-                          },
-                          child: Container(
-                            width: screenWidth / 390 * 358,
-                            height: screenHeight / 844 * 59,
-                            decoration: ShapeDecoration(
-                              color: AhtColors.Main_Color,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            child: const Center(
-                              child: CustomText(
-                                text: '다음',
-                                style: AhtTextTheme.ButtonText,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenHeight / 844 * 18,
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),
             ),
           ),
+          Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  //Exam.set(
+                  //title: title,
+                  //subject: subject,
+                  //dates: dates,
+                  //memo: memo,
+                  //range: range,
+                  //ladmin: admin,
+                  //grade: grade,
+                  //);
+                  Get.back();
+                  Get.snackbar('알림', '정보가 저장되었습니다.');
+                },
+                child: Container(
+                  width: screenWidth / 390 * 358,
+                  height: screenHeight / 844 * 59,
+                  decoration: ShapeDecoration(
+                    color: AhtColors.Main_Color,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Center(
+                    child: CustomText(
+                      text: '다음',
+                      style: AhtTextTheme.ButtonText,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: screenHeight / 844 * 18,
+              ),
+            ],
+          )
         ],
       ),
     );
