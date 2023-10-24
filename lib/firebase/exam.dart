@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:aht_dimigo/firebase/image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,7 +23,7 @@ class Exam {
   String memo;
   String subject;
   int score;
-  List<File> images;
+  List<Uint8List> images;
 
   Exam({
     required this.title,
@@ -42,10 +42,10 @@ class Exam {
     required String memo,
     required String range,
     required int score,
-    required List<File> files,
+    required List<Uint8List> bytes,
   }) async {
     bool docExist = await Exam.get(title) != null;
-    bool imageUpload = await Storage.uploadExamImages(title, files);
+    bool imageUpload = await Storage.uploadExamImages(title, bytes);
     if (!docExist && imageUpload) {
       await collection.doc(title).set(
         {
@@ -63,7 +63,7 @@ class Exam {
         memo: memo,
         range: range,
         score: score,
-        images: files,
+        images: bytes,
       );
     }
     return null;
@@ -75,12 +75,12 @@ class Exam {
     String? newMemo,
     String? newRange,
     int? newScore,
-    List<File>? newFiles,
+    List<Uint8List>? newImages,
   }) async {
     try {
-      if (newFiles != null) {
-        bool imageUpload = await Storage.uploadExamImages(title, newFiles);
-        if (imageUpload) images = newFiles;
+      if (newImages != null) {
+        bool imageUpload = await Storage.uploadExamImages(title, newImages);
+        if (imageUpload) images = newImages;
       }
       await collection.doc(title).set(
         {
@@ -101,7 +101,7 @@ class Exam {
   static Future<Exam?> get(String title) async {
     try {
       Map<String, dynamic> data = (await collection.doc(title).get()).data()!;
-      List<File> files = (await Storage.getExamImages(title))!;
+      List<Uint8List> bytes = (await Storage.getExamImages(title))!;
       return Exam(
         title: title,
         subject: data['subject'],
@@ -109,7 +109,7 @@ class Exam {
         dates: data['dates'],
         memo: data['memo'],
         score: data['score'],
-        images: files,
+        images: bytes,
       );
     } catch (e) {
       print(e);
@@ -122,7 +122,7 @@ class Exam {
     try {
       for (var doc in (await collection.get()).docs) {
         Map<String, dynamic> data = doc.data();
-        List<File> files = (await Storage.getExamImages(doc.id))!;
+        List<Uint8List> bytes = (await Storage.getExamImages(doc.id))!;
         docs.add(
           Exam(
             title: doc.id,
@@ -131,7 +131,7 @@ class Exam {
             dates: data['dates'],
             memo: data['memo'],
             score: data['score'],
-            images: files,
+            images: bytes,
           ),
         );
       }

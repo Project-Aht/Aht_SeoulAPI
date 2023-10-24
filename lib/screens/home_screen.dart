@@ -1,6 +1,7 @@
 import 'package:aht_dimigo/screens/register_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
+import '../firebase/instance.dart';
 import '../widgets/custom_text.dart';
 import 'package:aht_dimigo/widgets/subject_selection_box.dart';
 import 'package:aht_dimigo/widgets/main_exam_box.dart';
@@ -14,6 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo ?? {};
+  @override
+  void initState() {
+    super.initState();
+    _userInfo = Get.find<Instance>().userInfo ?? {};
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -73,15 +81,22 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 width: 36,
                                 height: 36,
-                                decoration: const ShapeDecoration(
+                                decoration: ShapeDecoration(
                                   color: Colors.white,
-                                  shape: OvalBorder(),
+                                  image: DecorationImage(
+                                    image: MemoryImage(
+                                      _userInfo['image'],
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  shape: const OvalBorder(),
                                 ),
                               ),
                               SizedBox(width: screenWidth / 390 * 14),
-                              const CustomText(
-                                text: '한국디지털미디어고 \n1학년 2반 22번',
-                                style: TextStyle(
+                              CustomText(
+                                text:
+                                    '${_userInfo['school']['name']} \n${_userInfo['school']['grade']}학년 ${_userInfo['school']['class']}반',
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontFamily: 'Pretendard',

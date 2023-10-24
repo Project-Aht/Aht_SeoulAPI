@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'instance.dart';
@@ -23,9 +22,15 @@ class Storage {
         .child(userInfo!['school']['class']);
   }
 
-  static Future<bool> uploadProfile(File file) async {
+  static Future<bool> uploadProfile(Uint8List byte) async {
     try {
-      profile.child(userInfo!['email']).putFile(file);
+      await profile.child(userInfo!['email']).putData(
+            byte,
+            SettableMetadata(
+              contentType: 'image/jpeg',
+            ),
+          );
+      await _instance.getUserInfo();
       return true;
     } catch (e) {
       print(e);
@@ -33,14 +38,16 @@ class Storage {
     }
   }
 
-  static Future<File?> getProfile() async {
+  static Future<Uint8List?> getProfile() async {
     try {
-      Uint8List? data = await profile.child(userInfo!['email']).getData();
-      data ??= await profile.child('default').getData();
-      File file = File.fromRawPath(data!);
-      return file;
+      Uint8List? data;
+      try {
+        data = await profile.child(userInfo!['email']).getData();
+      } catch (e) {
+        data = await profile.child('default.jpeg').getData();
+      }
+      return data;
     } catch (e) {
-      print(e);
       return null;
     }
   }
@@ -48,6 +55,7 @@ class Storage {
   static Future<bool> removeProfile() async {
     try {
       await profile.child(userInfo!['email']).delete();
+      _instance.getUserInfo();
       return true;
     } catch (e) {
       print(e);
@@ -55,11 +63,17 @@ class Storage {
     }
   }
 
-  static Future<bool> uploadExamImages(String title, List<File> files) async {
+  static Future<bool> uploadExamImages(
+      String title, List<Uint8List> bytes) async {
     try {
       initExamRoute();
-      for (int i = 0; i < files.length; i++) {
-        await examImage.child(title).child('$i').putFile(files[i]);
+      for (int i = 0; i < bytes.length; i++) {
+        await examImage.child(title).child('$i').putData(
+              bytes[i],
+              SettableMetadata(
+                contentType: 'image/jpeg',
+              ),
+            );
       }
       return true;
     } catch (e) {
@@ -68,16 +82,16 @@ class Storage {
     }
   }
 
-  static Future<List<File>?> getExamImages(String title) async {
+  static Future<List<Uint8List>?> getExamImages(String title) async {
     try {
       initExamRoute();
       List<Reference> images = (await examImage.child(title).listAll()).items;
-      List<File> files = [];
+      List<Uint8List> bytes = [];
       for (Reference image in images) {
         Uint8List data = (await image.getData())!;
-        files.add(File.fromRawPath(data));
+        bytes.add(data);
       }
-      return files;
+      return bytes;
     } catch (e) {
       print(e);
       return null;

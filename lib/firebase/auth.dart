@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:aht_dimigo/firebase/image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,7 +31,7 @@ class Auth {
         'get_notice': true,
         'notice_detail': <String, bool>{},
       });
-      Get.find<Instance>().getUserInfo();
+      await Get.find<Instance>().getUserInfo();
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return false;
@@ -55,7 +53,7 @@ class Auth {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: pw);
-      Get.find<Instance>().getUserInfo();
+      await Get.find<Instance>().getUserInfo();
       if (autoLogin) {
         prefs.setString('email', email);
         prefs.setString('pw', pw);

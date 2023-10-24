@@ -1,3 +1,4 @@
+import 'package:aht_dimigo/firebase/image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -19,5 +20,8 @@ class Instance extends GetxController {
         .data();
     userInfo?['email'] = firebaseAuth.currentUser!.email;
     update();
+    userInfo?['image'] = await Storage.getProfile();
+    update();
+    return;
   }
 }
