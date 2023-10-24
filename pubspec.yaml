@@ -15,6 +15,7 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   firebase_messaging:
+  google_sign_in:
   get:
   scroll_date_picker:
   image_picker:
