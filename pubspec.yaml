@@ -13,8 +13,8 @@ dependencies:
   firebase_core:
   firebase_storage:
   firebase_auth:
-  cloud_firestore:
-  firebase_messaging:
+  cloud_firestore: 
+  firebase_messaging: 
   google_sign_in:
   get:
   scroll_date_picker:

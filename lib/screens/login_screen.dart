@@ -242,10 +242,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Row(
               children: [
-                const CustomText(
-                  text: '아이디 찾기',
-                  style: AhtTextTheme.CheckBoxText,
-                ),
                 SizedBox(
                   width: screenWidth / 390 * 15,
                 ),
@@ -269,7 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     child: CustomText(
-                      text: '“앗”이 처음이라면? 회원가입하기',
+                      text: '“앗”이 처음이라면?  이메일로 회원가입하기',
                       style: AhtTextTheme.CheckBoxText.apply(
                         color: const Color(0xFF38498E),
                       ),
@@ -277,6 +273,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: screenHeight / 844 * 30,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [],
             ),
           ],
         ),
