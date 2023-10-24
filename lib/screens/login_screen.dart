@@ -39,8 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
     prefs = await SharedPreferences.getInstance();
     setState(() {
       email = prefs.getString('email');
+      if (email != null) savingId = true;
       _controller.text = email ?? '';
-      print(email);
     });
   }
 

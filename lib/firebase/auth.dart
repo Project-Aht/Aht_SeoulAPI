@@ -88,7 +88,7 @@ class Auth {
   static Future<bool> quit() async {
     final prefs = await SharedPreferences.getInstance();
     try {
-      Storage.removeProfile();
+      await Storage.removeProfile();
       firestore
           .collection('profile')
           .doc(_instance.userInfo!['email'])
