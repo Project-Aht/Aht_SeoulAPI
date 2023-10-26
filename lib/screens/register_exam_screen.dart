@@ -25,6 +25,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
   List<String> admin = ['aaaskdjf;l@gmail.com'];
   late int ratio;
   int grade = 3;
+  int score = -1; // !초기 값 -1로 설정
   List<String> subjects = ['수학', '국어', '영어', '전지훈바보'];
   DateTime _selectedDate = DateTime.now();
 
@@ -504,15 +505,15 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  //Exam.set(
-                  //title: title,
-                  //subject: subject,
-                  //dates: dates,
-                  //memo: memo,
-                  //range: range,
-                  //ladmin: admin,
-                  //grade: grade,
-                  //);
+                  /*Exam.set(
+                    title: title,
+                    subject: subject,
+                    dates: dates,
+                    memo: memo,
+                    range: range,
+                    score: score,
+                    bytes: 
+                  )*/
                   Get.back();
                   Get.snackbar('알림', '정보가 저장되었습니다.');
                 },
