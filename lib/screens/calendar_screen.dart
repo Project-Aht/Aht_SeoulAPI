@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Screen1 extends StatefulWidget {
-  const Screen1({super.key});
+class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({super.key});
 
   @override
-  State<Screen1> createState() => _Screen1State();
+  State<CalendarScreen> createState() => _CalendarScreenState();
 }
 
-class _Screen1State extends State<Screen1> {
+class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(

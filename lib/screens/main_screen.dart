@@ -2,7 +2,7 @@ import 'package:aht_dimigo/screens/myinfo_screen.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/screens/home_screen.dart';
-import 'package:aht_dimigo/screens/screen1.dart';
+import 'package:aht_dimigo/screens/calendar_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
         child: TabBarView(
           controller: _tabController,
           children: const [
-            Screen1(),
+            CalendarScreen(),
             HomeScreen(),
             MyinfoScreen(),
           ],
