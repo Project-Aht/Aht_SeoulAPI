@@ -21,11 +21,27 @@ class _CalendarScreenState extends State<CalendarScreen> {
         eventName: "Event 1",
         eventDate: DateTime(2023, 10, 26),
         eventTextStyle: const TextStyle(),
+        eventBackgroundColor: const Color(0xFF38498E).withOpacity(0.2),
       ),
       CalendarEvent(
         eventName: "Event 2",
         eventDate: DateTime(2023, 10, 27),
         eventTextStyle: const TextStyle(),
+        eventBackgroundColor: const Color(0xFF02CC5B).withOpacity(0.15),
+      ),
+      CalendarEvent(
+        eventName: "Event 3",
+        eventDate: DateTime(2023, 10, 27),
+        eventTextStyle: const TextStyle(),
+        eventBackgroundColor:
+            const Color.fromARGB(255, 103, 2, 204).withOpacity(0.15),
+      ),
+      CalendarEvent(
+        eventName: "Event 4",
+        eventDate: DateTime(2023, 10, 27),
+        eventTextStyle: const TextStyle(),
+        eventBackgroundColor:
+            const Color.fromARGB(255, 204, 2, 174).withOpacity(0.15),
       ),
     ];
     double screenHeight = MediaQuery.of(context).size.height;
@@ -59,10 +75,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ],
             ),
           ),
-          SizedBox(height: screenHeight / 844 * 48),
+          SizedBox(height: screenHeight / 844 * 26),
           SizedBox(
             width: screenWidth / 390 * 358,
-            height: screenHeight / 844 * 560,
+            height: screenHeight / 844 * 591,
             child: CellCalendar(
               events: events,
               cellCalendarPageController: cellCalendarPageController,
@@ -99,13 +115,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       child: SizedBox(
                         width: screenWidth / 390 * 174,
                         child: Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.center, //!Icon 생성시 이거 삭제
                           children: [
-                            Icon(
-                              Icons.arrow_back_ios_sharp,
-                              size: screenWidth / 390 * 22,
-                              color: Colors.black,
-                            ),
-                            SizedBox(width: screenWidth / 390 * 30),
+                            /*Icon(
+                        Icons.arrow_back_ios_sharp,
+                        size: screenWidth / 390 * 22,
+                        color: Colors.black,
+                      ),
+                            SizedBox(width: screenWidth / 390 * 30),*/
                             Text(
                               "$year.$month",
                               style: const TextStyle(
@@ -114,12 +132,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 height: 1.25,
                               ),
                             ),
-                            SizedBox(width: screenWidth / 390 * 25),
+
+                            /*SizedBox(width: screenWidth / 390 * 25),
                             Icon(
-                              Icons.arrow_forward_ios_sharp,
-                              size: screenWidth / 390 * 22,
-                              color: Colors.black,
-                            ),
+                        Icons.arrow_forward_ios_sharp,
+                        size: screenWidth / 390 * 22,
+                        color: Colors.black,
+                      ),*/
                           ],
                         ),
                       ),
