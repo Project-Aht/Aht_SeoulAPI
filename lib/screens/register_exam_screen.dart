@@ -112,27 +112,26 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             style: AhtTextTheme.MiddleMenuText,
                           ),
                           SizedBox(height: screenHeight / 844 * 4),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: screenHeight / 844 * 4,
+                          Container(
+                            height: screenHeight / 844 * 48,
+                            padding: EdgeInsets.only(
+                              left: 16 / 390 * screenWidth,
+                              right: screenWidth / 390 * 16,
                             ),
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                left: 16 / 390 * screenWidth,
-                                right: screenWidth / 390 * 16,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF4F4F4),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF4F4F4),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: SizedBox(
+                              height: screenHeight / 844 * 48,
                               child: CustomTextField(
                                 maxLines: 1,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                   contentPadding: EdgeInsets.only(
-                                    bottom: screenHeight / 844 * 14,
-                                    top: screenHeight / 844 * 14,
+                                    bottom: screenHeight / 844 * 15,
+                                    top: screenHeight / 844 * 30,
                                   ),
                                   hintText: '수행평가 이름',
                                   hintStyle: AhtTextTheme.TextfieldHintText,
@@ -431,45 +430,41 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             style: AhtTextTheme.MiddleMenuText,
                           ),
                           SizedBox(height: screenHeight / 844 * 4),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: screenHeight / 844 * 4,
+                          Container(
+                            height: screenHeight / 844 * 48,
+                            padding: EdgeInsets.only(
+                              left: 16 / 390 * screenWidth,
+                              right: screenWidth / 390 * 16,
                             ),
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                left: 16 / 390 * screenWidth,
-                                right: screenWidth / 390 * 16,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF4F4F4),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: CustomTextField(
-                                keyboardType: TextInputType.number,
-                                controller: val1,
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    contentPadding: EdgeInsets.only(
-                                      bottom: screenHeight / 844 * 14,
-                                      top: screenHeight / 844 * 14,
-                                    ),
-                                    hintText: '비율 입력',
-                                    hintStyle: AhtTextTheme.TextfieldHintText),
-                                onSubmitted: (val) {
-                                  int? parsedValue = int.tryParse(val);
-                                  setState(() {
-                                    if (parsedValue != null) {
-                                      setState(() {
-                                        ratio = parsedValue;
-                                      });
-                                    } else {
-                                      Get.snackbar('알림', '수행평가 반영 비율을 입력해주세요');
-                                    }
-                                  });
-                                },
-                              ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF4F4F4),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: CustomTextField(
+                              keyboardType: TextInputType.number,
+                              controller: val1,
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(
+                                    bottom: screenHeight / 844 * 15,
+                                    top: screenHeight / 844 * 30,
+                                  ),
+                                  hintText: '비율 입력',
+                                  hintStyle: AhtTextTheme.TextfieldHintText),
+                              onSubmitted: (val) {
+                                int? parsedValue = int.tryParse(val);
+                                setState(() {
+                                  if (parsedValue != null) {
+                                    setState(() {
+                                      ratio = parsedValue;
+                                    });
+                                  } else {
+                                    Get.snackbar('알림', '수행평가 반영 비율을 입력해주세요');
+                                  }
+                                });
+                              },
                             ),
                           ),
                           SizedBox(height: screenHeight / 844 * 20),
@@ -478,37 +473,33 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             style: AhtTextTheme.MiddleMenuText,
                           ),
                           SizedBox(height: screenHeight / 844 * 4),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: screenHeight / 844 * 4,
+                          Container(
+                            height: screenHeight / 844 * 48,
+                            padding: EdgeInsets.only(
+                              left: 16 / 390 * screenWidth,
+                              right: screenWidth / 390 * 16,
                             ),
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                left: 16 / 390 * screenWidth,
-                                right: screenWidth / 390 * 16,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF4F4F4),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: CustomTextField(
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: screenHeight / 844 * 14,
-                                    top: screenHeight / 844 * 14,
-                                  ),
-                                  hintText: '범위 입력',
-                                  hintStyle: AhtTextTheme.TextfieldHintText,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF4F4F4),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: CustomTextField(
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                contentPadding: EdgeInsets.only(
+                                  bottom: screenHeight / 844 * 15,
+                                  top: screenHeight / 844 * 30,
                                 ),
-                                onSubmitted: (changingrange) {
-                                  setState(() {
-                                    range = changingrange;
-                                  });
-                                },
+                                hintText: '범위 입력',
+                                hintStyle: AhtTextTheme.TextfieldHintText,
                               ),
+                              onSubmitted: (changingrange) {
+                                setState(() {
+                                  range = changingrange;
+                                });
+                              },
                             ),
                           ),
                         ],

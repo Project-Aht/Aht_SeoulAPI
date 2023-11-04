@@ -64,6 +64,7 @@ class CustomTextField extends StatelessWidget {
     return MediaQuery(
       data: mqDataNew,
       child: TextField(
+        textAlignVertical: TextAlignVertical.center,
         textAlign: textAlign ?? TextAlign.start,
         textInputAction: textInputAction,
         cursorColor: Colors.black,
