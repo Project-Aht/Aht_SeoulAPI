@@ -94,13 +94,13 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                 left: screenWidth / 390 * 16,
                 right: screenWidth / 390 * 16,
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: screenHeight / 844 * 637,
-                      width: screenWidth / 390 * 358,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: screenHeight / 844 * 637,
+                    width: screenWidth / 390 * 358,
+                    child: SingleChildScrollView(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -496,8 +496,8 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
