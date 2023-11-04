@@ -4,6 +4,7 @@ import '../themes/text_theme.dart';
 import '../themes/color_theme.dart';
 import '../widgets/custom_text.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
+import 'package:intl/intl.dart';
 
 class RegisterExamScreen extends StatefulWidget {
   const RegisterExamScreen({super.key});
@@ -38,6 +39,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Column(
         children: [
@@ -296,10 +298,26 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                               style: AhtTextTheme
                                                   .TextfieldHintText,
                                             )
-                                          : CustomText(
-                                              text: '${dates.first}',
-                                              style: AhtTextTheme
-                                                  .SubjectCardHighlight,
+                                          : Row(
+                                              children: [
+                                                CustomText(
+                                                  text: DateFormat(
+                                                          'yyyy년 MM월 dd일',
+                                                          'ko_KR')
+                                                      .format(dates.first)
+                                                      .toString(),
+                                                  style: AhtTextTheme
+                                                      .SubjectCardHighlight,
+                                                ),
+                                                const CustomText(text: ' '),
+                                                CustomText(
+                                                  text: (dates.length > 1)
+                                                      ? '외 ${dates.length - 1}개'
+                                                      : '',
+                                                  style: AhtTextTheme
+                                                      .SubjectCardHighlight,
+                                                ),
+                                              ],
                                             )
                                     ],
                                   ),

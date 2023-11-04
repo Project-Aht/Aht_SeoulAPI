@@ -18,6 +18,7 @@ dependencies:
   google_sign_in:
   get:
   scroll_date_picker:
+  intl:
   image_picker:
   flutter:
     sdk: flutter

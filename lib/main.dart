@@ -9,10 +9,12 @@ import 'firebase/instance.dart';
 import 'themes/color_theme.dart';
 import 'screens/main_screen.dart';
 import 'screens/splash_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await initializeDateFormatting("ko_KR", null);
   Get.put(Instance());
   runApp(const MainApp());
 }
