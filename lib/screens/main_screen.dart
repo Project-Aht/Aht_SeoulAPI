@@ -1,4 +1,4 @@
-import 'package:aht_dimigo/screens/myinfo_screen.dart';
+import 'package:aht_dimigo/screens/menu_screen.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/screens/home_screen.dart';
@@ -52,7 +52,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           children: const [
             CalendarScreen(),
             HomeScreen(),
-            MyinfoScreen(),
+            MenuScreen(),
           ],
         ),
       ),
