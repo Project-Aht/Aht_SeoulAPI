@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+import 'package:aht_dimigo/functions/get_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../firebase/exam.dart';
 import '../themes/text_theme.dart';
 import '../themes/color_theme.dart';
 import '../widgets/custom_text.dart';
@@ -29,6 +32,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
   int score = -1; // !초기 값 -1로 설정
   List<String> subjects = ['수학', '국어', '영어', '전지훈바보'];
   DateTime _selectedDate = DateTime.now();
+  List<Uint8List> images = [];
 
   @override
   void initState() {
@@ -374,54 +378,102 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             style: AhtTextTheme.MiddleMenuText,
                           ),
                           SizedBox(height: screenHeight / 844 * 4),
-                          Container(
-                            height: screenHeight / 844 * 48,
-                            padding: EdgeInsets.only(
-                              left: 16 / 390 * screenWidth,
-                              right: screenWidth / 390 * 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF4F4F4),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.filter_center_focus,
-                                  color: const Color(0xFFD9D9D9),
-                                  size: screenWidth / 390 * 24,
-                                ),
-                                SizedBox(width: screenWidth / 390 * 8),
-                                Text('사진 추가',
-                                    style: AhtTextTheme.TextfieldHintText),
-                              ],
+                          GestureDetector(
+                            onTap: () async {
+                              Uint8List? img = await getImage();
+                              if (img != null) {
+                                setState(() {
+                                  images.add(img);
+                                });
+                              }
+                            },
+                            child: Container(
+                              height: screenHeight / 844 * 48,
+                              padding: EdgeInsets.only(
+                                left: 16 / 390 * screenWidth,
+                                right: screenWidth / 390 * 16,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF4F4F4),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.filter_center_focus,
+                                    color: const Color(0xFFD9D9D9),
+                                    size: screenWidth / 390 * 24,
+                                  ),
+                                  SizedBox(width: screenWidth / 390 * 8),
+                                  Text('사진 추가',
+                                      style: AhtTextTheme.TextfieldHintText),
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(height: screenHeight / 844 * 10),
                           Container(
-                            height: screenHeight / 844 * 48,
-                            padding: EdgeInsets.only(
-                              left: 16 / 390 * screenWidth,
-                              right: screenWidth / 390 * 16,
-                            ),
+                            height: screenHeight / 844 * 120,
+                            padding: EdgeInsets.all(screenHeight / 844 * 16),
                             decoration: BoxDecoration(
                               color: const Color(0xFFF4F4F4),
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            child: Row(
-                              children: [
-                                Transform.rotate(
-                                  angle: 3.14 / 3.5,
-                                  child: Icon(
-                                    Icons.attach_file,
-                                    color: const Color(0xFFD9D9D9),
-                                    size: screenWidth / 390 * 24,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () {
+                                  // TODO: 클릭했을 때 dialog로 이미지 띄우기
+                                },
+                                child: Container(
+                                  height: screenHeight / 844 * 88,
+                                  width: screenHeight / 844 * 66,
+                                  padding:
+                                      EdgeInsets.all(screenHeight / 944 * 5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                    image: DecorationImage(
+                                      image: MemoryImage(
+                                        images[index],
+                                      ),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                images.removeAt(index);
+                                              });
+                                            },
+                                            child: Container(
+                                              width: screenWidth / 390 * 10,
+                                              height: screenWidth / 390 * 10,
+                                              decoration: const ShapeDecoration(
+                                                color: Colors.grey,
+                                                shape: CircleBorder(),
+                                              ),
+                                              child: Icon(
+                                                Icons.close,
+                                                size: screenWidth / 390 * 8,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(width: screenWidth / 390 * 8),
-                                Text('사진 추가',
-                                    style: AhtTextTheme.TextfieldHintText),
-                              ],
+                              ),
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: screenHeight / 844 * 16,
+                              ),
+                              itemCount: images.length,
                             ),
                           ),
                           SizedBox(height: screenHeight / 844 * 20),
@@ -502,6 +554,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                               },
                             ),
                           ),
+                          SizedBox(height: screenHeight / 844 * 20),
                         ],
                       ),
                     ),
@@ -513,18 +566,26 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
           Column(
             children: [
               GestureDetector(
-                onTap: () {
-                  /*Exam.set(
-                    title: title,
-                    subject: subject,
-                    dates: dates,
-                    memo: memo,
-                    range: range,
-                    score: score,
-                    bytes: 
-                  )*/
-                  Get.back();
-                  Get.snackbar('알림', '정보가 저장되었습니다.');
+                onTap: () async {
+                  if (title.isEmpty) {
+                  } else if (subject.isEmpty) {
+                  } else if (dates.isEmpty) {
+                  } else if (range.isEmpty) {
+                  } else {
+                    Exam? uplodadedExam = await Exam.set(
+                      title: title,
+                      subject: subject,
+                      dates: dates,
+                      memo: memo,
+                      range: range,
+                      score: score,
+                      bytes: images,
+                    );
+                    if (uplodadedExam != null) {
+                      Get.back();
+                      Get.snackbar('알림', '정보가 저장되었습니다.');
+                    }
+                  }
                 },
                 child: Container(
                   width: screenWidth / 390 * 358,

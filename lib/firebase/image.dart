@@ -9,17 +9,17 @@ Map<String, dynamic>? userInfo = _instance.userInfo;
 Reference profile = _storage.ref('profile');
 Reference examImage = _storage
     .ref('exam')
-    .child(userInfo?['school']['name'])
-    .child(userInfo?['school']['grade'])
-    .child(userInfo?['school']['class']);
+    .child('${userInfo!['school']['name']}')
+    .child('${userInfo!['school']['grade']}')
+    .child('${userInfo!['school']['class']}');
 
 class Storage {
   static void initExamRoute() {
     examImage = _storage
         .ref('exam')
-        .child(userInfo!['school']['name'])
-        .child(userInfo!['school']['grade'])
-        .child(userInfo!['school']['class']);
+        .child('${userInfo!['school']['name']}')
+        .child('${userInfo!['school']['grade']}')
+        .child('${userInfo!['school']['class']}');
   }
 
   static Future<bool> uploadProfile(Uint8List byte) async {
