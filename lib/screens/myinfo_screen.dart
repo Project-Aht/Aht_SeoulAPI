@@ -154,7 +154,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '${_userInfo['school']['grade']}학년 ${_userInfo['school']['class']}반 ${_userInfo['name']}',
+                        '${_userInfo['school']['grade']}학년 ${_userInfo['school']['class']}반 ${_userInfo['school']['name']}',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -210,7 +210,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
-                            onTap: _GetToEditInformationScreen,
+                            onTap: _getToEditInformationScreen,
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: Icon(
@@ -221,7 +221,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: _GetToDoneExamScreen,
+                            onTap: _getToDoneExamScreen,
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: Icon(
@@ -232,7 +232,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: _GetToGradeCalculatorScreen,
+                            onTap: _getToGradeCalculatorScreen,
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: Icon(
@@ -248,7 +248,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
-                            onTap: _GetToEditInformationScreen,
+                            onTap: _getToEditInformationScreen,
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: const Center(
@@ -266,7 +266,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: _GetToDoneExamScreen,
+                            onTap: _getToDoneExamScreen,
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: const Center(
@@ -285,7 +285,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: _GetToGradeCalculatorScreen,
+                            onTap: _getToGradeCalculatorScreen,
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: const Center(
@@ -339,14 +339,14 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
   }
 }
 
-void _GetToGradeCalculatorScreen() {
+void _getToGradeCalculatorScreen() {
   Get.to(() => const GradeCalclulatorScreen());
 }
 
-void _GetToDoneExamScreen() {
+void _getToDoneExamScreen() {
   Get.to(() => const GradeCalclulatorScreen());
 }
 
-void _GetToEditInformationScreen() {
+void _getToEditInformationScreen() {
   Get.to(() => const GradeCalclulatorScreen());
 }
