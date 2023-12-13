@@ -86,4 +86,28 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w400,
     height: 0,
   );
+  static const SignUpHeadline = TextStyle(
+    color: Colors.black,
+    fontSize: 22,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+  );
+  static const SignUpText = TextStyle(
+    color: Color(0xFFA6A6A6),
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w500,
+  );
+  static const SignUpCheckBox = TextStyle(
+    color: Colors.black,
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w500,
+  );
+  static const SignUpButton = TextStyle(
+    color: Color(0xFF434343),
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+  );
 }

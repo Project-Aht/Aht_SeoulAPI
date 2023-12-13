@@ -1,12 +1,9 @@
-import 'package:aht_dimigo/firebase/auth.dart';
-import 'package:aht_dimigo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../themes/color_theme.dart';
 import '../themes/text_theme.dart';
 import '../widgets/custom_text.dart';
-import 'main_screen.dart';
+import 'signup_screen_profile.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -16,350 +13,340 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String? email, pw, pwCheck, schoolName;
-  int? schoolGrade, schoolClass;
+  List check = [false, false, false];
+  String email = '', pw = '', pwCheck = '';
+  FocusNode emailFocus = FocusNode(), pwFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
     double screenHeight = MediaQuery.of(context).size.height;
-    // ignore: unused_local_variable
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: screenWidth / 390 * 32,
+        padding: EdgeInsets.only(
+          left: screenWidth / 390 * 32,
+          right: screenWidth / 390 * 32,
+          bottom: screenHeight / 844 * 43,
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: screenHeight / 844 * 60,
-              ),
-              const CustomText(
-                text: 'Aht!',
-                style: AhtTextTheme.LogoText,
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 40,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.account_circle_outlined,
-                    size: screenWidth / 390 * 22.5,
-                    color: const Color(0xFFD9D9D9),
-                  ),
                   SizedBox(
-                    width: screenWidth / 390 * 7.25,
+                    height: screenHeight / 844 * 72,
                   ),
-                  SizedBox(
-                    width: screenWidth / 390 * 266,
-                    child: CustomTextField(
-                      maxLines: 1,
-                      textInputAction: TextInputAction.next,
-                      onChanged: (p0) {
-                        setState(() {
-                          email = p0;
-                        });
-                      },
-                      decoration: const InputDecoration(
-                        hintText: '이메일을 입력해 주세요.',
-                        hintStyle: AhtTextTheme.LoginHintText,
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFF7D7D7D),
-                            width: 2,
-                          ),
-                        ),
-                      ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      size: screenWidth / 390 * 21,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 24,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.lock_outline,
-                    size: screenWidth / 390 * 22.5,
-                    color: const Color(0xFFD9D9D9),
+                  SizedBox(
+                    height: screenHeight / 844 * 22,
+                  ),
+                  const CustomText(
+                    text: '약관 동의',
+                    style: AhtTextTheme.SignUpHeadline,
                   ),
                   SizedBox(
-                    width: screenWidth / 390 * 7.25,
+                    height: screenHeight / 844 * 8,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    height: screenHeight / 844 * 3,
                   ),
                   SizedBox(
-                    width: screenWidth / 390 * 266,
-                    child: CustomTextField(
-                      maxLines: 1,
-                      textInputAction: TextInputAction.next,
-                      onChanged: (p0) {
-                        setState(() {
-                          pw = p0;
-                        });
-                      },
-                      decoration: const InputDecoration(
-                        hintText: '비밀번호를 입력해 주세요.',
-                        hintStyle: AhtTextTheme.LoginHintText,
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFF7D7D7D),
-                            width: 2,
-                          ),
+                    height: screenHeight / 844 * 24,
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (check.contains(false)) {
+                              check = [true, true, true];
+                            } else {
+                              check = [false, false, false];
+                            }
+                          });
+                        },
+                        child: Icon(
+                          (check.contains(false))
+                              ? Icons.check_box_outline_blank
+                              : Icons.check_box_outlined,
+                          size: 18,
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 24,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.lock_outline,
-                    size: screenWidth / 390 * 22.5,
-                    color: const Color(0xFFD9D9D9),
+                      SizedBox(
+                        width: screenWidth / 390 * 6,
+                      ),
+                      const CustomText(
+                        text: '전체 약관에 동의합니다.',
+                        style: AhtTextTheme.SignUpCheckBox,
+                      )
+                    ],
                   ),
                   SizedBox(
-                    width: screenWidth / 390 * 7.25,
+                    height: screenHeight / 844 * 21,
                   ),
-                  SizedBox(
-                    width: screenWidth / 390 * 266,
-                    child: CustomTextField(
-                      maxLines: 1,
-                      textInputAction: TextInputAction.next,
-                      onChanged: (p0) {
-                        setState(() {
-                          pwCheck = p0;
-                        });
-                      },
-                      decoration: const InputDecoration(
-                        hintText: '비밀번호를 다시 입력해 주세요.',
-                        hintStyle: AhtTextTheme.LoginHintText,
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFF7D7D7D),
-                            width: 2,
-                          ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            check[0] = !check[0];
+                          });
+                        },
+                        child: Icon(
+                          (check[0])
+                              ? Icons.check_box_outlined
+                              : Icons.check_box_outline_blank,
+                          size: 18,
                         ),
                       ),
+                      SizedBox(
+                        width: screenWidth / 390 * 6,
+                      ),
+                      const CustomText(
+                        text: '약관 1에 동의합니다.',
+                        style: AhtTextTheme.SignUpCheckBox,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 12,
+                  ),
+                  Container(
+                    height: screenHeight / 844 * 1,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFE7E7E7),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 24,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.school_outlined,
-                    size: screenWidth / 390 * 22.5,
-                    color: const Color(0xFFD9D9D9),
-                  ),
                   SizedBox(
-                    width: screenWidth / 390 * 7.25,
+                    height: screenHeight / 844 * 12,
                   ),
-                  SizedBox(
-                    width: screenWidth / 390 * 266,
-                    child: CustomTextField(
-                      maxLines: 1,
-                      textInputAction: TextInputAction.next,
-                      onChanged: (p0) {
-                        setState(() {
-                          schoolName = p0;
-                        });
-                      },
-                      decoration: const InputDecoration(
-                        hintText: '학교명을 입력해 주세요.',
-                        hintStyle: AhtTextTheme.LoginHintText,
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0xFF7D7D7D),
-                            width: 2,
-                          ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            check[1] = !check[1];
+                          });
+                        },
+                        child: Icon(
+                          (check[1])
+                              ? Icons.check_box_outlined
+                              : Icons.check_box_outline_blank,
+                          size: 18,
                         ),
                       ),
+                      SizedBox(
+                        width: screenWidth / 390 * 6,
+                      ),
+                      const CustomText(
+                        text: '약관 2에 동의합니다.',
+                        style: AhtTextTheme.SignUpCheckBox,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 12,
+                  ),
+                  Container(
+                    height: screenHeight / 844 * 1,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFE7E7E7),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 24,
-              ),
-              Container(
-                width: screenWidth / 390 * 266,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF4F4F4),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.symmetric(
-                  vertical: screenHeight / 844 * 10,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: screenWidth / 390 * 20,
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Color(0xFF7D7D7D),
-                              ),
-                            ),
-                          ),
+                  SizedBox(
+                    height: screenHeight / 844 * 12,
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            check[2] = !check[2];
+                          });
+                        },
+                        child: Icon(
+                          (check[2])
+                              ? Icons.check_box_outlined
+                              : Icons.check_box_outline_blank,
+                          size: 18,
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth / 390 * 6,
+                      ),
+                      const CustomText(
+                        text: '만 14세 이상입니다.',
+                        style: AhtTextTheme.SignUpCheckBox,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 12,
+                  ),
+                  Container(
+                    height: screenHeight / 844 * 1,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFE7E7E7),
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 33,
+                  ),
+                  const CustomText(
+                    text: '회원 정보',
+                    style: AhtTextTheme.SignUpHeadline,
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 8,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                    ),
+                    height: screenHeight / 844 * 3,
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 35,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.account_circle_outlined,
+                        size: 21.67,
+                        color: Color(0xFFD7D7D7),
+                      ),
+                      SizedBox(
+                        width: screenWidth / 390 * 12,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: 14,
                           child: CustomTextField(
-                            textAlign: TextAlign.center,
                             maxLines: 1,
                             textInputAction: TextInputAction.next,
                             onChanged: (p0) {
                               setState(() {
-                                schoolGrade = int.tryParse(p0);
+                                email = p0;
                               });
                             },
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
+                            focusNode: emailFocus,
+                            keyboardType: TextInputType.emailAddress,
+                            style: AhtTextTheme.LoginText,
+                            decoration: const InputDecoration(
+                              hintText: '이메일을 입력해 주세요.',
+                              hintStyle: AhtTextTheme.LoginHintText,
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.only(bottom: 10.5),
                             ),
                           ),
                         ),
-                        const CustomText(text: '학년'),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: screenWidth / 390 * 20,
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Color(0xFF7D7D7D),
-                              ),
-                            ),
-                          ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 13,
+                  ),
+                  Container(
+                    height: screenHeight / 844 * 2,
+                    color: const Color(0xFFD7D7D7),
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 28,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.lock_outlined,
+                        size: 21.67,
+                        color: Color(0xFFD7D7D7),
+                      ),
+                      SizedBox(
+                        width: screenWidth / 390 * 12,
+                      ),
+                      Expanded(
+                        child: SizedBox(
+                          height: 14,
                           child: CustomTextField(
-                            textAlign: TextAlign.center,
                             maxLines: 1,
                             textInputAction: TextInputAction.done,
                             onChanged: (p0) {
                               setState(() {
-                                schoolClass = int.tryParse(p0);
+                                pw = p0;
                               });
                             },
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
+                            // obscureText: true,
+                            focusNode: pwFocus,
+                            keyboardType: TextInputType.visiblePassword,
+                            style: AhtTextTheme.LoginText,
+                            decoration: const InputDecoration(
+                              hintText: '비밀번호를 입력해 주세요.',
+                              hintStyle: AhtTextTheme.LoginHintText,
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.only(bottom: 10.5),
                             ),
                           ),
                         ),
-                        const CustomText(text: '반'),
-                      ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 13,
+                  ),
+                  Container(
+                    height: screenHeight / 844 * 2,
+                    color: const Color(0xFFD7D7D7),
+                  ),
+                ],
+              ),
+            ),
+            if (!emailFocus.hasFocus && !pwFocus.hasFocus)
+              GestureDetector(
+                onTap: () {
+                  if (check.contains(false)) {
+                  } else if (email.isEmpty) {
+                  } else if (pw.isEmpty) {
+                  } else {
+                    Get.to(
+                      () => SignUpScreenProfile(
+                        email: email,
+                        pw: pw,
+                      ),
+                    );
+                  }
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: screenHeight / 844 * 52,
+                      decoration: BoxDecoration(
+                        color: AhtColors.Main_Color,
+                        borderRadius:
+                            BorderRadius.circular(screenHeight / 844 * 10),
+                      ),
+                      child: Center(
+                        child: CustomText(
+                          text: '다음',
+                          style: AhtTextTheme.ButtonText.copyWith(fontSize: 16),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: screenHeight / 844 * 24,
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 44,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  if (email == null) {
-                    Get.snackbar(
-                      '',
-                      '이메일을 입력해주세요.',
-                    );
-                  } else if (pw == null) {
-                    Get.snackbar(
-                      '',
-                      '비밀번호를 입력해주세요.',
-                    );
-                  } else if (pw != pwCheck) {
-                    Get.snackbar(
-                      '',
-                      '비밀번호가 일치하지 않습니다.',
-                    );
-                  } else if (schoolName == null ||
-                      schoolGrade == null ||
-                      schoolClass == null) {
-                    Get.snackbar(
-                      '',
-                      '학교 정보를 입력해주세요.',
-                    );
-                  } else {
-                    bool signupCompleted = await Auth.signup(
-                      email: email!,
-                      pw: pw!,
-                      schoolName: schoolName!,
-                      schoolGrade: schoolGrade!,
-                      schoolClass: schoolClass!,
-                    );
-                    if (signupCompleted) {
-                      Get.offAll(() => const MainScreen());
-                    } else {
-                      Get.snackbar(
-                        '',
-                        '회원가입에 실패했습니다.',
-                      );
-                    }
-                  }
-                },
-                child: Container(
-                  height: screenHeight / 844 * 52,
-                  decoration: BoxDecoration(
-                    color: AhtColors.Main_Color,
-                    borderRadius:
-                        BorderRadius.circular(screenHeight / 844 * 10),
-                  ),
-                  child: const Center(
-                    child: CustomText(
-                      text: '회원가입',
-                      style: AhtTextTheme.ButtonText,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 8,
-              ),
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.offAll(() => const LoginScreen());
-                    },
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Color(0xFF38498E),
-                          ),
-                        ),
-                      ),
-                      child: CustomText(
-                        text: '“앗” 회원이라면? 로그인하기',
-                        style: AhtTextTheme.CheckBoxText.apply(
-                          color: const Color(0xFF38498E),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          ],
         ),
       ),
     );

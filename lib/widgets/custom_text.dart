@@ -24,6 +24,7 @@ class CustomText extends StatelessWidget {
 }
 
 class CustomTextField extends StatelessWidget {
+  final FocusNode? focusNode;
   final TextAlign? textAlign;
   final TextInputAction? textInputAction;
   final InputDecoration? decoration;
@@ -41,6 +42,7 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     super.key,
+    this.focusNode,
     this.textAlign,
     this.textInputAction,
     this.decoration,
@@ -60,10 +62,12 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mqData = MediaQuery.of(context);
-    final mqDataNew = mqData.copyWith(textScaleFactor: 0.85);
+    final mqDataNew =
+        mqData.copyWith(textScaler: const TextScaler.linear(0.85));
     return MediaQuery(
       data: mqDataNew,
       child: TextField(
+        focusNode: focusNode,
         textAlignVertical: TextAlignVertical.center,
         textAlign: textAlign ?? TextAlign.start,
         textInputAction: textInputAction,

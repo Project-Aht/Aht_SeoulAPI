@@ -17,7 +17,6 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  final Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo ?? {};
   bool loading = false;
 
   @override
@@ -104,14 +103,6 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: screenHeight / 844 * 70),
-                GestureDetector(
-                  onTap: () async {
-                    await Auth.signout();
-                    Get.to(() => const LoginScreen());
-                  },
-                  child: const Text('로그아웃'),
                 ),
               ],
             ),

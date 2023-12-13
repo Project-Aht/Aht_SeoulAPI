@@ -258,7 +258,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.offAll(() => const SignUpScreen());
+                    Get.to(() => const SignUpScreen());
                   },
                   child: Container(
                     decoration: const BoxDecoration(

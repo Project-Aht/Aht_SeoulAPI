@@ -35,8 +35,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true  
   assets:
-    - image\red.jpg
-    - assets\images\splash_image.png
+    - image/red.jpg
+    - assets/images/
 
   fonts:
     - family: Righteous
