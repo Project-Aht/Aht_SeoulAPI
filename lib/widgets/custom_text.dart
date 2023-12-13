@@ -18,7 +18,7 @@ class CustomText extends StatelessWidget {
       text,
       style: style,
       textAlign: textAlign,
-      textScaleFactor: 0.85,
+      textScaler: const TextScaler.linear(0.85),
     );
   }
 }
