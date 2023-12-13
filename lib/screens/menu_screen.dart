@@ -1,11 +1,8 @@
 import 'package:aht_dimigo/screens/myinfo_screen.dart';
 import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:aht_dimigo/widgets/custom_text.dart';
-import '../firebase/auth.dart';
-import '../firebase/instance.dart';
 import '../themes/color_theme.dart';
 import 'grade_calculator_screen.dart';
-import 'login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
