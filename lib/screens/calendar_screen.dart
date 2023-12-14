@@ -52,7 +52,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         padding: EdgeInsets.symmetric(horizontal: screenWidth / 390 * 16),
         child: Column(
           children: [
-            SizedBox(height: screenHeight / 844 * 60),
+            SizedBox(height: screenHeight / 844 * 74),
             Expanded(
               child: SizedBox(
                 width: screenWidth / 390 * 358,

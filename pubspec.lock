@@ -54,7 +54,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: f93cf03aea86e30e7c72d1d89adfebc9170ba891
+      resolved-ref: e2077697de8e4b87a8873f5fef34db401ad8643f
       url: "https://github.com/dodo07070707/custom_cell_calendar.git"
     source: git
     version: "0.8.0"
