@@ -93,10 +93,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               ),
               Tab(
                 icon: Icon(
-                  Icons.account_circle,
+                  Icons.menu,
                   size: screenWidth / 390 * 26,
                 ),
-                text: '마이페이지',
+                text: '메뉴',
                 iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 6.5),
               ),
             ],
