@@ -1,4 +1,5 @@
 import 'package:aht_dimigo/screens/register_exam_screen.dart';
+import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import '../firebase/exam.dart';
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> subjectList = [];
   String? selected;
   List<Exam> results = [];
+  String newsubject = '';
 
   Future<void> searchExam(String? subject) async {
     if (subject != null) {
@@ -190,27 +192,127 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(width: screenWidth / 390 * 10),
-                Container(
-                  width: screenWidth / 390 * 57,
-                  height: screenHeight / 844 * 31,
-                  decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                          width: 0.50, color: Color(0xFFC4C4C4)),
-                      borderRadius: BorderRadius.circular(19),
-                    ),
-                  ),
-                  child: const Center(
-                    child: CustomText(
-                      text: '+',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
+                GestureDetector(
+                  onTap: () {
+                    Get.defaultDialog(
+                      barrierDismissible: true,
+                      title: '새로운 과목 추가',
+                      titleStyle: const TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.w100,
+                        fontWeight: FontWeight.bold,
                         height: 1.25,
+                      ),
+                      titlePadding: EdgeInsets.only(
+                        top: screenHeight / 844 * 33,
+                      ),
+                      content: SizedBox(
+                        width: screenWidth / 390 * 200,
+                        child: CustomTextField(
+                          maxLines: 1,
+                          textInputAction: TextInputAction.done,
+                          onChanged: (n) {
+                            setState(() {
+                              newsubject = n;
+                            });
+                          },
+                          keyboardType: TextInputType.text,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                              top: 0,
+                              bottom: screenHeight / 844 * 8,
+                            ),
+                          ),
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.only(
+                        bottom: screenHeight / 844 * 20,
+                      ),
+                      confirm: Container(
+                        width: screenWidth / 390 * 80,
+                        height: screenHeight / 844 * 35,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: TextButton(
+                          onPressed: () {
+                            //TODO : 여기 로직
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              AhtColors.Main_Color,
+                            ),
+                          ),
+                          child: const Text(
+                            '추가',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              height: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      cancel: Container(
+                        width: screenWidth / 390 * 80,
+                        height: screenHeight / 844 * 35,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: TextButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFF9B9B9F),
+                            ),
+                          ),
+                          child: const Text(
+                            '취소',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              height: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                      backgroundColor: Colors.white, //TODO : 이거 색 왜 안바뀌지
+                    );
+                  },
+                  child: Container(
+                    width: screenWidth / 390 * 57,
+                    height: screenHeight / 844 * 31,
+                    decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                            width: 0.8, color: Color(0xFFC4C4C4)),
+                        borderRadius: BorderRadius.circular(19),
+                      ),
+                    ),
+                    child: const Center(
+                      child: CustomText(
+                        text: '+',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w100,
+                          height: 1.25,
+                        ),
                       ),
                     ),
                   ),
