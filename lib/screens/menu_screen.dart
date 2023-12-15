@@ -64,12 +64,30 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: screenHeight / 844 * 26,
-                    right: screenWidth / 390 * 16,
-                    left: screenWidth / 390 * 16,
+                    top: screenHeight / 844 * 29,
+                    right: screenWidth / 390 * 24,
+                    left: screenWidth / 390 * 24,
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const CustomText(
+                          text: '회원정보 수정', style: AhtTextTheme.MenuFontMain),
+                      SizedBox(height: screenHeight / 844 * 18),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const CustomText(
+                              text: '회원정보 수정', style: AhtTextTheme.MenuFontSub),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: screenHeight / 844 * 17,
+                            color: const Color(0xFFA2A2A2),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight / 844 * 21),
                       GestureDetector(
                         onTap: () {
                           Get.to(() => const MyinfoScreen());

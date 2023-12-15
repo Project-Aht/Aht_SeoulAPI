@@ -112,4 +112,16 @@ abstract class AhtTextTheme {
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w600,
   );
+  static const MenuFontMain = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+  );
+  static const MenuFontSub = TextStyle(
+    color: Colors.black,
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w400,
+  );
 }
