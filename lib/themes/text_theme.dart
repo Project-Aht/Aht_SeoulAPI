@@ -124,4 +124,10 @@ abstract class AhtTextTheme {
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w400,
   );
+  static const MenuFontSubHighlight = TextStyle(
+    color: Colors.red,
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w400,
+  );
 }

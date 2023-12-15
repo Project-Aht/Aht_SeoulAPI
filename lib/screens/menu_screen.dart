@@ -5,6 +5,8 @@ import '../themes/color_theme.dart';
 import 'grade_calculator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:aht_dimigo/firebase/auth.dart';
+import 'login_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -73,8 +75,27 @@ class _MenuScreenState extends State<MenuScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomText(
-                          text: '회원정보 수정', style: AhtTextTheme.MenuFontMain),
+                          text: '회원정보', style: AhtTextTheme.MenuFontMain),
                       SizedBox(height: screenHeight / 844 * 18),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => const MyinfoScreen());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const CustomText(
+                                text: '회원정보 확인',
+                                style: AhtTextTheme.MenuFontSub),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: screenHeight / 844 * 17,
+                              color: const Color(0xFFA2A2A2),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -87,34 +108,106 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: screenHeight / 844 * 21),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      Container(
+                        height: 1,
+                        width: screenWidth * 342 / 390,
+                        decoration:
+                            const BoxDecoration(color: Color(0xFFD9D9D9)),
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      const CustomText(
+                          text: '어플리케이션 정보', style: AhtTextTheme.MenuFontMain),
+                      SizedBox(height: screenHeight / 844 * 18),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const CustomText(
+                              text: '버전', style: AhtTextTheme.MenuFontSub),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: screenHeight / 844 * 17,
+                            color: const Color(0xFFA2A2A2),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const CustomText(
+                              text: '고객센터', style: AhtTextTheme.MenuFontSub),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: screenHeight / 844 * 17,
+                            color: const Color(0xFFA2A2A2),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const CustomText(
+                              text: '개인정보처리방침 및 법률정보',
+                              style: AhtTextTheme.MenuFontSub),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: screenHeight / 844 * 17,
+                            color: const Color(0xFFA2A2A2),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      Container(
+                        height: 1,
+                        width: screenWidth * 342 / 390,
+                        decoration:
+                            const BoxDecoration(color: Color(0xFFD9D9D9)),
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      const CustomText(
+                          text: '중요 정보', style: AhtTextTheme.MenuFontMain),
+                      SizedBox(height: screenHeight / 844 * 18),
                       GestureDetector(
-                        onTap: () {
-                          Get.to(() => const MyinfoScreen());
+                        onTap: () async {
+                          await Auth.signout();
+                          Get.to(() => const LoginScreen());
                         },
-                        child: Container(
-                          height: screenHeight / 844 * 54,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFD9D9D9),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const CustomText(
+                                text: '로그아웃',
+                                style: AhtTextTheme.MenuFontSubHighlight),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: screenHeight / 844 * 17,
+                              color: const Color(0xFFA2A2A2),
                             ),
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(width: screenWidth / 390 * 10),
-                              Icon(
-                                Icons.account_circle,
-                                size: screenHeight / 844 * 30,
-                              ),
-                              SizedBox(width: screenWidth / 390 * 10),
-                              const CustomText(
-                                text: '내 정보',
-                                style: AhtTextTheme.MiddleMenuText,
-                              )
-                            ],
-                          ),
+                          ],
                         ),
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const CustomText(
+                              text: '계정 탈퇴',
+                              style: AhtTextTheme.MenuFontSubHighlight),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: screenHeight / 844 * 17,
+                            color: const Color(0xFFA2A2A2),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      Container(
+                        height: 1,
+                        width: screenWidth * 342 / 390,
+                        decoration:
+                            const BoxDecoration(color: Color(0xFFD9D9D9)),
                       ),
                     ],
                   ),
