@@ -24,4 +24,9 @@ class Instance extends GetxController {
     update();
     return;
   }
+
+  Future<void> getExams() async {
+    exams = await Exam.getAll() ?? [];
+    update();
+  }
 }

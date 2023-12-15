@@ -1,6 +1,7 @@
 import 'package:aht_dimigo/screens/register_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
+import '../firebase/exam.dart';
 import '../firebase/instance.dart';
 import '../widgets/custom_text.dart';
 import 'package:aht_dimigo/widgets/subject_selection_box.dart';
@@ -16,24 +17,45 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo ?? {};
+  List<Exam> exams = Get.find<Instance>().exams;
+  List<String> subjectList = [];
+  String? selected;
+  List<Exam> results = [];
+
+  Future<void> searchExam(String? subject) async {
+    if (subject != null) {
+      results = [];
+      for (Exam exam in exams) {
+        if (exam.subject == subject) results.add(exam);
+      }
+    } else {
+      results = List.from(exams);
+    }
+    results.sort(
+      (a, b) => a.dates.last.compareTo(b.dates.last),
+    );
+    setState(() {});
+  }
+
+  Future<void> getSubjects() async {
+    subjectList = await Exam.getSubjects();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     _userInfo = Get.find<Instance>().userInfo ?? {};
+    exams = Get.find<Instance>().exams;
+    getSubjects();
+    searchExam(selected);
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    Set<String> subjectSet = {'수학', '과학', '국어', '영어', '프밍'};
-    List<String> subjectList = subjectSet.toList();
-    Set<String> mathSet = {
-      '수학 곱셈공식 암기 수행평가',
-      '수학 항등식 수행평가',
-      '수학 곱셈공식 암기 수행평가 두줄이 넘어가면 이케 돼요',
-    };
-    List<String> mathList = mathSet.toList();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -41,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: AhtColors.Main_Color,
         elevation: 7,
         child: GestureDetector(
-          onTap: () {
+          onTap: () async {
             Get.to(() => const RegisterExamScreen());
           },
           child: const Icon(Icons.add),
@@ -141,7 +163,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           shrinkWrap: true,
                           itemCount: subjectList.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return SubjectSelectionBox(subjectList[index]);
+                            return GestureDetector(
+                              onTap: () async {
+                                if (selected == subjectList[index]) {
+                                  selected = null;
+                                } else {
+                                  selected = subjectList[index];
+                                }
+                                setState(() {});
+                                await searchExam(selected);
+                                setState(() {});
+                              },
+                              child: SubjectSelectionBox(
+                                subjectList[index],
+                                selected: selected == subjectList[index],
+                              ),
+                            );
                           },
                           separatorBuilder: (BuildContext context, int index) =>
                               SizedBox(
@@ -218,9 +255,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListView.separated(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: false,
-                    itemCount: mathList.length,
+                    itemCount: results.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return MainExamBox(mathList[index]);
+                      return MainExamBox(results[index]);
                     },
                     separatorBuilder: (BuildContext context, int index) =>
                         SizedBox(
@@ -230,12 +267,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            /*ElevatedButton(
-              onPressed: () {
-                Get.to(() => const GradeCalclulatorScreen());
-              },
-              child: const CustomText(text: '성적 계산기'),
-            ),*/
           ],
         ),
       ),

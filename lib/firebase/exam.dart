@@ -12,9 +12,9 @@ List<Exam> exams = _instance.exams;
 CollectionReference<Map<String, dynamic>> collection = _firestore
     .collection('school')
     .doc(userInfo?['school']['name'])
-    .collection('exam')
-    .doc('${userInfo?['school']['grade']}')
-    .collection('${userInfo?['school']['class']}');
+    .collection('${userInfo?['school']['grade']}')
+    .doc('${userInfo?['school']['class']}')
+    .collection('exam');
 
 class Exam {
   List<DateTime> dates;
@@ -56,7 +56,8 @@ class Exam {
           'score': score,
         },
       );
-      return Exam(
+      _instance.getUserInfo();
+      Exam exam = Exam(
         title: title,
         subject: subject,
         dates: dates,
@@ -65,6 +66,8 @@ class Exam {
         score: score,
         images: bytes,
       );
+      exams.add(exam);
+      return exam;
     }
     return null;
   }
@@ -117,29 +120,71 @@ class Exam {
     }
   }
 
-  static Future<List<Exam>?> getAll() async {
+  static Future<List<Exam>?> getAll({String? subject}) async {
     List<Exam> docs = [];
     try {
       for (var doc in (await collection.get()).docs) {
         Map<String, dynamic> data = doc.data();
-        List<Uint8List> bytes = (await Storage.getExamImages(doc.id))!;
-        docs.add(
-          Exam(
-            title: doc.id,
-            subject: data['subject'],
-            range: data['range'],
-            dates: data['dates'],
-            memo: data['memo'],
-            score: data['score'],
-            images: bytes,
+        List<Uint8List> bytes = (await Storage.getExamImages(doc.id)) ?? [];
+        data['dates'] = List.generate(
+          data['dates'].length,
+          (i) => DateTime.parse(
+            data['dates'][i].toDate().toString(),
           ),
         );
+
+        if (subject == null || subject == data['subject']) {
+          docs.add(
+            Exam(
+              title: doc.id,
+              subject: data['subject'],
+              range: data['range'],
+              dates: data['dates'],
+              memo: data['memo'],
+              score: data['score'],
+              images: bytes,
+            ),
+          );
+        }
       }
     } catch (e) {
       print(e);
       return null;
     }
     return docs;
+  }
+
+  static Future<List<String>> getSubjects() async {
+    try {
+      List<String> subjects =
+          (await collection.parent!.get()).data()!['subject'];
+      if (subjects.isNotEmpty) {
+        return subjects;
+      } else {
+        return ['국어', '수학', '영어'];
+      }
+    } catch (e) {
+      print(e);
+      return ['국어', '수학', '영어'];
+    }
+  }
+
+  static Future<bool> setSubjects(subject) async {
+    try {
+      List<String> subjects = await getSubjects();
+      if (subjects.isEmpty) {
+        subjects = ['국어', '수학', '영어'];
+      }
+      if (!subjects.contains(subject)) {
+        subjects.add(subject);
+      }
+      subjects.sort();
+      collection.parent!.set({'subject': subjects});
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 
   Future<bool> remove() async {

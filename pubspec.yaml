@@ -20,6 +20,7 @@ dependencies:
   scroll_date_picker:
   intl:
   image_picker:
+  http:
   flutter:
     sdk: flutter
   cell_calendar:

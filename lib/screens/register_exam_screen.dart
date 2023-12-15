@@ -26,11 +26,9 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
   List<DateTime> dates = [];
   String memo = '';
   String range = '';
-  List<String> admin = ['aaaskdjf;l@gmail.com'];
-  late int ratio;
   int grade = 3;
   int score = -1; // !초기 값 -1로 설정
-  List<String> subjects = ['수학', '국어', '영어', '전지훈바보'];
+  List<String> subjects = [];
   DateTime _selectedDate = DateTime.now();
   List<Uint8List> images = [];
 
@@ -425,48 +423,57 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                 onTap: () {
                                   // TODO: 클릭했을 때 dialog로 이미지 띄우기
                                 },
-                                child: Container(
-                                  height: screenHeight / 844 * 88,
-                                  width: screenHeight / 844 * 66,
-                                  padding:
-                                      EdgeInsets.all(screenHeight / 944 * 5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(3),
-                                    image: DecorationImage(
-                                      image: MemoryImage(
-                                        images[index],
+                                child: GestureDetector(
+                                  onLongPressEnd: (detail) {
+                                    setState(() {
+                                      images.removeAt(index);
+                                    });
+                                  },
+                                  child: Container(
+                                    height: screenHeight / 844 * 88,
+                                    width: screenHeight / 844 * 66,
+                                    padding:
+                                        EdgeInsets.all(screenHeight / 944 * 5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(3),
+                                      image: DecorationImage(
+                                        image: MemoryImage(
+                                          images[index],
+                                        ),
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                images.removeAt(index);
-                                              });
-                                            },
-                                            child: Container(
-                                              width: screenWidth / 390 * 10,
-                                              height: screenWidth / 390 * 10,
-                                              decoration: const ShapeDecoration(
-                                                color: Colors.grey,
-                                                shape: CircleBorder(),
-                                              ),
-                                              child: Icon(
-                                                Icons.close,
-                                                size: screenWidth / 390 * 8,
-                                                color: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  images.removeAt(index);
+                                                });
+                                              },
+                                              child: Container(
+                                                width: screenWidth / 390 * 15,
+                                                height: screenWidth / 390 * 15,
+                                                decoration:
+                                                    const ShapeDecoration(
+                                                  color: Colors.grey,
+                                                  shape: CircleBorder(),
+                                                ),
+                                                child: Icon(
+                                                  Icons.close,
+                                                  size: screenWidth / 390 * 8,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -510,7 +517,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                 setState(() {
                                   if (parsedValue != null) {
                                     setState(() {
-                                      ratio = parsedValue;
+                                      score = parsedValue;
                                     });
                                   } else {
                                     Get.snackbar('알림', '수행평가 반영 비율을 입력해주세요');
@@ -555,6 +562,41 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             ),
                           ),
                           SizedBox(height: screenHeight / 844 * 20),
+                          const CustomText(
+                            text: '메모',
+                            style: AhtTextTheme.MiddleMenuText,
+                          ),
+                          SizedBox(height: screenHeight / 844 * 4),
+                          Container(
+                            height: screenHeight / 844 * 48,
+                            padding: EdgeInsets.only(
+                              left: 16 / 390 * screenWidth,
+                              right: screenWidth / 390 * 16,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF4F4F4),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: CustomTextField(
+                              maxLines: 1,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                contentPadding: EdgeInsets.only(
+                                  bottom: screenHeight / 844 * 15,
+                                  top: screenHeight / 844 * 30,
+                                ),
+                                hintText: '메모 입력',
+                                hintStyle: AhtTextTheme.TextfieldHintText,
+                              ),
+                              onSubmitted: (changingrange) {
+                                setState(() {
+                                  memo = changingrange;
+                                });
+                              },
+                            ),
+                          ),
+                          SizedBox(height: screenHeight / 844 * 20),
                         ],
                       ),
                     ),
@@ -568,9 +610,13 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
               GestureDetector(
                 onTap: () async {
                   if (title.isEmpty) {
+                    print('title is empty');
                   } else if (subject.isEmpty) {
+                    print('subject is empty');
                   } else if (dates.isEmpty) {
+                    print('dates is empty');
                   } else if (range.isEmpty) {
+                    print('range is empty');
                   } else {
                     Exam? uplodadedExam = await Exam.set(
                       title: title,
@@ -585,6 +631,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                       Get.back();
                       Get.snackbar('알림', '정보가 저장되었습니다.');
                     }
+                    print(uplodadedExam);
                   }
                 },
                 child: Container(

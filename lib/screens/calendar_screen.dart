@@ -1,8 +1,5 @@
 import 'package:cell_calendar/cell_calendar.dart';
 import 'package:flutter/material.dart';
-import 'package:aht_dimigo/themes/color_theme.dart';
-import 'package:aht_dimigo/widgets/custom_text.dart';
-import 'package:aht_dimigo/themes/text_theme.dart';
 import 'dart:core';
 
 class CalendarScreen extends StatefulWidget {

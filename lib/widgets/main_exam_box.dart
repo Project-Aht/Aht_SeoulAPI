@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../firebase/exam.dart';
 import 'custom_text.dart';
 
 class MainExamBox extends StatelessWidget {
-  final String examname;
-  const MainExamBox(this.examname, {super.key});
+  final Exam exam;
+  MainExamBox(this.exam, {super.key});
+
+  final Map<String, IconData> icons = {
+    '수학': Icons.calculate_outlined,
+  };
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    now = DateTime(now.year, now.month, now.day);
     double screenwidth = MediaQuery.of(context).size.width;
-    // ignore: unused_local_variable
     double screenheight = MediaQuery.of(context).size.height;
     return Column(
       children: [
@@ -25,9 +32,9 @@ class MainExamBox extends StatelessWidget {
                 height: 1.25,
               ),
             ),
-            const CustomText(
-              text: 'D-3 ',
-              style: TextStyle(
+            CustomText(
+              text: 'D-${exam.dates.last.difference(now).inDays} ',
+              style: const TextStyle(
                 color: Color(0xFFDE3123),
                 fontSize: 14,
                 fontFamily: 'Pretendard',
@@ -35,9 +42,9 @@ class MainExamBox extends StatelessWidget {
                 height: 1.25,
               ),
             ),
-            const CustomText(
-              text: '| 2023.08.03',
-              style: TextStyle(
+            CustomText(
+              text: '| ${DateFormat("yyyy.MM.dd").format(exam.dates.last)}',
+              style: const TextStyle(
                 color: Color(0xFFC0C0C0),
                 fontSize: 14,
                 fontFamily: 'Pretendard',
@@ -70,16 +77,16 @@ class MainExamBox extends StatelessWidget {
                     ),
                     child: Center(
                       child: Icon(
-                        Icons.calculate_outlined,
+                        icons[exam.subject] ?? Icons.subject,
                         size: screenwidth / 390 * 30,
                         color: Colors.black,
                       ),
                     ),
                   ),
                   SizedBox(height: screenheight / 844 * 10),
-                  const Text(
-                    '수학',
-                    style: TextStyle(
+                  Text(
+                    exam.subject,
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontFamily: 'Pretendard',
@@ -99,7 +106,7 @@ class MainExamBox extends StatelessWidget {
                       width: screenwidth / 390 * 200,
                       child: Center(
                         child: CustomText(
-                          text: examname,
+                          text: exam.title,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.black,
@@ -112,11 +119,11 @@ class MainExamBox extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: screenheight / 844 * 5),
-                    const CustomText(
-                      text: '범위 : 교과서에 나온 곱셈공식 전부',
+                    CustomText(
+                      text: exam.memo,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xFFA3A3A3),
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
                         fontSize: 14,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w500,

@@ -32,6 +32,10 @@ class Auth {
         'notice_detail': <String, bool>{},
       });
       await Get.find<Instance>().getUserInfo();
+
+      final prefs = await SharedPreferences.getInstance();
+      prefs.remove('email');
+      prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
       print(e.code);
       return false;

@@ -102,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         email = p0;
                       });
                     },
+                    textInputAction: TextInputAction.next,
                     decoration: const InputDecoration(
                       hintText: '이메일을 입력해 주세요.',
                       hintStyle: AhtTextTheme.LoginHintText,
@@ -138,6 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         pw = p0;
                       });
                     },
+                    textInputAction: TextInputAction.done,
                     decoration: const InputDecoration(
                       hintText: '비밀번호를 입력해 주세요.',
                       hintStyle: AhtTextTheme.LoginHintText,

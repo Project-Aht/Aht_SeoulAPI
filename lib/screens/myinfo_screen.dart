@@ -5,6 +5,7 @@ import 'package:aht_dimigo/functions/get_image.dart';
 import '../firebase/auth.dart';
 import '../firebase/instance.dart';
 import '../themes/color_theme.dart';
+import '../widgets/custom_text.dart';
 import 'grade_calculator_screen.dart';
 import 'login_screen.dart';
 import 'package:flutter/material.dart';
@@ -62,8 +63,8 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                               ),
                             ),
                             SizedBox(width: screenWidth / 390 * 12),
-                            const Text(
-                              '마이페이지',
+                            const CustomText(
+                              text: '마이페이지',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -147,14 +148,15 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                 ),
                 SizedBox(height: screenHeight / 844 * 26),
                 SizedBox(
-                  width: screenWidth / 390 * 142,
-                  height: screenHeight / 844 * 20,
+                  // width: screenWidth / 390 * 142,
+                  // height: screenHeight / 844 * 20,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        '${_userInfo['school']['grade']}학년 ${_userInfo['school']['class']}반 ${_userInfo['school']['name']}',
+                      CustomText(
+                        text:
+                            '${_userInfo['school']['name']}\n${_userInfo['school']['grade']}학년 ${_userInfo['school']['class']}반',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -162,36 +164,14 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                           fontWeight: FontWeight.w700,
                           height: 1.25,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                      Container(
-                        width: screenWidth / 390 * 30,
-                        height: screenHeight / 844 * 20,
-                        decoration: ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                width: 1.50, color: Color(0xFFDE3123)),
-                            borderRadius: BorderRadius.circular(8.80),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            '등급',
-                            style: TextStyle(
-                              color: Color(0xFFDE3123),
-                              fontSize: 10,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w500,
-                              height: 1.25,
-                            ),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),
                 SizedBox(height: screenHeight / 844 * 10),
-                const Text(
-                  '포인트 13p',
+                const CustomText(
+                  text: '포인트 13p',
                   style: TextStyle(
                     color: Color(0xFFA8A8A8),
                     fontSize: 16,
@@ -252,8 +232,8 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: const Center(
-                                child: Text(
-                                  '정보수정',
+                                child: CustomText(
+                                  text: '정보수정',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -270,8 +250,8 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: const Center(
-                                child: Text(
-                                  '완료된\n수행평가',
+                                child: CustomText(
+                                  text: '완료된\n수행평가',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.black,
@@ -289,8 +269,8 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             child: SizedBox(
                               width: screenWidth / 390 * 70,
                               child: const Center(
-                                child: Text(
-                                  '점수계산기',
+                                child: CustomText(
+                                  text: '점수계산기',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -313,7 +293,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                     await Auth.signout();
                     Get.to(() => const LoginScreen());
                   },
-                  child: const Text('로그아웃'),
+                  child: const CustomText(text: '로그아웃'),
                 ),
               ],
             ),

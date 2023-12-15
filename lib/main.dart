@@ -33,7 +33,6 @@ class _MainAppState extends State<MainApp> {
   Future<void> _loadData() async {
     await Future.delayed(
         const Duration(milliseconds: 2000)); // splash screen이 표시될 시간(초)
-    print(2);
     setState(() {
       _showSplashScreen = false;
     });
@@ -44,7 +43,6 @@ class _MainAppState extends State<MainApp> {
     String? email = prefs.getString('email');
     String? pw = prefs.getString('pw');
     if (pw == null) {
-      print(1);
       setState(() {
         loginCompleted = false;
       });
@@ -58,6 +56,7 @@ class _MainAppState extends State<MainApp> {
     );
     if (loginCompleted!) {
       await Get.find<Instance>().getUserInfo();
+      Get.find<Instance>().getExams();
     } else {
       await prefs.remove('email');
       await prefs.remove('pw');
