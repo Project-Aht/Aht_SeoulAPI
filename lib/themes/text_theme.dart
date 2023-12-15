@@ -64,7 +64,6 @@ abstract class AhtTextTheme {
     fontSize: 14,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w500,
-    height: 0,
   );
   static const CheckBoxText = TextStyle(
     color: Color(0xFFD9D9D9),
@@ -73,6 +72,7 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w600,
     height: 0,
     decorationThickness: 4,
+    decoration: TextDecoration.none,
   );
   static const CheckBoxHighlight = TextStyle(
     color: Colors.black,
@@ -129,5 +129,35 @@ abstract class AhtTextTheme {
     fontSize: 14,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w400,
+  );
+  static const SignUpSchool = TextStyle(
+    color: Colors.black,
+    fontSize: 12,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 1.75,
+    letterSpacing: -0.32,
+  );
+  static const SignUpSchoolSearch = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w500,
+    height: 1.25,
+  );
+  static const SignUpSchoolAddress = TextStyle(
+    color: Color(0xFF8B8C8B),
+    fontSize: 10,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 2.1,
+    letterSpacing: -0.32,
+  );
+  static const SignUpGradeTitle = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.24,
   );
 }
