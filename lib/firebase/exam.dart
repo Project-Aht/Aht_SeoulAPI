@@ -120,7 +120,7 @@ class Exam {
     }
   }
 
-  static Future<List<Exam>?> getAll({String? subject}) async {
+  static Future<List<Exam>?> getAll() async {
     List<Exam> docs = [];
     try {
       for (var doc in (await collection.get()).docs) {
@@ -133,31 +133,30 @@ class Exam {
           ),
         );
 
-        if (subject == null || subject == data['subject']) {
-          docs.add(
-            Exam(
-              title: doc.id,
-              subject: data['subject'],
-              range: data['range'],
-              dates: data['dates'],
-              memo: data['memo'],
-              score: data['score'],
-              images: bytes,
-            ),
-          );
-        }
+        docs.add(
+          Exam(
+            title: doc.id,
+            subject: data['subject'],
+            range: data['range'],
+            dates: data['dates'],
+            memo: data['memo'],
+            score: data['score'],
+            images: bytes,
+          ),
+        );
       }
+      print(docs);
+      return docs;
     } catch (e) {
       print(e);
       return null;
     }
-    return docs;
   }
 
   static Future<List<String>> getSubjects() async {
     try {
-      List<String> subjects =
-          (await collection.parent!.get()).data()!['subject'];
+      List data = (await collection.parent!.get()).data()!['subject'];
+      List<String> subjects = data.cast();
       if (subjects.isNotEmpty) {
         return subjects;
       } else {
@@ -169,9 +168,11 @@ class Exam {
     }
   }
 
-  static Future<bool> setSubjects(subject) async {
+  static Future<bool> setSubject(subject) async {
     try {
+      print(1);
       List<String> subjects = await getSubjects();
+      print(2);
       if (subjects.isEmpty) {
         subjects = ['국어', '수학', '영어'];
       }

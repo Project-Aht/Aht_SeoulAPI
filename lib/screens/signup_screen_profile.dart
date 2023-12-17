@@ -129,6 +129,7 @@ class _SignUpScreenProfileState extends State<SignUpScreenProfile> {
                     pw: widget.pw,
                     image: image,
                   ),
+                  duration: Duration.zero,
                 );
               },
               child: Column(

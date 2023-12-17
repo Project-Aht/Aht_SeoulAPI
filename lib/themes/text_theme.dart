@@ -160,4 +160,18 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w600,
     letterSpacing: -0.24,
   );
+  static const DropdownSelected = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.24,
+  );
+  static const DropdownElement = TextStyle(
+    color: Color(0xFF565656),
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.21,
+  );
 }

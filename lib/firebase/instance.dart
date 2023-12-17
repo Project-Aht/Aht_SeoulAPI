@@ -11,6 +11,7 @@ class Instance extends GetxController {
   final FirebaseStorage storage = FirebaseStorage.instance;
   Map<String, dynamic>? userInfo;
   List<Exam> exams = [];
+  List<String> subjects = [];
 
   Future<void> getUserInfo() async {
     userInfo = (await firestore
@@ -27,6 +28,7 @@ class Instance extends GetxController {
 
   Future<void> getExams() async {
     exams = await Exam.getAll() ?? [];
+    subjects = await Exam.getSubjects();
     update();
   }
 }

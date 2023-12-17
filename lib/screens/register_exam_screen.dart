@@ -3,6 +3,7 @@ import 'package:aht_dimigo/functions/get_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../firebase/exam.dart';
+import '../firebase/instance.dart';
 import '../themes/text_theme.dart';
 import '../themes/color_theme.dart';
 import '../widgets/custom_text.dart';
@@ -28,7 +29,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
   String range = '';
   int grade = 3;
   int score = -1; // !초기 값 -1로 설정
-  List<String> subjects = [];
+  List<String> subjects = Get.find<Instance>().subjects;
   DateTime _selectedDate = DateTime.now();
   List<Uint8List> images = [];
 
@@ -141,7 +142,6 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                 onSubmitted: (changingtitle) {
                                   setState(() {
                                     title = changingtitle;
-                                    print(title);
                                     dateadding = false;
                                   });
                                 },
@@ -156,7 +156,6 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                           SizedBox(height: screenHeight / 844 * 4),
                           GestureDetector(
                             onTap: () {
-                              print(subject);
                               setState(() {
                                 if (subjectadding) {
                                   subjectadding = false;

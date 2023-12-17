@@ -1,5 +1,4 @@
 import 'package:aht_dimigo/screens/register_exam_screen.dart';
-import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import '../firebase/exam.dart';
@@ -9,6 +8,8 @@ import 'package:aht_dimigo/widgets/subject_selection_box.dart';
 import 'package:aht_dimigo/widgets/main_exam_box.dart';
 import 'package:get/get.dart';
 
+Instance _instance = Get.find<Instance>();
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -17,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo ?? {};
-  List<Exam> exams = Get.find<Instance>().exams;
+  Map<String, dynamic> _userInfo = _instance.userInfo ?? {};
+  List<Exam> exams = _instance.exams;
   List<String> subjectList = [];
   String? selected;
   List<Exam> results = [];
@@ -39,19 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  Future<void> getSubjects() async {
-    subjectList = await Exam.getSubjects();
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
-    _userInfo = Get.find<Instance>().userInfo ?? {};
-    exams = Get.find<Instance>().exams;
-    getSubjects();
+    _userInfo = _instance.userInfo ?? {};
+    exams = _instance.exams;
+    subjectList = _instance.subjects;
     searchExam(selected);
-    setState(() {});
   }
 
   @override
@@ -243,7 +238,15 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(10)),
                         child: TextButton(
                           onPressed: () {
-                            //TODO : 여기 로직
+                            () async {
+                              bool uploaded = await Exam.setSubject(newsubject);
+                              if (uploaded) {
+                                await _instance.getExams();
+                                subjectList = _instance.subjects;
+                                setState(() {});
+                                Get.back();
+                              }
+                            }();
                           },
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(

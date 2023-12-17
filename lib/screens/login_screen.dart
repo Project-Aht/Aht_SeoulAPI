@@ -7,6 +7,7 @@ import 'package:aht_dimigo/widgets/custom_text.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../firebase/instance.dart';
 import 'main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -221,6 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     savingId: savingId,
                   );
                   if (signinCompleted) {
+                    Get.find<Instance>().getExams();
                     Get.offAll(() => const MainScreen());
                   }
                 }

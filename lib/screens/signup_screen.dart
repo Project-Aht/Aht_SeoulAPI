@@ -218,9 +218,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: screenHeight / 844 * 3,
                   ),
                   SizedBox(
-                    height: screenHeight / 844 * 35,
+                    height: screenHeight / 844 * 24,
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Icon(
                         Icons.account_circle_outlined,
@@ -231,39 +232,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         width: screenWidth / 390 * 12,
                       ),
                       Expanded(
-                        child: SizedBox(
-                          height: 14,
-                          child: CustomTextField(
-                            maxLines: 1,
-                            textInputAction: TextInputAction.next,
-                            onChanged: (p0) {
-                              setState(() {
-                                email = p0;
-                              });
-                            },
-                            focusNode: emailFocus,
-                            keyboardType: TextInputType.emailAddress,
-                            style: AhtTextTheme.LoginText,
-                            decoration: const InputDecoration(
-                              hintText: '이메일을 입력해 주세요.',
-                              hintStyle: AhtTextTheme.LoginHintText,
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.only(bottom: 10.5),
-                            ),
+                        child: CustomTextField(
+                          maxLines: 1,
+                          textInputAction: TextInputAction.next,
+                          onChanged: (p0) {
+                            setState(() {
+                              email = p0;
+                            });
+                          },
+                          focusNode: emailFocus,
+                          keyboardType: TextInputType.emailAddress,
+                          style: AhtTextTheme.LoginText,
+                          decoration: const InputDecoration(
+                            hintText: '이메일을 입력해 주세요.',
+                            hintStyle: AhtTextTheme.LoginHintText,
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(vertical: 14),
                           ),
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: screenHeight / 844 * 13,
                   ),
                   Container(
                     height: screenHeight / 844 * 2,
                     color: const Color(0xFFD7D7D7),
                   ),
                   SizedBox(
-                    height: screenHeight / 844 * 28,
+                    height: screenHeight / 844 * 16,
                   ),
                   Row(
                     children: [
@@ -277,7 +272,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       Expanded(
                         child: SizedBox(
-                          height: 14,
                           child: CustomTextField(
                             maxLines: 1,
                             textInputAction: TextInputAction.done,
@@ -294,15 +288,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               hintText: '비밀번호를 입력해 주세요.',
                               hintStyle: AhtTextTheme.LoginHintText,
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.only(bottom: 10.5),
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 14),
                             ),
                           ),
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: screenHeight / 844 * 13,
                   ),
                   Container(
                     height: screenHeight / 844 * 2,
@@ -323,6 +315,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         email: email,
                         pw: pw,
                       ),
+                      duration: Duration.zero,
                     );
                   }
                 },
