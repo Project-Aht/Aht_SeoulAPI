@@ -194,14 +194,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 GestureDetector(
                   onTap: () {
                     Get.defaultDialog(
-                      barrierDismissible: true,
+                      backgroundColor: Colors.white, //TODO : 이거 색 왜 안바뀌지
                       title: '새로운 과목 추가',
-                      titleStyle: const TextStyle(
+                      titleStyle: TextStyle(
                         color: Colors.black,
-                        fontSize: 18,
+                        fontSize: MediaQuery.of(context).textScaler.scale(18),
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.bold,
-                        height: 1.25,
                       ),
                       titlePadding: EdgeInsets.only(
                         top: screenHeight / 844 * 33,
@@ -217,9 +216,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             });
                           },
                           keyboardType: TextInputType.text,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.black,
-                            fontSize: 18,
+                            fontSize:
+                                MediaQuery.of(context).textScaler.scale(18),
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w700,
                             height: 0,
@@ -235,67 +235,70 @@ class _HomeScreenState extends State<HomeScreen> {
                       contentPadding: EdgeInsets.only(
                         bottom: screenHeight / 844 * 20,
                       ),
-                      confirm: Container(
-                        width: screenWidth / 390 * 80,
-                        height: screenHeight / 844 * 35,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: TextButton(
-                          onPressed: () {
-                            () async {
-                              bool uploaded = await Exam.setSubject(newsubject);
-                              if (uploaded) {
-                                await _instance.getExams();
-                                subjectList = _instance.subjects;
-                                setState(() {});
-                                Get.back();
-                              }
-                            }();
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              AhtColors.Main_Color,
+                      confirm: GestureDetector(
+                        onTap: () {
+                          () async {
+                            bool uploaded = await Exam.setSubject(newsubject);
+                            if (uploaded) {
+                              await _instance.getExams();
+                              subjectList = _instance.subjects;
+                              setState(() {});
+                              Get.back();
+                            }
+                          }();
+                        },
+                        child: Container(
+                          width: screenWidth / 390 * 84,
+                          height: screenHeight / 844 * 35,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              screenWidth / 390 * 4,
                             ),
+                            color: AhtColors.Main_Color,
                           ),
-                          child: const Text(
-                            '추가',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              height: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                      cancel: Container(
-                        width: screenWidth / 390 * 80,
-                        height: screenHeight / 844 * 35,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: TextButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF9B9B9F),
-                            ),
-                          ),
-                          child: const Text(
-                            '취소',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              height: 1,
+                          child: const Center(
+                            child: CustomText(
+                              text: '추가',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      backgroundColor: Colors.white, //TODO : 이거 색 왜 안바뀌지
+                      cancel: GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Container(
+                          width: screenWidth / 390 * 84,
+                          height: screenHeight / 844 * 35,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                              color: const Color(0xFFDCDCDC),
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              screenWidth / 390 * 4,
+                            ),
+                          ),
+                          child: const Center(
+                            child: CustomText(
+                              text: '취소',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: 'Pretendard',
+                                fontWeight: FontWeight.w700,
+                                height: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     );
                   },
                   child: Container(
