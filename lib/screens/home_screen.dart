@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:aht_dimigo/screens/register_exam_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
@@ -193,113 +195,248 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(width: screenWidth / 390 * 10),
                 GestureDetector(
                   onTap: () {
-                    Get.defaultDialog(
-                      backgroundColor: Colors.white, //TODO : 이거 색 왜 안바뀌지
-                      title: '새로운 과목 추가',
-                      titleStyle: TextStyle(
-                        color: Colors.black,
-                        fontSize: MediaQuery.of(context).textScaler.scale(18),
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.bold,
-                      ),
-                      titlePadding: EdgeInsets.only(
-                        top: screenHeight / 844 * 33,
-                      ),
-                      content: SizedBox(
-                        width: screenWidth / 390 * 200,
-                        child: CustomTextField(
-                          maxLines: 1,
-                          textInputAction: TextInputAction.done,
-                          onChanged: (n) {
-                            setState(() {
-                              newsubject = n;
-                            });
-                          },
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize:
-                                MediaQuery.of(context).textScaler.scale(18),
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                              top: 0,
-                              bottom: screenHeight / 844 * 8,
-                            ),
-                          ),
-                        ),
-                      ),
-                      contentPadding: EdgeInsets.only(
-                        bottom: screenHeight / 844 * 20,
-                      ),
-                      confirm: GestureDetector(
-                        onTap: () {
-                          () async {
-                            bool uploaded = await Exam.setSubject(newsubject);
-                            if (uploaded) {
-                              await _instance.getExams();
-                              subjectList = _instance.subjects;
-                              setState(() {});
-                              Get.back();
-                            }
-                          }();
-                        },
+                    Get.dialog(
+                      Dialog(
                         child: Container(
-                          width: screenWidth / 390 * 84,
-                          height: screenHeight / 844 * 35,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(
-                              screenWidth / 390 * 4,
+                              screenWidth / 390 * 10,
                             ),
-                            color: AhtColors.Main_Color,
-                          ),
-                          child: const Center(
-                            child: CustomText(
-                              text: '추가',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      cancel: GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                          width: screenWidth / 390 * 84,
-                          height: screenHeight / 844 * 35,
-                          decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(
-                              color: const Color(0xFFDCDCDC),
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              screenWidth / 390 * 4,
-                            ),
                           ),
-                          child: const Center(
-                            child: CustomText(
-                              text: '취소',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w700,
-                                height: 1,
+                          padding: EdgeInsets.only(
+                            top: screenHeight / 844 * 33,
+                            bottom: screenHeight / 844 * 20,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const CustomText(
+                                text: '새로운 과목 추가',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
+                              SizedBox(
+                                height: max(screenHeight / 844 * 69 - 48, 0),
+                              ),
+                              SizedBox(
+                                width: screenWidth / 390 * 200,
+                                child: CustomTextField(
+                                  maxLines: 1,
+                                  textInputAction: TextInputAction.done,
+                                  onChanged: (n) {
+                                    setState(() {
+                                      newsubject = n;
+                                    });
+                                  },
+                                  keyboardType: TextInputType.text,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                      top: 0,
+                                      bottom: screenHeight / 844 * 8,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenHeight / 844 * 26,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Container(
+                                      width: screenWidth / 390 * 84,
+                                      height: screenHeight / 844 * 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: const Color(0xFFDCDCDC),
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          screenWidth / 390 * 4,
+                                        ),
+                                      ),
+                                      child: const Center(
+                                        child: CustomText(
+                                          text: '취소',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontFamily: 'Pretendard',
+                                            fontWeight: FontWeight.w700,
+                                            height: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: screenWidth / 390 * 20,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      () async {
+                                        bool uploaded =
+                                            await Exam.setSubject(newsubject);
+                                        if (uploaded) {
+                                          await _instance.getExams();
+                                          subjectList = _instance.subjects;
+                                          setState(() {});
+                                          Get.back();
+                                        }
+                                      }();
+                                    },
+                                    child: Container(
+                                      width: screenWidth / 390 * 84,
+                                      height: screenHeight / 844 * 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          screenWidth / 390 * 4,
+                                        ),
+                                        color: AhtColors.Main_Color,
+                                      ),
+                                      child: const Center(
+                                        child: CustomText(
+                                          text: '추가',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Pretendard',
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     );
+                    // Get.defaultDialog(
+                    //   backgroundColor: Colors.white, //TODO : 이거 색 왜 안바뀌지
+                    //   title: '새로운 과목 추가',
+                    //   titleStyle: TextStyle(
+                    //     color: Colors.black,
+                    //     fontSize: MediaQuery.of(context).textScaler.scale(18),
+                    //     fontFamily: 'Pretendard',
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    //   titlePadding: EdgeInsets.only(
+                    //     top: screenHeight / 844 * 33,
+                    //   ),
+                    //   content: SizedBox(
+                    //     width: screenWidth / 390 * 200,
+                    //     child: CustomTextField(
+                    //       maxLines: 1,
+                    //       textInputAction: TextInputAction.done,
+                    //       onChanged: (n) {
+                    //         setState(() {
+                    //           newsubject = n;
+                    //         });
+                    //       },
+                    //       keyboardType: TextInputType.text,
+                    //       style: TextStyle(
+                    //         color: Colors.black,
+                    //         fontSize:
+                    //             MediaQuery.of(context).textScaler.scale(18),
+                    //         fontFamily: 'Pretendard',
+                    //         fontWeight: FontWeight.w700,
+                    //         height: 0,
+                    //       ),
+                    //       decoration: InputDecoration(
+                    //         contentPadding: EdgeInsets.only(
+                    //           top: 0,
+                    //           bottom: screenHeight / 844 * 8,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   contentPadding: EdgeInsets.only(
+                    //     bottom: screenHeight / 844 * 20,
+                    //   ),
+                    //   confirm: GestureDetector(
+                    //     onTap: () {
+                    //       () async {
+                    //         bool uploaded = await Exam.setSubject(newsubject);
+                    //         if (uploaded) {
+                    //           await _instance.getExams();
+                    //           subjectList = _instance.subjects;
+                    //           setState(() {});
+                    //           Get.back();
+                    //         }
+                    //       }();
+                    //     },
+                    //     child: Container(
+                    //       width: screenWidth / 390 * 84,
+                    //       height: screenHeight / 844 * 35,
+                    //       decoration: BoxDecoration(
+                    //         borderRadius: BorderRadius.circular(
+                    //           screenWidth / 390 * 4,
+                    //         ),
+                    //         color: AhtColors.Main_Color,
+                    //       ),
+                    //       child: const Center(
+                    //         child: CustomText(
+                    //           text: '추가',
+                    //           style: TextStyle(
+                    //             color: Colors.white,
+                    //             fontSize: 16,
+                    //             fontFamily: 'Pretendard',
+                    //             fontWeight: FontWeight.w700,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    //   cancel: GestureDetector(
+                    //     onTap: () {
+                    //       Get.back();
+                    //     },
+                    //     child: Container(
+                    //       width: screenWidth / 390 * 84,
+                    //       height: screenHeight / 844 * 35,
+                    //       decoration: BoxDecoration(
+                    //         color: Colors.white,
+                    //         border: Border.all(
+                    //           color: const Color(0xFFDCDCDC),
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(
+                    //           screenWidth / 390 * 4,
+                    //         ),
+                    //       ),
+                    //       child: const Center(
+                    //         child: CustomText(
+                    //           text: '취소',
+                    //           style: TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 16,
+                    //             fontFamily: 'Pretendard',
+                    //             fontWeight: FontWeight.w700,
+                    //             height: 1,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // );
                   },
                   child: Container(
                     width: screenWidth / 390 * 57,
