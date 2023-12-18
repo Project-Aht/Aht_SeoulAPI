@@ -630,7 +630,6 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                       Get.back();
                       Get.snackbar('알림', '정보가 저장되었습니다.');
                     }
-                    print(uplodadedExam);
                   }
                 },
                 child: Container(

@@ -145,7 +145,6 @@ class Exam {
           ),
         );
       }
-      print(docs);
       return docs;
     } catch (e) {
       print(e);
@@ -170,9 +169,7 @@ class Exam {
 
   static Future<bool> setSubject(subject) async {
     try {
-      print(1);
       List<String> subjects = await getSubjects();
-      print(2);
       if (subjects.isEmpty) {
         subjects = ['국어', '수학', '영어'];
       }

@@ -26,14 +26,17 @@ class _HomeScreenState extends State<HomeScreen> {
   String newsubject = '';
 
   Future<void> searchExam(String? subject) async {
-    if (subject != null) {
-      results = [];
-      for (Exam exam in exams) {
-        if (exam.subject == subject) results.add(exam);
+    results = [];
+    for (Exam exam in exams) {
+      if (subject == exam.subject || subject == null) {
+        if (exam.dates.last.isBefore(DateTime.now())) {
+          exam.remove();
+        } else {
+          results.add(exam);
+        }
       }
-    } else {
-      results = List.from(exams);
     }
+
     results.sort(
       (a, b) => a.dates.last.compareTo(b.dates.last),
     );
@@ -61,7 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 7,
         child: GestureDetector(
           onTap: () async {
-            Get.to(() => const RegisterExamScreen());
+            await Get.to(() => const RegisterExamScreen());
+            setState(() {});
           },
           child: const Icon(Icons.add),
         ),
