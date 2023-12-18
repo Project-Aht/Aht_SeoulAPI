@@ -2,6 +2,11 @@ import 'package:cell_calendar/cell_calendar.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
 
+import 'package:get/get.dart';
+
+import '../firebase/exam.dart';
+import '../firebase/instance.dart';
+
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
 
@@ -9,35 +14,27 @@ class CalendarScreen extends StatefulWidget {
   State<CalendarScreen> createState() => _CalendarScreenState();
 }
 
+Map<String, Color> colors = {
+  '수학': const Color(0xFF02CC5B).withOpacity(0.15),
+};
+
 class _CalendarScreenState extends State<CalendarScreen> {
   final cellCalendarPageController = CellCalendarPageController();
-  var events = [
-    CalendarEvent(
-      eventName: "Event 1",
-      eventDate: DateTime(2023, 10, 26),
-      eventTextStyle: const TextStyle(),
-      eventBackgroundColor: const Color(0xFF38498E).withOpacity(0.2),
-    ),
-    CalendarEvent(
-      eventName: "Event 2",
-      eventDate: DateTime(2023, 10, 27),
-      eventTextStyle: const TextStyle(),
-      eventBackgroundColor: const Color(0xFF02CC5B).withOpacity(0.15),
-    ),
-    CalendarEvent(
-      eventName: "Event 3",
-      eventDate: DateTime(2023, 10, 27),
-      eventTextStyle: const TextStyle(),
-      eventBackgroundColor:
-          const Color.fromARGB(255, 103, 2, 204).withOpacity(0.15),
-    ),
-    CalendarEvent(
-      eventName: "Event 4",
-      eventDate: DateTime(2023, 10, 27),
-      eventTextStyle: const TextStyle(),
-      eventBackgroundColor:
-          const Color.fromARGB(255, 204, 2, 174).withOpacity(0.15),
-    ),
+  List<CalendarEvent> events = [
+    for (Exam exam in Get.find<Instance>().exams)
+      for (DateTime date in exam.dates)
+        CalendarEvent(
+          eventName: exam.title,
+          eventDate: date,
+          eventTextStyle: TextStyle(
+            fontFamily: 'Pretendard',
+            fontSize: const TextScaler.linear(1).scale(10),
+            fontWeight: FontWeight.w600,
+            letterSpacing: -0.2,
+          ),
+          eventBackgroundColor: colors[exam.subject] ??
+              const Color.fromARGB(255, 103, 2, 204).withOpacity(0.15),
+        ),
   ];
 
   @override
@@ -58,7 +55,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   cellCalendarPageController: cellCalendarPageController,
                   todayMarkColor: const Color(0xFF38498E),
                   todayTextColor: Colors.white,
-                  dateTextStyle: const TextStyle(fontFamily: 'Pretendard'),
+                  dateTextStyle: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontSize: const TextScaler.linear(1).scale(12),
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                    letterSpacing: -0.24,
+                  ),
                   onCellTapped: (date) {
                     print("$date is tapped !");
                   },

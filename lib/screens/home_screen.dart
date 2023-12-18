@@ -31,11 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     results = [];
     for (Exam exam in exams) {
       if (subject == exam.subject || subject == null) {
-        if (exam.dates.last.isBefore(DateTime.now())) {
-          exam.remove();
-        } else {
-          results.add(exam);
-        }
+        results.add(exam);
       }
     }
 
@@ -67,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: GestureDetector(
           onTap: () async {
             await Get.to(() => const RegisterExamScreen());
+            exams = _instance.exams;
             setState(() {});
           },
           child: const Icon(Icons.add),

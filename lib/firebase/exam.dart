@@ -126,24 +126,29 @@ class Exam {
       for (var doc in (await collection.get()).docs) {
         Map<String, dynamic> data = doc.data();
         List<Uint8List> bytes = (await Storage.getExamImages(doc.id)) ?? [];
-        data['dates'] = List.generate(
+        List<DateTime> dates = List.generate(
           data['dates'].length,
           (i) => DateTime.parse(
             data['dates'][i].toDate().toString(),
           ),
-        );
+        )..sort((a, b) => a.compareTo(b));
 
-        docs.add(
-          Exam(
-            title: doc.id,
-            subject: data['subject'],
-            range: data['range'],
-            dates: data['dates'],
-            memo: data['memo'],
-            score: data['score'],
-            images: bytes,
-          ),
-        );
+        if (dates.last.isBefore(DateTime.now())) {
+          Storage.removeExamImages(doc.id);
+          collection.doc(doc.id).delete();
+        } else {
+          docs.add(
+            Exam(
+              title: doc.id,
+              subject: data['subject'],
+              range: data['range'],
+              dates: data['dates'],
+              memo: data['memo'],
+              score: data['score'],
+              images: bytes,
+            ),
+          );
+        }
       }
       return docs;
     } catch (e) {
