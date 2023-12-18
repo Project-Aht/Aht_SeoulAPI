@@ -81,8 +81,8 @@ class _SignUpScreenProfileState extends State<SignUpScreenProfile> {
                             fit: BoxFit.cover,
                             image: (image == null)
                                 ? Image.asset(
-                                        'assets/images/default_profile.png')
-                                    .image
+                                    'assets/images/default_profile.png',
+                                  ).image
                                 : Image.memory(image!).image,
                           ),
                         ),

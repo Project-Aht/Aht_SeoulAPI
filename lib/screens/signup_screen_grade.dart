@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:aht_dimigo/screens/signup_screen_result.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -162,7 +163,13 @@ class _SignUpScreenGradeState extends State<SignUpScreenGrade> {
                       schoolClass: schoolClass!,
                     );
                     if (signupCompleted) {
-                      Get.offAll(() => const MainScreen());
+                      Get.offAll(
+                        () => SignUpScreenResult(
+                          school: widget.school,
+                          schoolGrade: schoolGrade!,
+                          schoolClass: schoolClass!,
+                        ),
+                      );
                     } else {
                       Get.snackbar(
                         '',
