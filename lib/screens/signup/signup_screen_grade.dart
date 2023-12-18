@@ -1,14 +1,13 @@
 import 'dart:typed_data';
-import 'package:aht_dimigo/screens/signup_screen_result.dart';
+import 'package:aht_dimigo/screens/signup/signup_screen_result.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../firebase/auth.dart';
-import '../themes/color_theme.dart';
-import '../themes/text_theme.dart';
-import '../widgets/custom_dropdown.dart';
-import '../widgets/custom_text.dart';
-import 'main_screen.dart';
+import '../../firebase/auth.dart';
+import '../../themes/color_theme.dart';
+import '../../themes/text_theme.dart';
+import '../../widgets/custom_dropdown.dart';
+import '../../widgets/custom_text.dart';
 
 class SignUpScreenGrade extends StatefulWidget {
   final String email, pw, school;
