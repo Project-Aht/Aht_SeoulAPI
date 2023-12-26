@@ -1,10 +1,12 @@
 import 'dart:typed_data';
 
+import 'package:aht_dimigo/firebase/exam.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../themes/color_theme.dart';
 import '../../themes/text_theme.dart';
+import '../../firebase/instance.dart';
 import '../../widgets/custom_text.dart';
 import '../main_screen.dart';
 
@@ -88,6 +90,9 @@ class _SignUpScreenResultState extends State<SignUpScreenResult> {
             ),
             GestureDetector(
               onTap: () async {
+                await Get.find<Instance>().getUserInfo();
+                await initExam();
+                Get.find<Instance>().getExams();
                 Get.offAll(() => const MainScreen());
               },
               child: Column(

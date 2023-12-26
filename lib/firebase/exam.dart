@@ -5,16 +5,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'instance.dart';
 
-final Instance _instance = Get.find<Instance>();
-final FirebaseFirestore _firestore = _instance.firestore;
-Map<String, dynamic>? userInfo = _instance.userInfo;
-List<Exam> exams = _instance.exams;
-CollectionReference<Map<String, dynamic>> collection = _firestore
-    .collection('school')
-    .doc(userInfo?['school']['name'])
-    .collection('${userInfo?['school']['grade']}')
-    .doc('${userInfo?['school']['class']}')
-    .collection('exam');
+bool init = false;
+
+Future<void> initExam() async {
+  _instance = Get.find<Instance>();
+  _firestore = _instance.firestore;
+  userInfo = _instance.userInfo;
+  exams = _instance.exams;
+  collection = _firestore
+      .collection('school')
+      .doc(userInfo['school']['name'])
+      .collection('${userInfo['school']['grade']}')
+      .doc('${userInfo['school']['class']}')
+      .collection('exam');
+}
+
+late Instance _instance;
+late FirebaseFirestore _firestore;
+late Map<String, dynamic> userInfo;
+late List<Exam> exams;
+late CollectionReference<Map<String, dynamic>> collection;
 
 class Exam {
   List<DateTime> dates;
@@ -44,6 +54,9 @@ class Exam {
     required int score,
     required List<Uint8List> bytes,
   }) async {
+    if (init == false) {
+      throw Exception("exam is not initialized.");
+    }
     bool docExist = await Exam.get(title) != null;
     bool imageUpload = await Storage.uploadExamImages(title, bytes);
     if (!docExist && imageUpload) {
@@ -80,6 +93,9 @@ class Exam {
     int? newScore,
     List<Uint8List>? newImages,
   }) async {
+    if (init == false) {
+      throw Exception("exam is not initialized.");
+    }
     try {
       if (newImages != null) {
         bool imageUpload = await Storage.uploadExamImages(title, newImages);
@@ -102,9 +118,12 @@ class Exam {
   }
 
   static Future<Exam?> get(String title) async {
+    if (init == false) {
+      throw Exception("exam is not initialized.");
+    }
     try {
       Map<String, dynamic> data = (await collection.doc(title).get()).data()!;
-      List<Uint8List> bytes = (await Storage.getExamImages(title))!;
+      List<Uint8List> bytes = await Storage.getExamImages(title);
       return Exam(
         title: title,
         subject: data['subject'],
@@ -121,12 +140,18 @@ class Exam {
   }
 
   static Future<List<Exam>?> getAll() async {
+    if (init == false) {
+      throw Exception("exam is not initialized.");
+    }
     List<Exam> docs = [];
     try {
+      Map<String, dynamic> data;
+      List<Uint8List> bytes;
+      List<DateTime> dates;
       for (var doc in (await collection.get()).docs) {
-        Map<String, dynamic> data = doc.data();
-        List<Uint8List> bytes = (await Storage.getExamImages(doc.id)) ?? [];
-        List<DateTime> dates = List.generate(
+        data = doc.data();
+        bytes = await Storage.getExamImages(doc.id);
+        dates = List.generate(
           data['dates'].length,
           (i) => DateTime.parse(
             data['dates'][i].toDate().toString(),
@@ -158,6 +183,9 @@ class Exam {
   }
 
   static Future<List<String>> getSubjects() async {
+    if (init == false) {
+      throw Exception("exam is not initialized.");
+    }
     try {
       List data = (await collection.parent!.get()).data()!['subject'];
       List<String> subjects = data.cast();
@@ -173,6 +201,9 @@ class Exam {
   }
 
   static Future<bool> setSubject(subject) async {
+    if (init == false) {
+      throw Exception("exam is not initialized.");
+    }
     try {
       List<String> subjects = await getSubjects();
       if (subjects.isEmpty) {
@@ -191,6 +222,9 @@ class Exam {
   }
 
   Future<bool> remove() async {
+    if (init == false) {
+      throw Exception("exam is not initialized.");
+    }
     try {
       Storage.removeExamImages(title);
       collection.doc(title).delete();

@@ -33,7 +33,7 @@ abstract class AhtTextTheme {
   );
   static const ButtonText = TextStyle(
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w700,
     height: 1.25,
@@ -57,7 +57,6 @@ abstract class AhtTextTheme {
     fontSize: 18,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w700,
-    height: 0,
   );
   static const LoginHintText = TextStyle(
     color: Color(0xFFD9D9D9),
@@ -66,27 +65,18 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w500,
   );
   static const CheckBoxText = TextStyle(
-    color: Color(0xFFD9D9D9),
-    fontSize: 12,
-    fontFamily: 'Pretendard',
-    fontWeight: FontWeight.w600,
-    height: 0,
-    decorationThickness: 4,
-    decoration: TextDecoration.none,
-  );
-  static const CheckBoxHighlight = TextStyle(
     color: Colors.black,
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'Pretendard',
-    fontWeight: FontWeight.w600,
-    height: 0,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.14,
   );
   static const LogoText = TextStyle(
     color: Color(0xFF38498E),
     fontSize: 64,
     fontFamily: 'Righteous',
     fontWeight: FontWeight.w400,
-    height: 0,
+    letterSpacing: -1.6,
   );
   static const SignUpHeadline = TextStyle(
     color: Colors.black,

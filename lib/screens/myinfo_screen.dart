@@ -19,7 +19,7 @@ class MyinfoScreen extends StatefulWidget {
 }
 
 class _MyinfoScreenState extends State<MyinfoScreen> {
-  Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo ?? {};
+  Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo;
   bool loading = false;
 
   @override
@@ -116,7 +116,7 @@ class _MyinfoScreenState extends State<MyinfoScreen> {
                             });
                             await Storage.uploadProfile(image);
                             setState(() {
-                              _userInfo = Get.find<Instance>().userInfo!;
+                              _userInfo = Get.find<Instance>().userInfo;
                               loading = false;
                             });
                           }

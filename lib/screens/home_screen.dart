@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Map<String, dynamic> _userInfo = _instance.userInfo ?? {};
+  Map<String, dynamic> _userInfo = _instance.userInfo;
   List<Exam> exams = _instance.exams;
   List<String> subjectList = [];
   String? selected;
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _userInfo = _instance.userInfo ?? {};
+    _userInfo = _instance.userInfo;
     exams = _instance.exams;
     subjectList = _instance.subjects;
     searchExam(selected);

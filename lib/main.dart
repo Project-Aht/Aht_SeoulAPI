@@ -1,4 +1,5 @@
 import 'package:aht_dimigo/firebase/auth.dart';
+import 'package:aht_dimigo/firebase/exam.dart';
 import 'package:aht_dimigo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,6 +57,7 @@ class _MainAppState extends State<MainApp> {
     );
     if (loginCompleted!) {
       await Get.find<Instance>().getUserInfo();
+      await initExam();
       Get.find<Instance>().getExams();
     } else {
       await prefs.remove('email');
