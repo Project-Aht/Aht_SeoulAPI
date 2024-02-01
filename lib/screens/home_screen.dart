@@ -44,10 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _instance = Get.find<Instance>();
     _userInfo = _instance.userInfo;
     exams = _instance.exams;
     subjectList = _instance.subjects;
-    searchExam(selected);
+    searchExam(null);
   }
 
   @override
