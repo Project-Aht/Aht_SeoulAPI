@@ -10,6 +10,7 @@ class Instance extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
   late Map<String, dynamic> userInfo;
+  bool examInit = false;
   List<Exam> exams = [];
   List<String> subjects = [];
 

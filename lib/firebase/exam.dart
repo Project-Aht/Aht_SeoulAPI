@@ -5,8 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'instance.dart';
 
-bool init = false;
-
 Future<void> initExam() async {
   _instance = Get.find<Instance>();
   _firestore = _instance.firestore;
@@ -18,6 +16,7 @@ Future<void> initExam() async {
       .collection('${userInfo['school']['grade']}')
       .doc('${userInfo['school']['class']}')
       .collection('exam');
+  _instance.examInit = true;
 }
 
 late Instance _instance;
@@ -54,7 +53,7 @@ class Exam {
     required int score,
     required List<Uint8List> bytes,
   }) async {
-    if (init == false) {
+    if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
     bool docExist = await Exam.get(title) != null;
@@ -69,7 +68,6 @@ class Exam {
           'score': score,
         },
       );
-      _instance.getUserInfo();
       Exam exam = Exam(
         title: title,
         subject: subject,
@@ -80,6 +78,7 @@ class Exam {
         images: bytes,
       );
       exams.add(exam);
+      _instance.update();
       return exam;
     }
     return null;
@@ -93,7 +92,7 @@ class Exam {
     int? newScore,
     List<Uint8List>? newImages,
   }) async {
-    if (init == false) {
+    if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
     try {
@@ -110,6 +109,12 @@ class Exam {
           'memo': newMemo ?? memo,
         },
       );
+      subject = newSubject ?? subject;
+      range = newRange ?? range;
+      dates = newDates ?? dates;
+      score = newScore ?? score;
+      memo = newMemo ?? memo;
+      _instance.update();
       return true;
     } catch (e) {
       print(e);
@@ -118,7 +123,7 @@ class Exam {
   }
 
   static Future<Exam?> get(String title) async {
-    if (init == false) {
+    if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
     try {
@@ -140,7 +145,7 @@ class Exam {
   }
 
   static Future<List<Exam>?> getAll() async {
-    if (init == false) {
+    if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
     List<Exam> docs = [];
@@ -167,7 +172,7 @@ class Exam {
               title: doc.id,
               subject: data['subject'],
               range: data['range'],
-              dates: data['dates'],
+              dates: dates,
               memo: data['memo'],
               score: data['score'],
               images: bytes,
@@ -183,7 +188,7 @@ class Exam {
   }
 
   static Future<List<String>> getSubjects() async {
-    if (init == false) {
+    if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
     try {
@@ -201,7 +206,7 @@ class Exam {
   }
 
   static Future<bool> setSubject(subject) async {
-    if (init == false) {
+    if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
     try {
@@ -222,13 +227,15 @@ class Exam {
   }
 
   Future<bool> remove() async {
-    if (init == false) {
+    if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
     try {
       Storage.removeExamImages(title);
       collection.doc(title).delete();
       exams.remove(this);
+
+      _instance.update();
       return true;
     } catch (e) {
       print(e);
