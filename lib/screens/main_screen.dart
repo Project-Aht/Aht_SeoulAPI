@@ -81,7 +81,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   size: screenWidth / 390 * 26,
                 ),
                 text: '캘린더',
-                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 6.5),
+                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 1.5),
               ),
               Tab(
                 icon: Icon(
@@ -89,7 +89,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   size: screenWidth / 390 * 26,
                 ),
                 text: '홈',
-                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 6.5),
+                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 1.5),
               ),
               Tab(
                 icon: Icon(
@@ -97,9 +97,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
                   size: screenWidth / 390 * 26,
                 ),
                 text: '메뉴',
-                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 6.5),
+                iconMargin: EdgeInsets.only(bottom: screenHeight / 844 * 1.5),
               ),
             ],
+            overlayColor: const MaterialStatePropertyAll(Colors.white),
             indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: AhtColors.Main_Color,
             indicatorWeight: 1,

@@ -80,17 +80,17 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Container(
               width: screenWidth,
-              height: screenHeight / 844 * 132,
+              height: screenHeight / 844 * 144,
               decoration: const BoxDecoration(
                 color: AhtColors.Main_Color,
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(39),
-                  bottomRight: Radius.circular(30),
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),
                 ),
               ),
               child: Column(
                 children: [
-                  SizedBox(height: screenHeight / 844 * 58),
+                  SizedBox(height: screenHeight / 844 * 70),
                   SizedBox(
                     height: screenHeight / 844 * 40,
                     width: screenWidth,
@@ -320,17 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(width: screenWidth / 390 * 32),
               ],
             ),
-            SizedBox(height: screenHeight / 844 * 16),
-            Container(
-              width: screenWidth,
-              height: screenHeight / 844 * 57,
-              decoration: ShapeDecoration(
-                color: const Color(0xFFD9D9D9),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(9)),
-              ),
-            ),
-            SizedBox(height: screenHeight / 844 * 20),
+            SizedBox(height: screenHeight / 844 * 22),
             Row(
               children: [
                 SizedBox(width: screenWidth / 390 * 16),
