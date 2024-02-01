@@ -82,7 +82,7 @@ class Storage {
     }
   }
 
-  static Future<List<Uint8List>?> getExamImages(String title) async {
+  static Future<List<Uint8List>> getExamImages(String title) async {
     try {
       initExamRoute();
       List<Reference> images = (await examImage.child(title).listAll()).items;
@@ -94,7 +94,7 @@ class Storage {
       return bytes;
     } catch (e) {
       print(e);
-      return null;
+      return [];
     }
   }
 

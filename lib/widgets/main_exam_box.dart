@@ -67,7 +67,7 @@ class MainExamBox extends StatelessWidget {
               SizedBox(width: screenwidth / 390 * 34),
               Column(
                 children: [
-                  SizedBox(height: screenheight / 844 * 28),
+                  SizedBox(height: screenheight / 844 * 22),
                   Container(
                     width: screenheight / 844 * 40,
                     height: screenheight / 844 * 40,
@@ -83,15 +83,14 @@ class MainExamBox extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: screenheight / 844 * 10),
-                  Text(
-                    exam.subject,
+                  SizedBox(height: screenheight / 844 * 15),
+                  CustomText(
+                    text: exam.subject,
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontFamily: 'Pretendard',
                       fontWeight: FontWeight.w700,
-                      height: 1.25,
                     ),
                   )
                 ],
@@ -99,7 +98,6 @@ class MainExamBox extends StatelessWidget {
               SizedBox(
                 width: screenwidth / 390 * 283,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
@@ -113,21 +111,19 @@ class MainExamBox extends StatelessWidget {
                             fontSize: 18,
                             fontFamily: 'Pretendard',
                             fontWeight: FontWeight.w700,
-                            height: 1.25,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: screenheight / 844 * 5),
+                    SizedBox(height: screenheight / 844 * 7),
                     CustomText(
-                      text: exam.memo,
+                      text: '범위 : ${exam.range}',
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        color: Color.fromARGB(255, 0, 0, 0),
+                        color: Color(0xFFA4A4A4),
                         fontSize: 14,
                         fontFamily: 'Pretendard',
                         fontWeight: FontWeight.w500,
-                        height: 1.25,
                       ),
                     ),
                     SizedBox(width: screenheight / 844 * 5),

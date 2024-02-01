@@ -2,10 +2,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../themes/color_theme.dart';
-import '../themes/text_theme.dart';
-import '../widgets/custom_text.dart';
-import '../functions/get_image.dart';
+import '../../themes/color_theme.dart';
+import '../../themes/text_theme.dart';
+import '../../widgets/custom_text.dart';
+import '../../functions/get_image.dart';
 import 'signup_screen_school.dart';
 
 class SignUpScreenProfile extends StatefulWidget {
@@ -81,8 +81,8 @@ class _SignUpScreenProfileState extends State<SignUpScreenProfile> {
                             fit: BoxFit.cover,
                             image: (image == null)
                                 ? Image.asset(
-                                        'assets/images/default_profile.png')
-                                    .image
+                                    'assets/images/default_profile.png',
+                                  ).image
                                 : Image.memory(image!).image,
                           ),
                         ),
@@ -129,6 +129,7 @@ class _SignUpScreenProfileState extends State<SignUpScreenProfile> {
                     pw: widget.pw,
                     image: image,
                   ),
+                  duration: Duration.zero,
                 );
               },
               child: Column(

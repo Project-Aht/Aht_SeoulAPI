@@ -93,10 +93,7 @@ class Auth {
     final prefs = await SharedPreferences.getInstance();
     try {
       await Storage.removeProfile();
-      firestore
-          .collection('profile')
-          .doc(_instance.userInfo!['email'])
-          .delete();
+      firestore.collection('profile').doc(_instance.userInfo['email']).delete();
       await _firebaseAuth.currentUser?.delete();
       await _firebaseAuth.signOut();
       Get.find<Instance>().getUserInfo();

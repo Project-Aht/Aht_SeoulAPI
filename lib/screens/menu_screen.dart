@@ -2,7 +2,6 @@ import 'package:aht_dimigo/screens/myinfo_screen.dart';
 import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:aht_dimigo/widgets/custom_text.dart';
 import '../themes/color_theme.dart';
-import 'grade_calculator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aht_dimigo/firebase/auth.dart';
@@ -234,16 +233,4 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
     );
   }
-}
-
-void _GetToGradeCalculatorScreen() {
-  Get.to(() => const GradeCalclulatorScreen());
-}
-
-void _GetToDoneExamScreen() {
-  Get.to(() => const GradeCalclulatorScreen());
-}
-
-void _GetToEditInformationScreen() {
-  Get.to(() => const GradeCalclulatorScreen());
 }

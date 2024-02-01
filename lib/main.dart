@@ -1,4 +1,5 @@
 import 'package:aht_dimigo/firebase/auth.dart';
+import 'package:aht_dimigo/firebase/exam.dart';
 import 'package:aht_dimigo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,6 +57,7 @@ class _MainAppState extends State<MainApp> {
     );
     if (loginCompleted!) {
       await Get.find<Instance>().getUserInfo();
+      await initExam();
       Get.find<Instance>().getExams();
     } else {
       await prefs.remove('email');
@@ -74,18 +76,19 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        theme: ThemeData(
-          fontFamily: 'Pretendard',
-          colorScheme: const ColorScheme.light(
-            background: Colors.white,
-            brightness: Brightness.light,
-          ),
-          primaryColor: AhtColors.Main_Color,
+      theme: ThemeData(
+        fontFamily: 'Pretendard',
+        colorScheme: const ColorScheme.light(
+          background: Colors.white,
+          brightness: Brightness.light,
         ),
-        home: (_showSplashScreen || loginCompleted == null)
-            ? const Scaffold(body: SplashScreen()) //값 받을 때까지 대기
-            : (loginCompleted!)
-                ? const MainScreen() //자동 로그인 정보가 유효하면 메인 화면으로
-                : const LoginScreen());
+        primaryColor: AhtColors.Main_Color,
+      ),
+      home: (_showSplashScreen || loginCompleted == null)
+          ? const Scaffold(body: SplashScreen()) //값 받을 때까지 대기
+          : (loginCompleted!)
+              ? const MainScreen() //자동 로그인 정보가 유효하면 메인 화면으로
+              : const LoginScreen(),
+    );
   }
 }

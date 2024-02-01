@@ -33,7 +33,7 @@ abstract class AhtTextTheme {
   );
   static const ButtonText = TextStyle(
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w700,
     height: 1.25,
@@ -57,36 +57,26 @@ abstract class AhtTextTheme {
     fontSize: 18,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w700,
-    height: 0,
   );
   static const LoginHintText = TextStyle(
     color: Color(0xFFD9D9D9),
     fontSize: 14,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w500,
-    height: 0,
   );
   static const CheckBoxText = TextStyle(
-    color: Color(0xFFD9D9D9),
-    fontSize: 12,
-    fontFamily: 'Pretendard',
-    fontWeight: FontWeight.w600,
-    height: 0,
-    decorationThickness: 4,
-  );
-  static const CheckBoxHighlight = TextStyle(
     color: Colors.black,
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'Pretendard',
-    fontWeight: FontWeight.w600,
-    height: 0,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.14,
   );
   static const LogoText = TextStyle(
     color: Color(0xFF38498E),
     fontSize: 64,
     fontFamily: 'Righteous',
     fontWeight: FontWeight.w400,
-    height: 0,
+    letterSpacing: -1.6,
   );
   static const SignUpHeadline = TextStyle(
     color: Colors.black,
@@ -129,5 +119,56 @@ abstract class AhtTextTheme {
     fontSize: 14,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w400,
+  );
+  static const SignUpSchool = TextStyle(
+    color: Colors.black,
+    fontSize: 12,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 1.75,
+    letterSpacing: -0.32,
+  );
+  static const SignUpSchoolSearch = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w500,
+    height: 1.25,
+  );
+  static const SignUpSchoolAddress = TextStyle(
+    color: Color(0xFF8B8C8B),
+    fontSize: 10,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    height: 2.1,
+    letterSpacing: -0.32,
+  );
+  static const SignUpGradeTitle = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.24,
+  );
+  static const SignUpResult = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.08,
+  );
+  static const DropdownSelected = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.24,
+  );
+  static const DropdownElement = TextStyle(
+    color: Color(0xFF565656),
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w500,
+    letterSpacing: -0.21,
   );
 }

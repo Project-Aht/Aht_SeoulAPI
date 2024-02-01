@@ -9,24 +9,30 @@ class Instance extends GetxController {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
-  Map<String, dynamic>? userInfo;
+  late Map<String, dynamic> userInfo;
   List<Exam> exams = [];
+  List<String> subjects = [];
 
   Future<void> getUserInfo() async {
-    userInfo = (await firestore
-            .collection('profile')
-            .doc(firebaseAuth.currentUser?.email)
-            .get())
-        .data();
-    userInfo?['email'] = firebaseAuth.currentUser!.email;
+    try {
+      userInfo = (await firestore
+              .collection('profile')
+              .doc(firebaseAuth.currentUser?.email)
+              .get())
+          .data()!;
+    } catch (e) {
+      print('network arror');
+    }
+    userInfo['email'] = firebaseAuth.currentUser!.email;
     update();
-    userInfo?['image'] = await Storage.getProfile();
+    userInfo['image'] = await Storage.getProfile();
     update();
     return;
   }
 
   Future<void> getExams() async {
     exams = await Exam.getAll() ?? [];
+    subjects = await Exam.getSubjects();
     update();
   }
 }

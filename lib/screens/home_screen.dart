@@ -1,5 +1,6 @@
+import 'dart:math';
+
 import 'package:aht_dimigo/screens/register_exam_screen.dart';
-import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import '../firebase/exam.dart';
@@ -9,6 +10,8 @@ import 'package:aht_dimigo/widgets/subject_selection_box.dart';
 import 'package:aht_dimigo/widgets/main_exam_box.dart';
 import 'package:get/get.dart';
 
+Instance _instance = Get.find<Instance>();
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -17,41 +20,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Map<String, dynamic> _userInfo = Get.find<Instance>().userInfo ?? {};
-  List<Exam> exams = Get.find<Instance>().exams;
+  Map<String, dynamic> _userInfo = _instance.userInfo;
+  List<Exam> exams = _instance.exams;
   List<String> subjectList = [];
   String? selected;
   List<Exam> results = [];
   String newsubject = '';
 
   Future<void> searchExam(String? subject) async {
-    if (subject != null) {
-      results = [];
-      for (Exam exam in exams) {
-        if (exam.subject == subject) results.add(exam);
+    results = [];
+    for (Exam exam in exams) {
+      if (subject == exam.subject || subject == null) {
+        results.add(exam);
       }
-    } else {
-      results = List.from(exams);
     }
+
     results.sort(
       (a, b) => a.dates.last.compareTo(b.dates.last),
     );
     setState(() {});
   }
 
-  Future<void> getSubjects() async {
-    subjectList = await Exam.getSubjects();
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
-    _userInfo = Get.find<Instance>().userInfo ?? {};
-    exams = Get.find<Instance>().exams;
-    getSubjects();
+    _userInfo = _instance.userInfo;
+    exams = _instance.exams;
+    subjectList = _instance.subjects;
     searchExam(selected);
-    setState(() {});
   }
 
   @override
@@ -66,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 7,
         child: GestureDetector(
           onTap: () async {
-            Get.to(() => const RegisterExamScreen());
+            await Get.to(() => const RegisterExamScreen());
+            exams = _instance.exams;
+            setState(() {});
           },
           child: const Icon(Icons.add),
         ),
@@ -194,101 +192,140 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(width: screenWidth / 390 * 10),
                 GestureDetector(
                   onTap: () {
-                    Get.defaultDialog(
-                      barrierDismissible: true,
-                      title: '새로운 과목 추가',
-                      titleStyle: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontFamily: 'Pretendard',
-                        fontWeight: FontWeight.bold,
-                        height: 1.25,
-                      ),
-                      titlePadding: EdgeInsets.only(
-                        top: screenHeight / 844 * 33,
-                      ),
-                      content: SizedBox(
-                        width: screenWidth / 390 * 200,
-                        child: CustomTextField(
-                          maxLines: 1,
-                          textInputAction: TextInputAction.done,
-                          onChanged: (n) {
-                            setState(() {
-                              newsubject = n;
-                            });
-                          },
-                          keyboardType: TextInputType.text,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontFamily: 'Pretendard',
-                            fontWeight: FontWeight.w700,
-                            height: 0,
-                          ),
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                              top: 0,
-                              bottom: screenHeight / 844 * 8,
+                    Get.dialog(
+                      Dialog(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              screenWidth / 390 * 10,
                             ),
+                            color: Colors.white,
+                          ),
+                          padding: EdgeInsets.only(
+                            top: screenHeight / 844 * 33,
+                            bottom: screenHeight / 844 * 20,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const CustomText(
+                                text: '새로운 과목 추가',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: max(screenHeight / 844 * 69 - 48, 0),
+                              ),
+                              SizedBox(
+                                width: screenWidth / 390 * 200,
+                                child: CustomTextField(
+                                  maxLines: 1,
+                                  textInputAction: TextInputAction.done,
+                                  onChanged: (n) {
+                                    setState(() {
+                                      newsubject = n;
+                                    });
+                                  },
+                                  keyboardType: TextInputType.text,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w700,
+                                    height: 0,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.only(
+                                      top: 0,
+                                      bottom: screenHeight / 844 * 8,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenHeight / 844 * 26,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Container(
+                                      width: screenWidth / 390 * 84,
+                                      height: screenHeight / 844 * 35,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: const Color(0xFFDCDCDC),
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          screenWidth / 390 * 4,
+                                        ),
+                                      ),
+                                      child: const Center(
+                                        child: CustomText(
+                                          text: '취소',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontFamily: 'Pretendard',
+                                            fontWeight: FontWeight.w700,
+                                            height: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: screenWidth / 390 * 20,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      () async {
+                                        bool uploaded =
+                                            await Exam.setSubject(newsubject);
+                                        if (uploaded) {
+                                          await _instance.getExams();
+                                          subjectList = _instance.subjects;
+                                          setState(() {});
+                                          Get.back();
+                                        }
+                                      }();
+                                    },
+                                    child: Container(
+                                      width: screenWidth / 390 * 84,
+                                      height: screenHeight / 844 * 35,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          screenWidth / 390 * 4,
+                                        ),
+                                        color: AhtColors.Main_Color,
+                                      ),
+                                      child: const Center(
+                                        child: CustomText(
+                                          text: '추가',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontFamily: 'Pretendard',
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      contentPadding: EdgeInsets.only(
-                        bottom: screenHeight / 844 * 20,
-                      ),
-                      confirm: Container(
-                        width: screenWidth / 390 * 80,
-                        height: screenHeight / 844 * 35,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: TextButton(
-                          onPressed: () {
-                            //TODO : 여기 로직
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              AhtColors.Main_Color,
-                            ),
-                          ),
-                          child: const Text(
-                            '추가',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              height: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                      cancel: Container(
-                        width: screenWidth / 390 * 80,
-                        height: screenHeight / 844 * 35,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: TextButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF9B9B9F),
-                            ),
-                          ),
-                          child: const Text(
-                            '취소',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontFamily: 'Pretendard',
-                              fontWeight: FontWeight.w700,
-                              height: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                      backgroundColor: Colors.white, //TODO : 이거 색 왜 안바뀌지
                     );
                   },
                   child: Container(
