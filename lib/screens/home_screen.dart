@@ -152,13 +152,13 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: screenHeight / 844 * 16),
             Row(
               children: [
-                SizedBox(width: screenWidth / 390 * 32),
+                SizedBox(width: screenWidth / 390 * 28),
                 SizedBox(
                   height: screenHeight / 844 * 31,
                   child: Row(
                     children: [
                       SizedBox(
-                        width: screenWidth / 390 * 259,
+                        width: screenWidth / 390 * 283,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                SizedBox(width: screenWidth / 390 * 10),
+                SizedBox(width: screenWidth / 390 * 5),
                 GestureDetector(
                   onTap: () {
                     Get.dialog(
@@ -330,35 +330,30 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   child: Container(
-                    width: screenWidth / 390 * 57,
-                    height: screenHeight / 844 * 31,
-                    decoration: ShapeDecoration(
+                    width: screenWidth / 390 * 45,
+                    height: screenHeight / 844 * 25,
+                    decoration: const BoxDecoration(
                       color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                            width: 0.8, color: Color(0xFFC4C4C4)),
-                        borderRadius: BorderRadius.circular(19),
-                      ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: CustomText(
                         text: '+',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: const Color(0xFf898989).withOpacity(0.8),
                           fontSize: 20,
                           fontFamily: 'Pretendard',
                           fontWeight: FontWeight.w100,
-                          height: 1.25,
+                          height: 0.5,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(width: screenWidth / 390 * 32),
+                SizedBox(width: screenWidth / 390 * 28),
               ],
             ),
-            SizedBox(height: screenHeight / 844 * 22),
+            SizedBox(height: screenHeight / 844 * 12),
             Row(
               children: [
                 SizedBox(width: screenWidth / 390 * 16),

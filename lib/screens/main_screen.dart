@@ -102,7 +102,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             ],
             overlayColor: const MaterialStatePropertyAll(Colors.white),
             indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: AhtColors.Main_Color,
+            indicatorColor: Colors.white,
             indicatorWeight: 1,
             labelColor: AhtColors.Main_Color,
             unselectedLabelColor: const Color(0xFFB0B0B0),
