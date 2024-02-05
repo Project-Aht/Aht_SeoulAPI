@@ -48,15 +48,15 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
         children: [
           Container(
             width: screenWidth,
-            height: screenHeight / 844 * 110,
+            height: screenHeight / 844 * 124,
             decoration: const BoxDecoration(
-              color: AhtColors.Main_Color,
+              color: Colors.white,
             ),
             child: Column(
               children: [
-                SizedBox(height: screenHeight / 844 * 61),
+                SizedBox(height: screenHeight / 844 * 73),
                 SizedBox(
-                  height: screenHeight / 844 * 28,
+                  height: screenHeight / 844 * 40,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +71,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             child: const Icon(
                               Icons.arrow_back,
                               size: 28,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                         ],
@@ -92,6 +92,13 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
             ),
           ),
           Container(
+            width: screenWidth / 390 * 358,
+            height: screenHeight / 844 * 2,
+            decoration: const BoxDecoration(
+              color: Colors.black,
+            ),
+          ),
+          Container(
             color: Colors.white,
             child: Padding(
               padding: EdgeInsets.only(
@@ -103,7 +110,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: screenHeight / 844 * 637,
+                    height: screenHeight / 844 * 600,
                     width: screenWidth / 390 * 358,
                     child: SingleChildScrollView(
                       child: Column(
@@ -606,6 +613,9 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
           ),
           Column(
             children: [
+              SizedBox(
+                height: screenHeight / 844 * 15,
+              ),
               GestureDetector(
                 onTap: () async {
                   if (title.isEmpty) {
@@ -650,7 +660,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                 ),
               ),
               SizedBox(
-                height: screenHeight / 844 * 18,
+                height: screenHeight / 844 * 23,
               ),
             ],
           )

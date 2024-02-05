@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 abstract class AhtTextTheme {
   static const TopMenuBar = TextStyle(
-    color: Colors.white,
+    color: Colors.black,
     fontSize: 20,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w700,
