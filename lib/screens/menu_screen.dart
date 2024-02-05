@@ -1,3 +1,4 @@
+import 'package:aht_dimigo/screens/grade_calculator_screen.dart';
 import 'package:aht_dimigo/screens/myinfo_screen.dart';
 import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:aht_dimigo/widgets/custom_text.dart';
@@ -85,7 +86,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       SizedBox(height: screenHeight / 844 * 18),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const MyinfoScreen());
+                          Get.to(() => const GradeCalclulatorScreen());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

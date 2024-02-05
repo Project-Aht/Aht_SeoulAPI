@@ -77,55 +77,53 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
         children: [
           Container(
             width: screenWidth,
-            height: screenHeight / 844 * 122,
+            height: screenHeight / 844 * 124,
             decoration: const BoxDecoration(
-              color: AhtColors.Main_Color,
+              color: Colors.white,
             ),
             child: Column(
               children: [
-                SizedBox(height: screenHeight / 844 * 70),
+                SizedBox(height: screenHeight / 844 * 73),
                 SizedBox(
-                  height: screenHeight / 844 * 28,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  height: screenHeight / 844 * 40,
+                  width: screenWidth,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(width: screenWidth / 390 * 16),
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: const Icon(
-                          Icons.arrow_back,
-                          size: 28,
-                          color: Colors.white,
+                      Text(
+                        '등급계산기',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w700,
+                          height: 1.4,
                         ),
-                      ),
-                      SizedBox(width: screenWidth / 390 * 108),
-                      const CustomText(
-                        text: '등급계산기',
-                        style: AhtTextTheme.TopMenuBar,
-                      ),
+                      )
                     ],
                   ),
                 ),
               ],
             ),
           ),
+          Container(
+            width: screenWidth / 390 * 358,
+            height: screenHeight / 844 * 2,
+            decoration: const BoxDecoration(
+              color: Colors.black,
+            ),
+          ),
           SizedBox(
-            height: 76 / 844 * screenHeight,
+            height: 48 / 844 * screenHeight,
           ),
           Container(
-            width: 105 / 844 * screenHeight,
-            height: 105 / 844 * screenHeight,
-            decoration: const ShapeDecoration(
-              color: Color(0x2638498E),
-              shape: OvalBorder(),
-            ),
-            child: Center(
-              child: CustomText(
-                text: '$meanGradeCut',
-              ),
-            ),
+            width: 150 / 844 * screenHeight,
+            height: 150 / 844 * screenHeight,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage('assets/images/trophy.png'),
+              fit: BoxFit.cover,
+            )),
           ),
           SizedBox(
             height: 26 / 844 * screenHeight,

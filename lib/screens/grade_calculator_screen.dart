@@ -32,47 +32,53 @@ class _GradeCalclulatorScreenState extends State<GradeCalclulatorScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            width: screenWidth,
-            height: screenHeight / 844 * 110,
-            decoration: const BoxDecoration(
-              color: AhtColors.Main_Color,
-            ),
-            child: Column(
-              children: [
-                SizedBox(height: screenHeight / 844 * 61),
-                SizedBox(
-                  height: screenHeight / 844 * 28,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: screenWidth / 390 * 16),
-                      InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: const Icon(
-                          Icons.arrow_back,
-                          size: 28,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(width: screenWidth / 390 * 108),
-                      const CustomText(
-                        text: '등급계산기',
-                        style: AhtTextTheme.TopMenuBar,
-                      ),
-                    ],
-                  ),
+          Column(
+            children: [
+              Container(
+                width: screenWidth,
+                height: screenHeight / 844 * 124,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
                 ),
-              ],
-            ),
+                child: Column(
+                  children: [
+                    SizedBox(height: screenHeight / 844 * 73),
+                    SizedBox(
+                      height: screenHeight / 844 * 40,
+                      width: screenWidth,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '등급계산기',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontFamily: 'Pretendard',
+                              fontWeight: FontWeight.w700,
+                              height: 1.4,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: screenWidth / 390 * 358,
+                height: screenHeight / 844 * 2,
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: screenHeight / 844 * 48,
-              left: screenWidth / 390 * 16,
-              right: screenWidth / 390 * 16,
+              top: screenHeight / 844 * 29,
+              left: screenWidth / 390 * 24,
+              right: screenWidth / 390 * 24,
             ),
             child: SizedBox(
               height: screenHeight / 844 * 686,
