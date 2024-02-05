@@ -34,13 +34,13 @@ class _MenuScreenState extends State<MenuScreen> {
               children: [
                 Container(
                   width: screenWidth,
-                  height: screenHeight / 844 * 110,
+                  height: screenHeight / 844 * 124,
                   decoration: const BoxDecoration(
-                    color: AhtColors.Main_Color,
+                    color: Colors.white,
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: screenHeight / 844 * 58),
+                      SizedBox(height: screenHeight / 844 * 73),
                       SizedBox(
                         height: screenHeight / 844 * 40,
                         width: screenWidth,
@@ -50,7 +50,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             Text(
                               '메뉴',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 20,
                                 fontFamily: 'Pretendard',
                                 fontWeight: FontWeight.w700,
@@ -61,6 +61,13 @@ class _MenuScreenState extends State<MenuScreen> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+                Container(
+                  width: screenWidth / 390 * 358,
+                  height: screenHeight / 844 * 2,
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
                   ),
                 ),
                 Padding(
@@ -74,7 +81,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const CustomText(
-                          text: '회원정보', style: AhtTextTheme.MenuFontMain),
+                          text: '유용한 기능', style: AhtTextTheme.MenuFontMain),
                       SizedBox(height: screenHeight / 844 * 18),
                       GestureDetector(
                         onTap: () {
@@ -84,7 +91,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const CustomText(
-                                text: '회원정보 확인',
+                                text: '등급 계산기',
                                 style: AhtTextTheme.MenuFontSub),
                             Icon(
                               Icons.arrow_forward_ios_rounded,
@@ -177,7 +184,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const CustomText(
-                                text: '로그아웃',
+                                text: '과목 삭제',
                                 style: AhtTextTheme.MenuFontSubHighlight),
                             Icon(
                               Icons.arrow_forward_ios_rounded,

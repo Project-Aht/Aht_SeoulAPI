@@ -44,7 +44,6 @@ flutter:
       fonts:
         - asset: fonts/Righteous/Righteous_400.ttf
           weight: 400
-
     - family: Pretendard
       fonts:
         - asset: fonts/Pretendard/Pretendard-Black.ttf

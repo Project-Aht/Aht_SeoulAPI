@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
         width: screenWidth,
         height: screenHeight,
         decoration: const BoxDecoration(
-          color: AhtColors.Highlight_Color,
+          color: AhtColors.Main_Color,
         ),
         child: Container(
           width: screenWidth,

@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                           padding: EdgeInsets.only(
-                            top: screenHeight / 844 * 33,
+                            top: screenHeight / 844 * 24,
                             bottom: screenHeight / 844 * 20,
                           ),
                           child: Column(
@@ -218,9 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(
-                                height: max(screenHeight / 844 * 69 - 48, 0),
-                              ),
+                              SizedBox(height: screenHeight / 844 * 4),
                               SizedBox(
                                 width: screenWidth / 390 * 200,
                                 child: CustomTextField(
@@ -240,6 +238,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 0,
                                   ),
                                   decoration: InputDecoration(
+                                    hintText: '최대 3글자',
+                                    hintStyle: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black.withOpacity(0.3),
+                                    ),
                                     contentPadding: EdgeInsets.only(
                                       top: 0,
                                       bottom: screenHeight / 844 * 8,
@@ -248,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: screenHeight / 844 * 26,
+                                height: screenHeight / 844 * 20,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
