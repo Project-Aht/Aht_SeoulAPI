@@ -21,6 +21,7 @@ dependencies:
   intl:
   image_picker:
   http:
+  flutter_inappwebview:
   flutter:
     sdk: flutter
   cell_calendar:

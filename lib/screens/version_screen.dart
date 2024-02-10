@@ -10,14 +10,14 @@ import 'login_screen.dart';
 import 'privacy_screen.dart';
 import 'version_screen.dart';
 
-class MenuScreen extends StatefulWidget {
-  const MenuScreen({super.key});
+class VersionScreen extends StatefulWidget {
+  const VersionScreen({super.key});
 
   @override
-  State<MenuScreen> createState() => _MenuScreenState();
+  State<VersionScreen> createState() => _VersionScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class _VersionScreenState extends State<VersionScreen> {
   bool loading = false;
 
   @override
@@ -130,7 +130,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       SizedBox(height: screenHeight / 844 * 18),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => VersionScreen());
+                          Get.to(() => const VersionScreen());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
