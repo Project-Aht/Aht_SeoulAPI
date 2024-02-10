@@ -77,7 +77,7 @@ class Exam {
         score: score,
         images: bytes,
       );
-      exams.add(exam);
+      _instance.exams.add(exam);
       _instance.update();
       return exam;
     }

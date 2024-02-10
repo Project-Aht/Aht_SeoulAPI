@@ -64,8 +64,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: GestureDetector(
           onTap: () async {
             await Get.to(() => const RegisterExamScreen());
-            exams = _instance.exams;
-            setState(() {});
+            setState(() {
+              exams = _instance.exams;
+              searchExam(selected);
+            });
           },
           child: const Icon(Icons.add),
         ),

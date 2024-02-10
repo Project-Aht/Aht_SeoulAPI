@@ -19,7 +19,7 @@ class RegisterExamScreen extends StatefulWidget {
 
 class _RegisterExamScreenState extends State<RegisterExamScreen> {
   TextEditingController val1 = TextEditingController();
-  bool subjectadding = false;
+  bool subjectOpen = false;
   bool dateadding = false;
   late int changingratio;
   String title = '';
@@ -146,10 +146,9 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                   hintText: '수행평가 이름',
                                   hintStyle: AhtTextTheme.TextfieldHintText,
                                 ),
-                                onSubmitted: (changingtitle) {
+                                onChanged: (changingtitle) {
                                   setState(() {
                                     title = changingtitle;
-                                    dateadding = false;
                                   });
                                 },
                               ),
@@ -164,10 +163,10 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                if (subjectadding) {
-                                  subjectadding = false;
+                                if (subjectOpen) {
+                                  subjectOpen = false;
                                 } else {
-                                  subjectadding = true;
+                                  subjectOpen = true;
                                 }
                               });
                             },
@@ -199,7 +198,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                   ),
                                   Row(
                                     children: [
-                                      subjectadding
+                                      subjectOpen
                                           ? Transform.rotate(
                                               angle: 3.14 / 2,
                                               child: Icon(
@@ -221,7 +220,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                             ),
                           ),
                           SizedBox(height: screenHeight / 844 * 6),
-                          subjectadding
+                          subjectOpen
                               ? ListView.separated(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
@@ -234,6 +233,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                       onTap: () {
                                         setState(() {
                                           subject = subjects[index];
+                                          subjectOpen = false;
                                         });
                                       },
                                       child: Container(
@@ -325,7 +325,7 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                                       .SubjectCardHighlight,
                                                 ),
                                               ],
-                                            )
+                                            ),
                                     ],
                                   ),
                                   Row(

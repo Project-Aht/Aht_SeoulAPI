@@ -64,7 +64,9 @@ class Storage {
   }
 
   static Future<bool> uploadExamImages(
-      String title, List<Uint8List> bytes) async {
+    String title,
+    List<Uint8List> bytes,
+  ) async {
     try {
       initExamRoute();
       for (int i = 0; i < bytes.length; i++) {
@@ -101,7 +103,9 @@ class Storage {
   static Future<bool> removeExamImages(String title) async {
     try {
       initExamRoute();
-      await examImage.child(title).delete();
+      for (Reference item in (await examImage.child(title).listAll()).items) {
+        await item.delete();
+      }
       return true;
     } catch (e) {
       print(e);
