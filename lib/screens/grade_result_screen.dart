@@ -21,6 +21,7 @@ class GradeResultScreen extends StatefulWidget {
 class _GradeResultScreenState extends State<GradeResultScreen> {
   String username = '';
   Map<String, double> result = {};
+  List<String> justranks = [];
   double meanGrade = 0;
   double meanGradeCut = 0; // 소수 첫재짜리 반올림
 
@@ -58,9 +59,11 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
         justrank = 9;
       }
       result[name] = justrank;
+      justranks.add(justrank.toString());
       credits += sub['credit'];
       meanGrade += justrank * sub['credit'];
       print(result[name]);
+      print(justranks[i]);
     }
     meanGrade /= credits;
     meanGradeCut = double.parse(meanGrade.toStringAsFixed(1));
@@ -133,20 +136,88 @@ class _GradeResultScreenState extends State<GradeResultScreen> {
             style: AhtTextTheme.GradeResultMean,
             textAlign: TextAlign.center,
           ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: screenWidth / 390 * 16,
-              ),
-              child: ListView.separated(
-                itemCount: subjectList.length,
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 10,
+          SizedBox(height: screenHeight / 844 * 34),
+          SizedBox(
+            height: screenHeight / 844 * 327,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: screenWidth / 390 * 135,
+                  height: result.length * 26 + (result.length - 1) * 7,
+                  child: ListView.separated(
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: widget.subjectList.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: screenHeight / 844 * 7,
+                      ); // 각 항목 사이에 SizedBox 추가
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: screenHeight / 844 * 26,
+                        child: CustomText(
+                          text: widget.subjectList[index]['name'],
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                itemBuilder: (context, index) => CustomText(
-                  text: '${subjectList[index]}',
+                SizedBox(width: screenWidth / 390 * 17),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    //SizedBox(height: screenHeight / 844 * 7),
+                    Container(
+                      width: screenWidth / 390 * 2,
+                      height: result.length * 26 + (result.length - 1) * 7,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: Color(0xFFD9D9D9),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+                SizedBox(width: screenWidth / 390 * 17),
+                SizedBox(
+                  width: screenWidth / 390 * 135,
+                  height: result.length * 26 + (result.length - 1) * 7,
+                  child: ListView.separated(
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: widget.subjectList.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: screenHeight / 844 * 7,
+                      ); // 각 항목 사이에 SizedBox 추가
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: screenHeight / 844 * 26,
+                        child: CustomText(
+                          text: '${justranks[index]} 등급',
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontFamily: 'Pretendard',
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
