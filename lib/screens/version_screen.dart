@@ -9,6 +9,7 @@ import 'package:aht_dimigo/firebase/auth.dart';
 import 'login_screen.dart';
 import 'privacy_screen.dart';
 import 'version_screen.dart';
+import 'package:aht_dimigo/static.dart';
 
 class VersionScreen extends StatefulWidget {
   const VersionScreen({super.key});
@@ -47,11 +48,22 @@ class _VersionScreenState extends State<VersionScreen> {
                       SizedBox(
                         height: screenHeight / 844 * 40,
                         width: screenWidth,
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: Row(
                           children: [
-                            Text(
-                              '메뉴',
+                            SizedBox(width: screenWidth / 390 * 16),
+                            GestureDetector(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: Icon(
+                                Icons.arrow_back_ios_rounded,
+                                color: Colors.black,
+                                size: screenHeight / 844 * 20,
+                              ),
+                            ),
+                            SizedBox(width: screenWidth / 390 * 12),
+                            const CustomText(
+                              text: '버전 정보',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
@@ -73,182 +85,24 @@ class _VersionScreenState extends State<VersionScreen> {
                     color: Colors.black,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: screenHeight / 844 * 29,
-                    right: screenWidth / 390 * 24,
-                    left: screenWidth / 390 * 24,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomText(
-                          text: '유용한 기능', style: AhtTextTheme.MenuFontMain),
-                      SizedBox(height: screenHeight / 844 * 18),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => const GradeCalclulatorScreen());
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const CustomText(
-                                text: '등급 계산기',
-                                style: AhtTextTheme.MenuFontSub),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: screenHeight / 844 * 17,
-                              color: const Color(0xFFA2A2A2),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const CustomText(
-                              text: '회원정보 수정', style: AhtTextTheme.MenuFontSub),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: screenHeight / 844 * 17,
-                            color: const Color(0xFFA2A2A2),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      Container(
-                        height: 1,
-                        width: screenWidth * 342 / 390,
-                        decoration:
-                            const BoxDecoration(color: Color(0xFFD9D9D9)),
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      const CustomText(
-                          text: '어플리케이션 정보', style: AhtTextTheme.MenuFontMain),
-                      SizedBox(height: screenHeight / 844 * 18),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => const VersionScreen());
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const CustomText(
-                                text: '버전', style: AhtTextTheme.MenuFontSub),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: screenHeight / 844 * 17,
-                              color: const Color(0xFFA2A2A2),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const CustomText(
-                              text: '고객센터', style: AhtTextTheme.MenuFontSub),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: screenHeight / 844 * 17,
-                            color: const Color(0xFFA2A2A2),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => const PrivacyScreen());
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const CustomText(
-                                text: '개인정보처리방침 및 법률정보',
-                                style: AhtTextTheme.MenuFontSub),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: screenHeight / 844 * 17,
-                              color: const Color(0xFFA2A2A2),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      Container(
-                        height: 1,
-                        width: screenWidth * 342 / 390,
-                        decoration:
-                            const BoxDecoration(color: Color(0xFFD9D9D9)),
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      const CustomText(
-                          text: '중요 정보', style: AhtTextTheme.MenuFontMain),
-                      SizedBox(height: screenHeight / 844 * 18),
-                      GestureDetector(
-                        onTap: () async {
-                          await Auth.signout();
-                          Get.to(() => const LoginScreen());
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const CustomText(
-                                text: '과목 삭제',
-                                style: AhtTextTheme.MenuFontSubHighlight),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: screenHeight / 844 * 17,
-                              color: const Color(0xFFA2A2A2),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const CustomText(
-                              text: '계정 탈퇴',
-                              style: AhtTextTheme.MenuFontSubHighlight),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: screenHeight / 844 * 17,
-                            color: const Color(0xFFA2A2A2),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      Container(
-                        height: 1,
-                        width: screenWidth * 342 / 390,
-                        decoration:
-                            const BoxDecoration(color: Color(0xFFD9D9D9)),
-                      ),
-                    ],
-                  ),
+                SizedBox(height: screenHeight / 844 * 300),
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                        text: 'V. ${AhtStatic.AppVersion}',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w700,
+                        )),
+                  ],
                 ),
               ],
             ),
           ),
-          if (loading)
-            GestureDetector(
-              onTap: () {},
-              onHorizontalDragStart: (details) {},
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
-                ),
-                child: const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              ),
-            ),
         ],
       ),
     );
