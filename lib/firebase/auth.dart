@@ -5,10 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'instance.dart';
 
-final _instance = Get.find<Instance>();
-final FirebaseAuth _firebaseAuth = _instance.firebaseAuth;
-final FirebaseFirestore firestore = _instance.firestore;
-
 class Auth {
   static Future<bool> signup({
     required String email,
@@ -17,8 +13,12 @@ class Auth {
     required int schoolGrade,
     required int schoolClass,
   }) async {
+    final Instance instance = Get.find<Instance>();
+    final FirebaseAuth firebaseAuth = instance.firebaseAuth;
+    final FirebaseFirestore firestore = instance.firestore;
+
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: pw);
 
       await firestore.collection('profile').doc(email).set({
@@ -53,10 +53,12 @@ class Auth {
     required bool autoLogin,
     required bool savingId,
   }) async {
+    final Instance instance = Get.find<Instance>();
+    final FirebaseAuth firebaseAuth = instance.firebaseAuth;
+
     final prefs = await SharedPreferences.getInstance();
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: pw);
+      await firebaseAuth.signInWithEmailAndPassword(email: email, password: pw);
       await Get.find<Instance>().getUserInfo();
       if (autoLogin) {
         prefs.setString('email', email);
@@ -76,9 +78,12 @@ class Auth {
   }
 
   static Future<bool> signout() async {
+    final Instance instance = Get.find<Instance>();
+    final FirebaseAuth firebaseAuth = instance.firebaseAuth;
     final prefs = await SharedPreferences.getInstance();
+
     try {
-      await _firebaseAuth.signOut();
+      await firebaseAuth.signOut();
       Get.find<Instance>().getUserInfo();
       prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
@@ -90,12 +95,16 @@ class Auth {
   }
 
   static Future<bool> quit() async {
+    final Instance instance = Get.find<Instance>();
+    final FirebaseAuth firebaseAuth = instance.firebaseAuth;
+    final FirebaseFirestore firestore = instance.firestore;
     final prefs = await SharedPreferences.getInstance();
+
     try {
       await Storage.removeProfile();
-      firestore.collection('profile').doc(_instance.userInfo['email']).delete();
-      await _firebaseAuth.currentUser?.delete();
-      await _firebaseAuth.signOut();
+      firestore.collection('profile').doc(instance.userInfo['email']).delete();
+      await firebaseAuth.currentUser?.delete();
+      await firebaseAuth.signOut();
       Get.find<Instance>().getUserInfo();
       prefs.remove('email');
       prefs.remove('pw');
