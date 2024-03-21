@@ -130,7 +130,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       SizedBox(height: screenHeight / 844 * 18),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => VersionScreen());
+                          Get.to(() => const VersionScreen());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -144,19 +144,6 @@ class _MenuScreenState extends State<MenuScreen> {
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(height: screenHeight / 844 * 22),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const CustomText(
-                              text: '고객센터', style: AhtTextTheme.MenuFontSub),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: screenHeight / 844 * 17,
-                            color: const Color(0xFFA2A2A2),
-                          ),
-                        ],
                       ),
                       SizedBox(height: screenHeight / 844 * 22),
                       GestureDetector(

@@ -56,20 +56,23 @@ class _VersionScreenState extends State<VersionScreen> {
                                 Get.back();
                               },
                               child: Icon(
-                                Icons.arrow_back_ios_rounded,
+                                Icons.arrow_back_rounded,
                                 color: Colors.black,
-                                size: screenHeight / 844 * 20,
+                                size: screenHeight / 844 * 32,
                               ),
                             ),
-                            SizedBox(width: screenWidth / 390 * 12),
-                            const CustomText(
-                              text: '버전 정보',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontFamily: 'Pretendard',
-                                fontWeight: FontWeight.w700,
-                                height: 1.4,
+                            SizedBox(width: screenWidth / 390 * 110),
+                            SizedBox(
+                              width: screenWidth / 390 * 74,
+                              child: const CustomText(
+                                text: '버전 정보',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontFamily: 'Pretendard',
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.4,
+                                ),
                               ),
                             )
                           ],
