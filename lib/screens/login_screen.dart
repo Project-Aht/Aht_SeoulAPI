@@ -1,6 +1,8 @@
+import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../firebase/auth.dart';
 import '../firebase/exam.dart';
@@ -26,214 +28,88 @@ class _LoginScreenState extends State<LoginScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Column(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: screenHeight / 844 * 119,
-              ),
-              const CustomText(
-                text: 'Aht!',
-                style: AhtTextTheme.LogoText,
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 29,
-              ),
-              const CustomText(
-                text: '당신만을 위한\n수행평가 관리 어플리케이션.',
-                style: AhtTextTheme.LoginText,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: screenHeight / 844 * 92,
-              ),
-            ],
-          ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFFF6F6F6),
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(
-                    screenWidth / 390 * 30,
-                  ),
-                ),
-              ),
-              padding: EdgeInsets.only(
-                top: screenHeight / 844 * 32,
-                left: screenWidth / 390 * 32,
-                right: screenWidth / 390 * 32,
-              ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: screenWidth / 390 * 33),
+        child: Column(
+          children: [
+            SizedBox(
+              width: screenWidth / 390 * 326,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selected = 'login';
-                          });
-                        },
-                        child: Container(
-                          height: screenHeight / 844 * 44,
-                          decoration: BoxDecoration(
-                            color: (selected == 'login')
-                                ? AhtColors.Main_Color
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(
-                              screenHeight / 844 * 22,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth / 390 * 24,
-                          ),
-                          child: Center(
-                            child: CustomText(
-                              text: '로그인',
-                              style: TextStyle(
-                                color: (selected == 'login')
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Pretendard',
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 2,
-                        height: screenHeight / 844 * 24,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF7D7D7D),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selected = 'signup';
-                          });
-                        },
-                        child: Container(
-                          height: screenHeight / 844 * 44,
-                          decoration: BoxDecoration(
-                            color: (selected != 'login')
-                                ? AhtColors.Main_Color
-                                : Colors.transparent,
-                            borderRadius: BorderRadius.circular(
-                              screenHeight / 844 * 22,
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: screenWidth / 390 * 24,
-                          ),
-                          child: Center(
-                            child: CustomText(
-                              text: '회원가입',
-                              style: TextStyle(
-                                color: (selected != 'login')
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'Pretendard',
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    height: screenHeight / 844 * 131,
                   ),
-                  Expanded(
-                    child: (selected == 'login')
-                        ? const LoginTab()
-                        : const SignupTab(),
+                  Container(
+                    width: screenHeight / 844 * 76,
+                    height: screenHeight / 844 * 76,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/Applogo.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 15,
+                  ),
+                  const CustomText(
+                    text: '당신만을 위한\n수행평가 관리 어플리케이션.',
+                    style: AhtTextTheme.LoginText,
+                    textAlign: TextAlign.left,
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            SizedBox(height: screenHeight / 844 * 10),
+            const LoginTab(),
+            SizedBox(height: screenHeight / 844 * 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  child: const CustomText(
+                      text: '아이디 찾기', style: AhtTextTheme.LoginSmallText),
+                  onTap: () {
+                    Get.snackbar(
+                      '알림',
+                      '해당 기능은 개발중에 있습니다. 조금만 기다려주세요!',
+                      snackPosition: SnackPosition.BOTTOM,
+                      duration: const Duration(seconds: 2),
+                    );
+                  },
+                ),
+                SizedBox(width: screenWidth / 390 * 5),
+                const CustomText(text: '|', style: AhtTextTheme.LoginSmallText),
+                SizedBox(width: screenWidth / 390 * 5),
+                GestureDetector(
+                  onTap: () {
+                    Get.snackbar(
+                      '알림',
+                      '해당 기능은 개발중에 있습니다. 조금만 기다려주세요!',
+                      snackPosition: SnackPosition.BOTTOM,
+                      duration: const Duration(seconds: 2),
+                    );
+                  },
+                  child: const CustomText(
+                      text: '비밀번호 찾기', style: AhtTextTheme.LoginSmallText),
+                ),
+                SizedBox(width: screenWidth / 390 * 5),
+                const CustomText(text: '|', style: AhtTextTheme.LoginSmallText),
+                SizedBox(width: screenWidth / 390 * 5),
+                GestureDetector(
+                  onTap: () async {
+                    Get.to(() => const SignUpScreen());
+                  },
+                  child: const CustomText(
+                      text: '회원가입', style: AhtTextTheme.LoginSmallText),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-    );
-  }
-}
-
-class SignupTab extends StatelessWidget {
-  const SignupTab({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-
-    return Column(
-      children: [
-        SizedBox(
-          height: screenHeight / 844 * 48,
-        ),
-        GestureDetector(
-          onTap: () async {
-            Get.to(() => const SignUpScreen());
-          },
-          child: Container(
-            height: screenHeight / 844 * 52,
-            decoration: BoxDecoration(
-              color: AhtColors.Main_Color,
-              borderRadius: BorderRadius.circular(screenHeight / 844 * 10),
-            ),
-            child: const Center(
-              child: CustomText(
-                text: '이메일로 회원가입',
-                style: AhtTextTheme.ButtonText,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: screenHeight / 844 * 13,
-        ),
-        GestureDetector(
-          onTap: () async {},
-          child: Container(
-            height: screenHeight / 844 * 52,
-            decoration: BoxDecoration(
-              color: AhtColors.Main_Color,
-              borderRadius: BorderRadius.circular(screenHeight / 844 * 10),
-            ),
-            child: const Center(
-              child: CustomText(
-                text: '',
-                style: AhtTextTheme.ButtonText,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: screenHeight / 844 * 13,
-        ),
-        GestureDetector(
-          onTap: () async {},
-          child: Container(
-            height: screenHeight / 844 * 52,
-            decoration: BoxDecoration(
-              color: AhtColors.Main_Color,
-              borderRadius: BorderRadius.circular(screenHeight / 844 * 10),
-            ),
-            child: const Center(
-              child: CustomText(
-                text: '',
-                style: AhtTextTheme.ButtonText,
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -278,19 +154,16 @@ class _LoginTabState extends State<LoginTab> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        SizedBox(
-          height: screenHeight / 844 * 52,
-        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.account_circle_outlined,
-              size: 21.67,
-              color: Color(0xFFD7D7D7),
+              size: screenWidth / 390 * 26,
+              color: const Color(0xFFD7D7D7),
             ),
             SizedBox(
-              width: screenWidth / 390 * 12,
+              width: screenWidth / 390 * 8,
             ),
             Expanded(
               child: CustomTextField(
@@ -305,7 +178,7 @@ class _LoginTabState extends State<LoginTab> {
                 style: AhtTextTheme.LoginText,
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
-                  hintText: '이메일을 입력해 주세요.',
+                  hintText: '이메일',
                   hintStyle: AhtTextTheme.LoginHintText,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(vertical: 14),
@@ -324,13 +197,13 @@ class _LoginTabState extends State<LoginTab> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.lock_outline,
-              size: 21.67,
-              color: Color(0xFFD7D7D7),
+              size: screenWidth / 390 * 26,
+              color: const Color(0xFFD7D7D7),
             ),
             SizedBox(
-              width: screenWidth / 390 * 12,
+              width: screenWidth / 390 * 8,
             ),
             Expanded(
               child: CustomTextField(
@@ -344,7 +217,7 @@ class _LoginTabState extends State<LoginTab> {
                 style: AhtTextTheme.LoginText,
                 textInputAction: TextInputAction.done,
                 decoration: const InputDecoration(
-                  hintText: '비밀번호를 입력해 주세요.',
+                  hintText: '비밀번호',
                   hintStyle: AhtTextTheme.LoginHintText,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(vertical: 14),
@@ -358,7 +231,7 @@ class _LoginTabState extends State<LoginTab> {
           color: const Color(0xFFD7D7D7),
         ),
         SizedBox(
-          height: screenHeight / 844 * 32,
+          height: screenHeight / 844 * 16,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -380,9 +253,11 @@ class _LoginTabState extends State<LoginTab> {
             SizedBox(
               width: screenWidth / 390 * 8,
             ),
-            const CustomText(
+            CustomText(
               text: '아이디 저장',
-              style: AhtTextTheme.CheckBoxText,
+              style: (savingId)
+                  ? AhtTextTheme.CheckBoxTextChange
+                  : AhtTextTheme.CheckBoxText,
             ),
             SizedBox(
               width: screenWidth / 390 * 24,
@@ -404,15 +279,15 @@ class _LoginTabState extends State<LoginTab> {
             SizedBox(
               width: screenWidth / 390 * 8,
             ),
-            const CustomText(
+            CustomText(
               text: '자동 로그인',
-              style: AhtTextTheme.CheckBoxText,
+              style: (autoLogin)
+                  ? AhtTextTheme.CheckBoxTextChange
+                  : AhtTextTheme.CheckBoxText,
             ),
           ],
         ),
-        const Expanded(
-          child: SizedBox(),
-        ),
+        SizedBox(height: screenHeight / 844 * 20),
         GestureDetector(
           onTap: () async {
             if (email != null && pw != null) {
@@ -445,7 +320,103 @@ class _LoginTabState extends State<LoginTab> {
           ),
         ),
         SizedBox(
-          height: screenHeight / 844 * 44,
+          height: screenHeight / 844 * 20,
+        ),
+        Row(
+          children: [
+            Container(
+              width: screenWidth / 390 * 140,
+              height: screenHeight / 844 * 1,
+              decoration: const BoxDecoration(color: Color(0xFF474747)),
+            ),
+            SizedBox(width: screenWidth / 390 * 12),
+            const CustomText(
+              text: '또는',
+              style: AhtTextTheme.OrText,
+            ),
+            SizedBox(width: screenWidth / 390 * 12),
+            Container(
+              width: screenWidth / 390 * 140,
+              height: screenHeight / 844 * 1,
+              decoration: const BoxDecoration(color: Color(0xFF474747)),
+            ),
+          ],
+        ),
+        SizedBox(height: screenHeight / 844 * 20),
+        GestureDetector(
+          onTap: () {
+            Get.snackbar(
+              '알림',
+              '해당 기능은 개발중에 있습니다. 조금만 기다려주세요!',
+              snackPosition: SnackPosition.BOTTOM,
+              duration: const Duration(seconds: 2),
+            );
+          },
+          child: Container(
+            height: screenHeight / 844 * 52,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(screenHeight / 844 * 10),
+                border: Border.all(color: Colors.black, width: 0.5)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: screenHeight / 844 * 24,
+                  height: screenHeight / 844 * 24,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/logo_google.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(width: screenWidth / 390 * 10),
+                const CustomText(
+                  text: '구글로 로그인',
+                  style: AhtTextTheme.ButtonTextBlack,
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: screenHeight / 844 * 13),
+        GestureDetector(
+          onTap: () {
+            Get.snackbar(
+              '알림',
+              '해당 기능은 개발중에 있습니다. 조금만 기다려주세요!',
+              snackPosition: SnackPosition.BOTTOM,
+              duration: const Duration(seconds: 2),
+            );
+          },
+          child: Container(
+            height: screenHeight / 844 * 52,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(screenHeight / 844 * 10),
+                border: Border.all(color: Colors.black, width: 0.5)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: screenHeight / 844 * 24,
+                  height: screenHeight / 844 * 24,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/logo_facebook.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(width: screenWidth / 390 * 10),
+                const CustomText(
+                  text: '페이스북으로 로그인',
+                  style: AhtTextTheme.ButtonTextBlack,
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

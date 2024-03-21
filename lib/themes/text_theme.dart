@@ -38,6 +38,20 @@ abstract class AhtTextTheme {
     fontWeight: FontWeight.w700,
     height: 1.25,
   );
+  static const ButtonTextBlack = TextStyle(
+    color: Colors.black,
+    fontSize: 16,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+    height: 1.25,
+  );
+  static const LoginSmallText = TextStyle(
+    color: Color(0xFF474747),
+    fontSize: 12,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+    height: 1.25,
+  );
   static const MiddleMenuText = TextStyle(
     color: Colors.black,
     fontSize: 16,
@@ -56,7 +70,9 @@ abstract class AhtTextTheme {
     color: Colors.black,
     fontSize: 18,
     fontFamily: 'Pretendard',
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w900,
+    height: 1.1,
+    letterSpacing: 0.0,
   );
   static const LoginHintText = TextStyle(
     color: Color(0xFFD9D9D9),
@@ -64,7 +80,20 @@ abstract class AhtTextTheme {
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w500,
   );
+  static const OrText = TextStyle(
+    color: Color(0xFF474747),
+    fontSize: 12,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w300,
+  );
   static const CheckBoxText = TextStyle(
+    color: Color(0xFFD7D7D7),
+    fontSize: 14,
+    fontFamily: 'Pretendard',
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.14,
+  );
+  static const CheckBoxTextChange = TextStyle(
     color: Colors.black,
     fontSize: 14,
     fontFamily: 'Pretendard',
