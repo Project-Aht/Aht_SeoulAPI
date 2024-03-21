@@ -95,7 +95,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                     },
                     child: Icon(
                       Icons.arrow_back,
-                      size: screenWidth / 390 * 21,
+                      size: screenWidth / 390 * 32,
                     ),
                   ),
                   SizedBox(
@@ -106,7 +106,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                     style: AhtTextTheme.SignUpHeadline,
                   ),
                   SizedBox(
-                    height: screenHeight / 844 * 16,
+                    height: screenHeight / 844 * 8,
                   ),
                   const CustomText(
                     text: '사용자님이 재학중인 학교를\n선택해주세요.',
@@ -151,7 +151,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                         child: GestureDetector(
                           child: Icon(
                             Icons.search,
-                            size: 18,
+                            size: screenWidth / 390 * 21,
                             color: (selected)
                                 ? Colors.black
                                 : const Color(0xFFCCCCCC),
@@ -173,7 +173,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, index) => Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth / 390 * 8,
+                          horizontal: screenWidth / 390 * 4,
                         ),
                         child: GestureDetector(
                           onTap: () {
@@ -187,9 +187,11 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                             });
                           },
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CustomText(
                                     text: results[index]['name']!,
@@ -201,16 +203,26 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                   ),
                                 ],
                               ),
-                              const Icon(
-                                Icons.outlined_flag_rounded,
-                                color: Color(0xFF8B8C8B),
+                              Column(
+                                children: [
+                                  Icon(
+                                    Icons.outlined_flag_rounded,
+                                    color: const Color(0xFF8B8C8B),
+                                    size: screenWidth / 390 * 24,
+                                  ),
+                                  SizedBox(height: screenHeight / 844 * 5),
+                                ],
                               ),
                             ],
                           ),
                         ),
                       ),
-                      separatorBuilder: (context, index) => SizedBox(
-                        height: screenHeight / 844 * 3,
+                      separatorBuilder: (context, index) => Column(
+                        children: [
+                          SizedBox(
+                            height: screenHeight / 844 * 26,
+                          ),
+                        ],
                       ),
                       itemCount: results.length,
                     ),

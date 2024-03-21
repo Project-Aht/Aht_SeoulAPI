@@ -151,7 +151,7 @@ abstract class AhtTextTheme {
   );
   static const SignUpSchool = TextStyle(
     color: Colors.black,
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: 'Pretendard',
     fontWeight: FontWeight.w600,
     height: 1.75,

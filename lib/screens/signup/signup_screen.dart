@@ -294,7 +294,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             if (!emailFocus.hasFocus && !pwFocus.hasFocus)
               GestureDetector(
                 onTap: () {
-                  if (check.contains(false)) {
+                  if (check[0] != true) {
                   } else if (email.isEmpty) {
                   } else if (pw.isEmpty) {
                   } else {

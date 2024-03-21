@@ -68,7 +68,7 @@ class _SignUpScreenGradeState extends State<SignUpScreenGrade> {
                       },
                       child: Icon(
                         Icons.arrow_back,
-                        size: screenWidth / 390 * 21,
+                        size: screenWidth / 390 * 32,
                       ),
                     ),
                     SizedBox(
@@ -79,7 +79,7 @@ class _SignUpScreenGradeState extends State<SignUpScreenGrade> {
                       style: AhtTextTheme.SignUpHeadline,
                     ),
                     SizedBox(
-                      height: screenHeight / 844 * 16,
+                      height: screenHeight / 844 * 8,
                     ),
                     const CustomText(
                       text: '사용자님의 반, 번호를\n설정해주세요.',

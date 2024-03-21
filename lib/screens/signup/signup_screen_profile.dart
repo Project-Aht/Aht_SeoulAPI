@@ -49,7 +49,7 @@ class _SignUpScreenProfileState extends State<SignUpScreenProfile> {
                     },
                     child: Icon(
                       Icons.arrow_back,
-                      size: screenWidth / 390 * 21,
+                      size: screenWidth / 390 * 32,
                     ),
                   ),
                   SizedBox(
@@ -60,7 +60,7 @@ class _SignUpScreenProfileState extends State<SignUpScreenProfile> {
                     style: AhtTextTheme.SignUpHeadline,
                   ),
                   SizedBox(
-                    height: screenHeight / 844 * 16,
+                    height: screenHeight / 844 * 8,
                   ),
                   const CustomText(
                     text: '앱 내에서 쓰일 사용자님의\n사진을 설정해주세요.',
