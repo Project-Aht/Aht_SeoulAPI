@@ -226,6 +226,24 @@ class Exam {
     }
   }
 
+  // 과목 삭제 함수 (성공시 true, 실패시 false 반환)
+  static Future<bool> removeSubject(subject) async {
+    if (_instance.examInit == false) {
+      throw Exception("exam is not initialized.");
+    }
+    try {
+      List<String> subjects = await getSubjects();
+      if (subjects.contains(subject)) {
+        subjects.remove(subject);
+        collection.parent!.set({'subject': subjects});
+        return true;
+      }
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
   Future<bool> remove() async {
     if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
