@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'instance.dart';
 
 class Auth {
+  // 회원가입 함수 (성공시 true, 실패시 false 반환)
   static Future<bool> signup({
     required String email,
     required String pw,
@@ -47,6 +48,43 @@ class Auth {
     return true;
   }
 
+  // 정보 수정 함수 (성공시 true, 실패시 false 반환)
+  static Future<bool> editInfo({
+    required String pw,
+    required String schoolName,
+    required int schoolGrade,
+    required int schoolClass,
+  }) async {
+    final Instance instance = Get.find<Instance>();
+    final FirebaseFirestore firestore = instance.firestore;
+
+    try {
+      await firestore
+          .collection('profile')
+          .doc(instance.userInfo['email'])
+          .set({
+        'point': 0,
+        'school': {
+          'name': schoolName,
+          'grade': schoolGrade,
+          'class': schoolClass,
+        },
+        'get_notice': true,
+        'notice_detail': <String, bool>{},
+      });
+      await Get.find<Instance>().getUserInfo();
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      return false;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+
+    return true;
+  }
+
+  // 로그인 함수 (성공시 true, 실패시 false 반환)
   static Future<bool> signin({
     required String email,
     required String pw,
@@ -77,6 +115,7 @@ class Auth {
     return true;
   }
 
+  // 로그아웃 함수 (성공시 true, 실패시 false 반환)
   static Future<bool> signout() async {
     final Instance instance = Get.find<Instance>();
     final FirebaseAuth firebaseAuth = instance.firebaseAuth;
@@ -84,7 +123,6 @@ class Auth {
 
     try {
       await firebaseAuth.signOut();
-      Get.find<Instance>().getUserInfo();
       prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
       print(e.code);
@@ -94,6 +132,7 @@ class Auth {
     return true;
   }
 
+  // 탈퇴 함수 (성공시 true, 실패시 false 반환)
   static Future<bool> quit() async {
     final Instance instance = Get.find<Instance>();
     final FirebaseAuth firebaseAuth = instance.firebaseAuth;
@@ -105,7 +144,6 @@ class Auth {
       firestore.collection('profile').doc(instance.userInfo['email']).delete();
       await firebaseAuth.currentUser?.delete();
       await firebaseAuth.signOut();
-      Get.find<Instance>().getUserInfo();
       prefs.remove('email');
       prefs.remove('pw');
     } on FirebaseAuthException catch (e) {
