@@ -1,9 +1,8 @@
-import 'dart:convert';
 import 'dart:typed_data';
+import 'package:aht_dimigo/functions/call_api.dart';
 import 'package:aht_dimigo/screens/signup/signup_screen_grade.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 import '../../themes/color_theme.dart';
 import '../../themes/text_theme.dart';
@@ -24,49 +23,28 @@ class SignUpScreenSchool extends StatefulWidget {
 }
 
 class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
+  late API api;
   String schoolName = '';
   int? maxGrade;
-  List<Map<String, String>> results = [];
-  List<Map<String, String>> schools = [];
   FocusNode focus = FocusNode();
   final TextEditingController _controller = TextEditingController();
   bool selected = false;
+  late bool loading;
 
-  Future<void> callAPI() async {
-    for (int index = 1; index <= 13; index++) {
-      var url = Uri.parse(
-        'https://open.neis.go.kr/hub/schoolInfo?KEY=cd3d82c9b70b4de3a1591e48d6507ea2&Type=json&pSize=1000&pIndex=$index',
-      );
-      var response = await http.get(url);
-      List arr = jsonDecode(response.body)['schoolInfo'][1]['row'];
-
-      for (var schoolData in arr) {
-        String name = schoolData['SCHUL_NM'];
-        String address = schoolData['ORG_RDNMA'] ?? '';
-        int maxGrade = (schoolData['SCHUL_KND_SC_NM'] == '초등학교') ? 6 : 3;
-        schools.add({
-          'name': name,
-          'address': address,
-          'maxGrade': '$maxGrade',
-        });
-      }
-    }
-    setState(() {});
-  }
+  List<Map<String, String>> results = [];
 
   void updateResults(String input) {
-    setState(() {
-      results = schools
-          .where((school) =>
-              school['name']!.toLowerCase().contains(input.toLowerCase()))
-          .toList();
-    });
+    results = api.schools
+        .where((school) =>
+            school['name']!.toLowerCase().contains(input.toLowerCase()))
+        .toList();
   }
 
   @override
   void initState() {
     super.initState();
-    callAPI();
+    api = Get.find<API>();
+    loading = api.loading;
   }
 
   @override
@@ -130,6 +108,7 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                                 setState(() {});
                               } else {
                                 updateResults(schoolName);
+                                setState(() {});
                               }
                             },
                             controller: _controller,
@@ -169,67 +148,92 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                   ),
                   SizedBox(
                     height: screenHeight / 844 * 400,
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      itemBuilder: (context, index) => Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: screenWidth / 390 * 4,
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              schoolName = results[index]['name']!;
-                              _controller.text = schoolName;
-                              maxGrade = int.parse(results[index]['maxGrade']!);
-                              results = [results[index]];
-                              focus.unfocus();
-                              selected = true;
-                            });
-                          },
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                    text: results[index]['name']!,
-                                    style: AhtTextTheme.SignUpSchool,
-                                  ),
-                                  CustomText(
-                                    text: results[index]['address']!,
-                                    style: AhtTextTheme.SignUpSchoolAddress,
-                                  ),
-                                ],
+                    child: GetBuilder<API>(
+                      builder: (_) {
+                        api = _;
+                        if (api.loading) {
+                          if (schoolName.isEmpty) {
+                            return const SizedBox();
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        } else {
+                          if (loading) {
+                            loading = false;
+                            updateResults(schoolName);
+                          }
+                          return ListView.separated(
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) => Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth / 390 * 4,
                               ),
-                              Column(
-                                children: [
-                                  Icon(
-                                    Icons.outlined_flag_rounded,
-                                    color: const Color(0xFF8B8C8B),
-                                    size: screenWidth / 390 * 24,
-                                  ),
-                                  SizedBox(height: screenHeight / 844 * 5),
-                                ],
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    schoolName = results[index]['name']!;
+                                    _controller.text = schoolName;
+                                    maxGrade =
+                                        int.parse(results[index]['maxGrade']!);
+                                    results = [results[index]];
+                                    focus.unfocus();
+                                    selected = true;
+                                  });
+                                },
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        CustomText(
+                                          text: results[index]['name']!,
+                                          style: AhtTextTheme.SignUpSchool,
+                                        ),
+                                        CustomText(
+                                          text: results[index]['address']!,
+                                          style:
+                                              AhtTextTheme.SignUpSchoolAddress,
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Icon(
+                                          Icons.outlined_flag_rounded,
+                                          color: const Color(0xFF8B8C8B),
+                                          size: screenWidth / 390 * 24,
+                                        ),
+                                        SizedBox(
+                                            height: screenHeight / 844 * 5),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      separatorBuilder: (context, index) => Column(
-                        children: [
-                          /*SizedBox(
-                            height: screenHeight / 844 * 26,
-                          ),*/
-                          Container(
-                            height: screenHeight / 844 * 20,
-                            width: screenWidth / 390 * 20,
-                            decoration: const BoxDecoration(color: Colors.red),
-                          )
-                        ],
-                      ),
-                      itemCount: results.length,
+                            ),
+                            separatorBuilder: (context, index) => Column(
+                              children: [
+                                /*SizedBox(
+                                height: screenHeight / 844 * 26,
+                              ),*/
+                                Container(
+                                  height: screenHeight / 844 * 20,
+                                  width: screenWidth / 390 * 20,
+                                  decoration:
+                                      const BoxDecoration(color: Colors.red),
+                                )
+                              ],
+                            ),
+                            itemCount: results.length,
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],

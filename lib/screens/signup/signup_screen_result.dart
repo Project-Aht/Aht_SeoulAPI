@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:aht_dimigo/firebase/exam.dart';
+import 'package:aht_dimigo/functions/call_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,54 +46,57 @@ class _SignUpScreenResultState extends State<SignUpScreenResult> {
         ),
         child: Stack(
           children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: screenHeight / 844 * 128,
-                ),
-                const CustomText(
-                  text: '회원가입 완료!',
-                  style: AhtTextTheme.SignUpHeadline,
-                ),
-                SizedBox(
-                  height: screenHeight / 844 * 85,
-                ),
-                Container(
-                  width: screenWidth / 390 * 103,
-                  height: screenWidth / 390 * 103,
-                  decoration: ShapeDecoration(
-                    shape: const OvalBorder(),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: (widget.image == null)
-                          ? Image.asset(
-                              'assets/images/default_profile.png',
-                            ).image
-                          : Image.memory(widget.image!).image,
+            Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: screenHeight / 844 * 128,
+                  ),
+                  const CustomText(
+                    text: '회원가입 완료!',
+                    style: AhtTextTheme.SignUpHeadline,
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 85,
+                  ),
+                  Container(
+                    width: screenWidth / 390 * 103,
+                    height: screenWidth / 390 * 103,
+                    decoration: ShapeDecoration(
+                      shape: const OvalBorder(),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: (widget.image == null)
+                            ? Image.asset(
+                                'assets/images/default_profile.png',
+                              ).image
+                            : Image.memory(widget.image!).image,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: screenHeight / 844 * 33,
-                ),
-                CustomText(
-                  text: widget.school,
-                  style: AhtTextTheme.SignUpResult,
-                ),
-                SizedBox(
-                  height: screenHeight / 844 * 7,
-                ),
-                CustomText(
-                  text: '${widget.schoolGrade}학년 ${widget.schoolClass}반',
-                  style: AhtTextTheme.SignUpResult,
-                ),
-              ],
+                  SizedBox(
+                    height: screenHeight / 844 * 33,
+                  ),
+                  CustomText(
+                    text: widget.school,
+                    style: AhtTextTheme.SignUpResult,
+                  ),
+                  SizedBox(
+                    height: screenHeight / 844 * 7,
+                  ),
+                  CustomText(
+                    text: '${widget.schoolGrade}학년 ${widget.schoolClass}반',
+                    style: AhtTextTheme.SignUpResult,
+                  ),
+                ],
+              ),
             ),
             GestureDetector(
               onTap: () async {
                 await Get.find<Instance>().getUserInfo();
                 await initExam();
                 Get.find<Instance>().getExams();
+                Get.find<API>().clear();
                 Get.offAll(() => const MainScreen());
               },
               child: Column(

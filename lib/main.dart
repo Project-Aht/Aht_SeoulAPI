@@ -1,5 +1,6 @@
 import 'package:aht_dimigo/firebase/auth.dart';
 import 'package:aht_dimigo/firebase/exam.dart';
+import 'package:aht_dimigo/functions/call_api.dart';
 import 'package:aht_dimigo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDateFormatting("ko_KR", null);
   Get.put(Instance());
+  Get.put(API());
   runApp(const MainApp());
 }
 
@@ -79,7 +81,7 @@ class _MainAppState extends State<MainApp> {
       theme: ThemeData(
         fontFamily: 'Pretendard',
         colorScheme: const ColorScheme.light(
-          background: Colors.white,
+          surface: Colors.white,
           brightness: Brightness.light,
         ),
         primaryColor: AhtColors.Main_Color,

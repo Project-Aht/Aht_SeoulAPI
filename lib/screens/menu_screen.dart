@@ -204,7 +204,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       GestureDetector(
                         onTap: () async {
                           await Auth.signout();
-                          Get.to(() => const LoginScreen());
+                          Get.offAll(() => const LoginScreen());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -223,8 +223,8 @@ class _MenuScreenState extends State<MenuScreen> {
                       SizedBox(height: screenHeight / 844 * 22),
                       GestureDetector(
                         onTap: () async {
-                          await Auth.signout();
-                          Get.to(() => const LoginScreen());
+                          await Auth.quit();
+                          Get.offAll(() => const LoginScreen());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

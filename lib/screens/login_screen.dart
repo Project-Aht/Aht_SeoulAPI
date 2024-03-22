@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../firebase/auth.dart';
 import '../firebase/exam.dart';
+import '../functions/call_api.dart';
 import '../themes/color_theme.dart';
 import '../themes/text_theme.dart';
 import '../widgets/custom_text.dart';
@@ -22,6 +22,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   String selected = 'login';
+
+  @override
+  void initState() {
+    super.initState();
+
+    Get.find<API>().callAPI();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -301,6 +308,7 @@ class _LoginTabState extends State<LoginTab> {
                 await Get.find<Instance>().getUserInfo();
                 await initExam();
                 Get.find<Instance>().getExams();
+                Get.find<API>().clear();
                 Get.offAll(() => const MainScreen());
               }
             }
