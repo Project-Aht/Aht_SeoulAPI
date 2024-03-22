@@ -179,7 +179,12 @@ class _MenuScreenState extends State<MenuScreen> {
                       SizedBox(height: screenHeight / 844 * 18),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => const DeleteSubjectScreen());
+                          Get.snackbar(
+                            '알림',
+                            '해당 기능은 개발중에 있습니다. 조금만 기다려주세요!',
+                            snackPosition: SnackPosition.BOTTOM,
+                            duration: const Duration(seconds: 2),
+                          );
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
