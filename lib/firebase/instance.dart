@@ -21,13 +21,14 @@ class Instance extends GetxController {
               .doc(firebaseAuth.currentUser?.email)
               .get())
           .data()!;
+      userInfo['email'] = firebaseAuth.currentUser!.email;
+      update();
+      userInfo['image'] = await Storage.getProfile();
+      update();
     } catch (e) {
       print('network arror');
     }
-    userInfo['email'] = firebaseAuth.currentUser!.email;
-    update();
-    userInfo['image'] = await Storage.getProfile();
-    update();
+
     return;
   }
 
