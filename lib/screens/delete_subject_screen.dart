@@ -201,6 +201,7 @@ class _DeleteSubjectScreenState extends State<DeleteSubjectScreen> {
                                             onTap: () async {
                                               await Exam.removeSubject(
                                                   subjectList[index]);
+                                              setState(() {});
                                               Get.snackbar(
                                                 '알림',
                                                 '과목 삭제가 완료되었습니다.',
@@ -209,6 +210,7 @@ class _DeleteSubjectScreenState extends State<DeleteSubjectScreen> {
                                                 duration:
                                                     const Duration(seconds: 2),
                                               );
+                                              setState(() {});
                                             },
                                           ),
                                           SizedBox(
