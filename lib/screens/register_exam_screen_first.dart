@@ -8,6 +8,7 @@ import '../themes/text_theme.dart';
 import '../themes/color_theme.dart';
 import '../widgets/custom_text.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
+import 'register_exam_screen_second.dart';
 import 'package:intl/intl.dart';
 
 class RegisterExamScreen extends StatefulWidget {
@@ -91,12 +92,24 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
               ],
             ),
           ),
-          Container(
-            width: screenWidth / 390 * 358,
-            height: screenHeight / 844 * 2,
-            decoration: const BoxDecoration(
-              color: Colors.black,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: screenWidth / 390 * 179,
+                height: screenHeight / 844 * 2,
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                ),
+              ),
+              Container(
+                width: screenWidth / 390 * 179,
+                height: screenHeight / 844 * 2,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFEBEBEB),
+                ),
+              ),
+            ],
           ),
           Container(
             color: Colors.white,
@@ -377,232 +390,6 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
                                 )
                               : const SizedBox(width: 0, height: 0),
                           SizedBox(height: screenHeight / 844 * 20),
-                          const CustomText(
-                            text: '사진 또는 파일 추가',
-                            style: AhtTextTheme.MiddleMenuText,
-                          ),
-                          SizedBox(height: screenHeight / 844 * 4),
-                          GestureDetector(
-                            onTap: () async {
-                              Uint8List? img = await getImage();
-                              if (img != null) {
-                                setState(() {
-                                  images.add(img);
-                                });
-                              }
-                            },
-                            child: Container(
-                              height: screenHeight / 844 * 48,
-                              padding: EdgeInsets.only(
-                                left: 16 / 390 * screenWidth,
-                                right: screenWidth / 390 * 16,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF4F4F4),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.filter_center_focus,
-                                    color: const Color(0xFFD9D9D9),
-                                    size: screenWidth / 390 * 24,
-                                  ),
-                                  SizedBox(width: screenWidth / 390 * 8),
-                                  Text('사진 추가',
-                                      style: AhtTextTheme.TextfieldHintText),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: screenHeight / 844 * 10),
-                          Container(
-                            height: screenHeight / 844 * 120,
-                            padding: EdgeInsets.all(screenHeight / 844 * 16),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF4F4F4),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) => GestureDetector(
-                                onTap: () {
-                                  // TODO: 클릭했을 때 dialog로 이미지 띄우기
-                                },
-                                child: GestureDetector(
-                                  onLongPressEnd: (detail) {
-                                    setState(() {
-                                      images.removeAt(index);
-                                    });
-                                  },
-                                  child: Container(
-                                    height: screenHeight / 844 * 88,
-                                    width: screenHeight / 844 * 66,
-                                    padding:
-                                        EdgeInsets.all(screenHeight / 944 * 5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(3),
-                                      image: DecorationImage(
-                                        image: MemoryImage(
-                                          images[index],
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  images.removeAt(index);
-                                                });
-                                              },
-                                              child: Container(
-                                                width: screenWidth / 390 * 15,
-                                                height: screenWidth / 390 * 15,
-                                                decoration:
-                                                    const ShapeDecoration(
-                                                  color: Colors.grey,
-                                                  shape: CircleBorder(),
-                                                ),
-                                                child: Icon(
-                                                  Icons.close,
-                                                  size: screenWidth / 390 * 8,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: screenHeight / 844 * 16,
-                              ),
-                              itemCount: images.length,
-                            ),
-                          ),
-                          SizedBox(height: screenHeight / 844 * 20),
-                          const CustomText(
-                            text: '반영 비율',
-                            style: AhtTextTheme.MiddleMenuText,
-                          ),
-                          SizedBox(height: screenHeight / 844 * 4),
-                          Container(
-                            height: screenHeight / 844 * 48,
-                            padding: EdgeInsets.only(
-                              left: 16 / 390 * screenWidth,
-                              right: screenWidth / 390 * 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF4F4F4),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: CustomTextField(
-                              keyboardType: TextInputType.number,
-                              controller: val1,
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(
-                                    bottom: screenHeight / 844 * 15,
-                                    top: screenHeight / 844 * 30,
-                                  ),
-                                  hintText: '비율 입력',
-                                  hintStyle: AhtTextTheme.TextfieldHintText),
-                              onSubmitted: (val) {
-                                int? parsedValue = int.tryParse(val);
-                                setState(() {
-                                  if (parsedValue != null) {
-                                    setState(() {
-                                      score = parsedValue;
-                                    });
-                                  } else {
-                                    Get.snackbar('알림', '수행평가 반영 비율을 입력해주세요');
-                                  }
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(height: screenHeight / 844 * 20),
-                          const CustomText(
-                            text: '수행 범위',
-                            style: AhtTextTheme.MiddleMenuText,
-                          ),
-                          SizedBox(height: screenHeight / 844 * 4),
-                          Container(
-                            height: screenHeight / 844 * 48,
-                            padding: EdgeInsets.only(
-                              left: 16 / 390 * screenWidth,
-                              right: screenWidth / 390 * 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF4F4F4),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: CustomTextField(
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.only(
-                                  bottom: screenHeight / 844 * 15,
-                                  top: screenHeight / 844 * 30,
-                                ),
-                                hintText: '범위 입력',
-                                hintStyle: AhtTextTheme.TextfieldHintText,
-                              ),
-                              onSubmitted: (changingrange) {
-                                setState(() {
-                                  range = changingrange;
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(height: screenHeight / 844 * 20),
-                          const CustomText(
-                            text: '메모',
-                            style: AhtTextTheme.MiddleMenuText,
-                          ),
-                          SizedBox(height: screenHeight / 844 * 4),
-                          Container(
-                            height: screenHeight / 844 * 48,
-                            padding: EdgeInsets.only(
-                              left: 16 / 390 * screenWidth,
-                              right: screenWidth / 390 * 16,
-                            ),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF4F4F4),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: CustomTextField(
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.only(
-                                  bottom: screenHeight / 844 * 15,
-                                  top: screenHeight / 844 * 30,
-                                ),
-                                hintText: '메모 입력',
-                                hintStyle: AhtTextTheme.TextfieldHintText,
-                              ),
-                              onSubmitted: (changingrange) {
-                                setState(() {
-                                  memo = changingrange;
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(height: screenHeight / 844 * 20),
                         ],
                       ),
                     ),
@@ -618,28 +405,22 @@ class _RegisterExamScreenState extends State<RegisterExamScreen> {
               ),
               GestureDetector(
                 onTap: () async {
-                  if (title.isEmpty) {
-                    print('title is empty');
-                  } else if (subject.isEmpty) {
-                    print('subject is empty');
-                  } else if (dates.isEmpty) {
-                    print('dates is empty');
-                  } else if (range.isEmpty) {
-                    print('range is empty');
-                  } else {
-                    Exam? uplodadedExam = await Exam.set(
-                      title: title,
-                      subject: subject,
-                      dates: dates,
-                      memo: memo,
-                      range: range,
-                      score: score,
-                      bytes: images,
+                  if (title.isEmpty || subject.isEmpty || dates.isEmpty) {
+                    Get.snackbar(
+                      '오류',
+                      '모든 정보를 입력해주세요',
+                      snackPosition: SnackPosition.BOTTOM,
+                      duration: const Duration(seconds: 2),
                     );
-                    if (uplodadedExam != null) {
-                      Get.back();
-                      Get.snackbar('알림', '정보가 저장되었습니다.');
-                    }
+                  } else {
+                    Get.to(
+                      () => RegisterExamScreen2(
+                        title: title,
+                        subject: subject,
+                        dates: dates,
+                      ),
+                      duration: Duration.zero,
+                    );
                   }
                 },
                 child: Container(
