@@ -205,6 +205,26 @@ class _MenuScreenState extends State<MenuScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const CustomText(
+                                text: '로그아웃',
+                                style: AhtTextTheme.MenuFontSubHighlight),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: screenHeight / 844 * 17,
+                              color: const Color(0xFFA2A2A2),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: screenHeight / 844 * 22),
+                      GestureDetector(
+                        onTap: () async {
+                          await Auth.signout();
+                          Get.to(() => const LoginScreen());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const CustomText(
                                 text: '계정 탈퇴',
                                 style: AhtTextTheme.MenuFontSubHighlight),
                             Icon(

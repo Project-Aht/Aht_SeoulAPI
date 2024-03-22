@@ -219,9 +219,14 @@ class _SignUpScreenSchoolState extends State<SignUpScreenSchool> {
                       ),
                       separatorBuilder: (context, index) => Column(
                         children: [
-                          SizedBox(
+                          /*SizedBox(
                             height: screenHeight / 844 * 26,
-                          ),
+                          ),*/
+                          Container(
+                            height: screenHeight / 844 * 20,
+                            width: screenWidth / 390 * 20,
+                            decoration: const BoxDecoration(color: Colors.red),
+                          )
                         ],
                       ),
                       itemCount: results.length,
