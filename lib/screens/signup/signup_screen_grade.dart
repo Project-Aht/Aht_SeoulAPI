@@ -171,7 +171,7 @@ class _SignUpScreenGradeState extends State<SignUpScreenGrade> {
                       );
                     } else {
                       Get.snackbar(
-                        '',
+                        '알림',
                         '회원가입에 실패했습니다.',
                       );
                     }

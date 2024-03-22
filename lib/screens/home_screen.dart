@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:aht_dimigo/screens/register_exam_screen.dart';
+import 'package:aht_dimigo/screens/register_exam_screen_first.dart';
 import 'package:flutter/material.dart';
 import 'package:aht_dimigo/themes/color_theme.dart';
 import '../firebase/exam.dart';
@@ -391,7 +391,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     separatorBuilder: (BuildContext context, int index) =>
                         SizedBox(
-                      height: screenHeight / 844 * 56,
+                      height: screenHeight / 844 * 25,
                     ),
                   ),
                 ),
