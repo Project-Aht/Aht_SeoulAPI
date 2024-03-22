@@ -2,12 +2,14 @@ import 'package:aht_dimigo/screens/grade_calculator_screen.dart';
 import 'package:aht_dimigo/screens/myinfo_screen.dart';
 import 'package:aht_dimigo/themes/text_theme.dart';
 import 'package:aht_dimigo/widgets/custom_text.dart';
+import 'package:flutter/cupertino.dart';
 import '../themes/color_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aht_dimigo/firebase/auth.dart';
 import 'login_screen.dart';
 import 'privacy_screen.dart';
+import 'delete_subject_screen.dart';
 import 'version_screen.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -176,9 +178,8 @@ class _MenuScreenState extends State<MenuScreen> {
                           text: '중요 정보', style: AhtTextTheme.MenuFontMain),
                       SizedBox(height: screenHeight / 844 * 18),
                       GestureDetector(
-                        onTap: () async {
-                          await Auth.signout();
-                          Get.to(() => const LoginScreen());
+                        onTap: () {
+                          Get.to(() => const DeleteSubjectScreen());
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,18 +196,24 @@ class _MenuScreenState extends State<MenuScreen> {
                         ),
                       ),
                       SizedBox(height: screenHeight / 844 * 22),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const CustomText(
-                              text: '계정 탈퇴',
-                              style: AhtTextTheme.MenuFontSubHighlight),
-                          Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            size: screenHeight / 844 * 17,
-                            color: const Color(0xFFA2A2A2),
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () async {
+                          await Auth.signout();
+                          Get.to(() => const LoginScreen());
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const CustomText(
+                                text: '계정 탈퇴',
+                                style: AhtTextTheme.MenuFontSubHighlight),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              size: screenHeight / 844 * 17,
+                              color: const Color(0xFFA2A2A2),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(height: screenHeight / 844 * 22),
                       Container(
