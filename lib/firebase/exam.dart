@@ -122,6 +122,17 @@ class Exam {
     }
   }
 
+  static Map<String, int> countBySubject() {
+    Map<String, int> subjectMap = {
+      for (int i = 0; i < _instance.subjects.length; i++)
+        _instance.subjects[i]: 0
+    };
+    for (Exam exam in exams) {
+      subjectMap[exam.subject] = subjectMap[exam.subject]! + 1;
+    }
+    return subjectMap;
+  }
+
   static Future<Exam?> get(String title) async {
     if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
@@ -228,6 +239,7 @@ class Exam {
 
   // 과목 삭제 함수 (성공시 true, 실패시 false 반환)
   static Future<bool> removeSubject(subject) async {
+    if (countBySubject()[subject] != 0) return false;
     if (_instance.examInit == false) {
       throw Exception("exam is not initialized.");
     }
